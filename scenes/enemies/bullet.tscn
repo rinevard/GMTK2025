@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://bys2myosswite"]
+
+[ext_resource type="PackedScene" uid="uid://bf5jlbp1hfdlv" path="res://scenes/enemies/enemy_attack_area.tscn" id="1_hl25f"]
+[ext_resource type="Script" uid="uid://c1qhwodbk51j8" path="res://scripts/enemies/bullet.gd" id="1_ncsv3"]
+[ext_resource type="Texture2D" uid="uid://ci1da58af873d" path="res://assets/art/bullet.svg" id="2_p5aa7"]
+[ext_resource type="PackedScene" uid="uid://bxcap5fdjer81" path="res://scenes/enemies/enemy_attacked_area.tscn" id="3_15gq6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5aa7"]
+size = Vector2(82, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncsv3"]
+size = Vector2(82, 38)
+
+[node name="Bullet" type="Node2D" groups=["Enemy"]]
+script = ExtResource("1_ncsv3")
+
+[node name="EnemyAttackArea" parent="." instance=ExtResource("1_hl25f")]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_p5aa7")
+
+[node name="EnemyAttackedArea" parent="." instance=ExtResource("3_15gq6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackedArea"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ncsv3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_p5aa7")
+
+[connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_some_area"]

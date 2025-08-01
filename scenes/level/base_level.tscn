@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx0yvywbjnai7"]
+[gd_scene load_steps=7 format=3 uid="uid://cx0yvywbjnai7"]
 
+[ext_resource type="Script" uid="uid://dmowbbc6io8hy" path="res://scripts/levels/level.gd" id="1_e1fnv"]
 [ext_resource type="PackedScene" uid="uid://b0ptm7s1g5hvs" path="res://scenes/player/player.tscn" id="1_upopr"]
 [ext_resource type="PackedScene" uid="uid://samklyvqty0f" path="res://scenes/sigils/sigil_pen.tscn" id="2_7xj1c"]
 [ext_resource type="PackedScene" uid="uid://d1ieh7spa4da7" path="res://scenes/enemies/enemy_handler.tscn" id="3_7xj1c"]
+[ext_resource type="PackedScene" uid="uid://pnm7djwly5em" path="res://scenes/level/bullet_handler.tscn" id="5_3ipv6"]
+[ext_resource type="Script" uid="uid://no50rbpxx7gh" path="res://scripts/levels/bullet_handler.gd" id="6_t6xnl"]
 
 [node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_e1fnv")
 
 [node name="Player" parent="." instance=ExtResource("1_upopr")]
 position = Vector2(1646, 261)
@@ -12,3 +16,6 @@ position = Vector2(1646, 261)
 [node name="SigilPen" parent="." instance=ExtResource("2_7xj1c")]
 
 [node name="EnemyHandler" parent="." instance=ExtResource("3_7xj1c")]
+
+[node name="BulletHandler" parent="." instance=ExtResource("5_3ipv6")]
+script = ExtResource("6_t6xnl")

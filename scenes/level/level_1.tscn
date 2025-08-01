@@ -1,16 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://gxhg1tmpjq3r"]
+[gd_scene load_steps=3 format=3 uid="uid://c1xtwaxuakd5o"]
 
+[ext_resource type="PackedScene" uid="uid://cx0yvywbjnai7" path="res://scenes/level/base_level.tscn" id="1_cfjva"]
 [ext_resource type="Script" uid="uid://4s01i07hsli7" path="res://scripts/levels/level_1.gd" id="1_xbhhu"]
-[ext_resource type="PackedScene" uid="uid://b0ptm7s1g5hvs" path="res://scenes/player/player.tscn" id="2_u8rbc"]
-[ext_resource type="PackedScene" uid="uid://samklyvqty0f" path="res://scenes/sigils/sigil_pen.tscn" id="3_0f3yk"]
-[ext_resource type="PackedScene" uid="uid://d1ieh7spa4da7" path="res://scenes/enemies/enemy_handler.tscn" id="4_nfqjd"]
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" instance=ExtResource("1_cfjva")]
 script = ExtResource("1_xbhhu")
-
-[node name="Player" parent="." instance=ExtResource("2_u8rbc")]
-position = Vector2(650, 452)
-
-[node name="SigilPen" parent="." instance=ExtResource("3_0f3yk")]
-
-[node name="EnemyHandler" parent="." instance=ExtResource("4_nfqjd")]

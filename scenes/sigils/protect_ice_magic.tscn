@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dounaio5si041"]
+
+[ext_resource type="Script" uid="uid://brwfcy26rrntm" path="res://scripts/sigil/protect_ice_magic.gd" id="1_vvt67"]
+
+[node name="ProtectIceMagic" type="Node2D"]
+script = ExtResource("1_vvt67")

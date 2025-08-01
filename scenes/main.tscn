@@ -1,7 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://1qhkngukjpre"]
 
-[ext_resource type="PackedScene" uid="uid://gxhg1tmpjq3r" path="res://scenes/level/level_1.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://c1xtwaxuakd5o" path="res://scenes/level/level_1.tscn" id="1_o5qli"]
 
 [node name="Main" type="Node2D"]
 
+[node name="Background" type="Sprite2D" parent="."]
+
 [node name="Level1" parent="." instance=ExtResource("1_o5qli")]
+
+[node name="UI" type="CanvasLayer" parent="."]

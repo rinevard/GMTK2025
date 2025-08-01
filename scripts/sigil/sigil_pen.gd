@@ -2,6 +2,7 @@ extends Node2D
 
 #region 魔法们
 const NORMAL_ATTACK_MAGIC = preload("res://scenes/sigils/normal_attack_magic.tscn")
+const PROTECT_ICE_MAGIC = preload("res://scenes/sigils/protect_ice_magic.tscn")
 #endregion
 
 ## 根据鼠标按下/松开判断是否在画画
@@ -87,7 +88,7 @@ func _polygon_area(polygon_points: PackedVector2Array) -> float:
 func _create_sigil() -> void:
 	# 1. magics
 	var attack_magic1 = NORMAL_ATTACK_MAGIC.instantiate()
-	var attack_magic2 = NORMAL_ATTACK_MAGIC.instantiate()
+	var attack_magic2 = PROTECT_ICE_MAGIC.instantiate()
 
 	# 2. points
 	# 已经被记录过了
