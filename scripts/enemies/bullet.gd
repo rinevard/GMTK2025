@@ -26,9 +26,9 @@ func _physics_process(delta: float) -> void:
 		call_deferred("queue_free")
 
 func _on_attack_some_area(area: Area2D) -> void:
-	self_destroy()
+	die()
 
-func self_destroy() -> void:
+func die() -> void:
 	call_deferred("queue_free")
 
 func get_cold() -> void:

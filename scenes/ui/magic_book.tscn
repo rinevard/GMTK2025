@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5laqfe5ojhb3"]
+
+[ext_resource type="Script" uid="uid://cjm5lnn64y6lv" path="res://scripts/ui/magic_book.gd" id="1_oi12o"]
+
+[node name="MagicBook" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oi12o")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 781.0
+offset_top = 455.0
+offset_right = 1267.0
+offset_bottom = 697.0
+text = "OK"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

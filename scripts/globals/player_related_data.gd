@@ -1,6 +1,6 @@
 extends Node
 
-var player_global_pos: Vector2
+var player_global_pos: Vector2 = Vector2(-1000, -1000)
 var bullet_handler: BulletHandler
 
 ## 只应由 player 调用

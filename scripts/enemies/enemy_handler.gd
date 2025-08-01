@@ -15,3 +15,9 @@ func spawn_enemy() -> void:
 	var melee_enemy = RANGED_ENEMY.instantiate()
 	melee_enemy.global_position = markers[rand_idx].global_position
 	add_child(melee_enemy)
+
+func clear_enemies() -> void:
+	var enemies: Array = get_children()
+	for enemy in enemies:
+		if enemy.has_method("die"):
+			enemy.die()

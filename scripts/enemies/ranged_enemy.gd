@@ -23,6 +23,9 @@ func _physics_process(delta: float) -> void:
 		time_after_last_shot = 0.0
 
 func _on_health_less_than_zero() -> void:
+	die()
+
+func die() -> void:
 	queue_free()
 
 func shot(dir: Vector2) -> void:
