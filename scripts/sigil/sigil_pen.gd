@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 		points.append(new_point)
 		line_2d.points = points
 		if _check_self_cross():
+			print("点数: ", sigil_points.size())
 			_create_sigil()
 			_end_draw()
 

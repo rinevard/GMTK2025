@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://cx0yvywbjnai7"]
+[gd_scene load_steps=4 format=3 uid="uid://cx0yvywbjnai7"]
+
+[ext_resource type="PackedScene" uid="uid://b0ptm7s1g5hvs" path="res://scenes/player/player.tscn" id="1_upopr"]
+[ext_resource type="PackedScene" uid="uid://samklyvqty0f" path="res://scenes/sigils/sigil_pen.tscn" id="2_7xj1c"]
+[ext_resource type="PackedScene" uid="uid://d1ieh7spa4da7" path="res://scenes/enemies/enemy_handler.tscn" id="3_7xj1c"]
 
 [node name="BaseLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_upopr")]
+position = Vector2(1646, 261)
+
+[node name="SigilPen" parent="." instance=ExtResource("2_7xj1c")]
+
+[node name="EnemyHandler" parent="." instance=ExtResource("3_7xj1c")]

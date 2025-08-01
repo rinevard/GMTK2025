@@ -4,7 +4,7 @@ extends Node
 # Ramer-Douglas-Peucker 算法的 epsilon 值。
 const RDP_EPSILON = 50.0
 # 定义一个“角”的角度阈值（单位：度）。
-const CORNER_ANGLE_THRESHOLD_DEGREES = 150.0
+const CORNER_ANGLE_THRESHOLD_DEGREES = 160.0
 
 # 多边形拟合误差阈值。
 const POLYGON_FIT_ERROR_THRESHOLD = 12.0

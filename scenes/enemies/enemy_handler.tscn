@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1ieh7spa4da7"]
+
+[ext_resource type="Script" uid="uid://c2rk3o6xbnwah" path="res://scripts/enemies/enemy_handler.gd" id="1_26qwv"]
+
+[node name="EnemyHandler" type="Node2D" node_paths=PackedStringArray("spawn_pos")]
+script = ExtResource("1_26qwv")
+spawn_pos = NodePath("SpawnPos")
+
+[node name="SpawnPos" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPos"]
+position = Vector2(-344, 126)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPos"]
+position = Vector2(-283, 712)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPos"]
+position = Vector2(591, 1513)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPos"]
+position = Vector2(1554, 1485)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnPos"]
+position = Vector2(2350, 1285)
+
+[node name="Marker2D6" type="Marker2D" parent="SpawnPos"]
+position = Vector2(2433, 689)
+
+[node name="Marker2D7" type="Marker2D" parent="SpawnPos"]
+position = Vector2(2425, 29)
+
+[node name="Marker2D8" type="Marker2D" parent="SpawnPos"]
+position = Vector2(1783, -416)
+
+[node name="Marker2D9" type="Marker2D" parent="SpawnPos"]
+position = Vector2(929, -371)
+
+[node name="Marker2D10" type="Marker2D" parent="SpawnPos"]
+position = Vector2(55, -358)

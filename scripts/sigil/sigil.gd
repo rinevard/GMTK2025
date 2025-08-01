@@ -7,7 +7,7 @@ const SIGIL = preload("res://scenes/sigils/sigil.tscn")
 @onready var line_2d: Line2D = $Line2D
 var points: PackedVector2Array = []
 var magics: Array[Magic] = []
-var live_duration: float = 10.0
+var live_duration: float = 0.3
 
 static func new_sigil(sigil_points: PackedVector2Array, sigil_magics: Array[Magic]) -> Sigil:
 	var sigil = SIGIL.instantiate()
@@ -20,6 +20,8 @@ func _ready() -> void:
 	shape.points = points
 	collision_shape_2d.shape = shape
 	line_2d.points = points
+	if (points.size() <= 6):
+		live_duration = 1.0
 	for magic in magics:
 		magic_handler.add_child(magic)
 
