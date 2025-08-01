@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8scksh3yokl4"]
+
+[ext_resource type="Script" uid="uid://6fg1e6vrf4j2" path="res://scripts/globals/gesture_recognizer.gd" id="1_wmfna"]
+
+[node name="GestureRecognizer" type="Node"]
+script = ExtResource("1_wmfna")

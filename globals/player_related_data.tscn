@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d356t3hklwo8c"]
+
+[ext_resource type="Script" uid="uid://dbtjugr1u06g8" path="res://scripts/globals/player_related_data.gd" id="1_dheos"]
+
+[node name="PlayerRelatedData" type="Node"]
+script = ExtResource("1_dheos")

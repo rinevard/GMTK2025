@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3p3a6vo1jaw7"]
+
+[ext_resource type="Script" uid="uid://3cjsrepx2va4" path="res://scripts/sigil/sigil.gd" id="1_imr1f"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_imr1f"]
+
+[node name="Sigil" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_imr1f")
+
+[node name="MagicHandler" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_imr1f")
+
+[node name="Line2D" type="Line2D" parent="."]
+closed = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

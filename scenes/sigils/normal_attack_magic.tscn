@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1jqb070rvj48"]
+
+[ext_resource type="Script" uid="uid://60l0e5oknm0h" path="res://scripts/sigil/normal_attack_magic.gd" id="1_gn2m4"]
+
+[node name="NormalAttackMagic" type="Node2D"]
+script = ExtResource("1_gn2m4")

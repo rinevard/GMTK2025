@@ -11,5 +11,26 @@ config_version=5
 [application]
 
 config/name="GMTK2025"
+run/main_scene="uid://1qhkngukjpre"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GestureRecognizer="*res://globals/gesture_recognizer.tscn"
+PlayerRelatedData="*res://globals/player_related_data.tscn"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+
+[global_group]
+
+Enemy=""
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"

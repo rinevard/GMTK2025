@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://samklyvqty0f"]
+
+[ext_resource type="Script" uid="uid://cpqn8iry7hyq" path="res://scripts/sigil/sigil_pen.gd" id="1_ltm5e"]
+
+[node name="SigilPen" type="Node2D"]
+script = ExtResource("1_ltm5e")
+
+[node name="Line2D" type="Line2D" parent="."]

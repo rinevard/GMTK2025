@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0ptm7s1g5hvs"]
+
+[ext_resource type="Script" uid="uid://ce8ok3nalelxm" path="res://scripts/player/player.gd" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://cm4wv16dcybvw" path="res://icon.svg" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="3_gmlin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
+size = Vector2(128, 128)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_8afob")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dovo2")
+
+[node name="AttackedArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackedArea"]
+shape = SubResource("RectangleShape2D_dovo2")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_gmlin")]
+health = 5
+
+[node name="Label" type="Label" parent="."]
+offset_left = -17.0
+offset_top = -89.0
+offset_right = 23.0
+offset_bottom = -66.0
+
+[connection signal="area_entered" from="AttackedArea" to="." method="_hit"]
+[connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]
