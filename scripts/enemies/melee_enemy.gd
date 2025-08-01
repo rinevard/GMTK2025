@@ -15,3 +15,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_health_less_than_zero() -> void:
 	queue_free()
+
+func get_cold() -> void:
+	is_cold = true

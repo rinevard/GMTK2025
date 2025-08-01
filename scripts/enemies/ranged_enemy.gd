@@ -27,3 +27,6 @@ func _on_health_less_than_zero() -> void:
 
 func shot(dir: Vector2) -> void:
 	PlayerRelatedData.get_bullet_handler().create_bullet(dir, global_position)
+
+func get_cold() -> void:
+	is_cold = true

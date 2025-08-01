@@ -30,3 +30,6 @@ func _on_attack_some_area(area: Area2D) -> void:
 
 func self_destroy() -> void:
 	call_deferred("queue_free")
+
+func get_cold() -> void:
+	is_cold = true
