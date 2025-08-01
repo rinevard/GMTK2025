@@ -63,7 +63,7 @@ func _check_self_cross() -> bool:
 			var area = _polygon_area(loop_points)
 			if area > area_threshold:
 				print(area)
-				sigil_points = GestureRecognizer.simplify_polygon(loop_points)
+				sigil_points = GestureRecognizer.simplify_shape(loop_points)
 				return true
 
 	return false
