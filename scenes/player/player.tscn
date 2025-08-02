@@ -11,10 +11,11 @@ size = Vector2(70, 88)
 script = ExtResource("1_8afob")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-33, -11)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_gmlin")
 flip_h = true
+region_enabled = true
+region_rect = Rect2(-85, 0, 555, 360)
 
 [node name="AttackedArea" type="Area2D" parent="."]
 collision_mask = 10
