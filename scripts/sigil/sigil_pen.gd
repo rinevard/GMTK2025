@@ -29,7 +29,8 @@ func _unhandled_input(event: InputEvent) -> void:
 ## 清空绘制内容
 func _end_draw() -> void:
 	points = []
-	line_2d.clear_points()
+	for line in lines:
+		line.clear_points()
 
 ## 绘制的点
 var points: PackedVector2Array = []
@@ -37,15 +38,23 @@ var points: PackedVector2Array = []
 var sigil_points: PackedVector2Array = []
 
 ## 显示绘制的轨迹
-@onready var line_2d: Line2D = $Line2D
+var lines: Array[Line2D] = []
+@onready var blue_line: Line2D = $BlueLine
+
+func _ready() -> void:
+	lines = [blue_line]
+
 @export var player: Player
+var point_distance_threshold: float = 5.0
 func _physics_process(delta: float) -> void:
 	if is_drawing:
 		var new_point = get_global_mouse_position()
 		if player:
 			new_point = player.broom_end_marker.global_position
-		points.append(new_point)
-		line_2d.points = points
+		if points.is_empty() or (new_point - points[points.size() - 1]).length() > point_distance_threshold:
+			points.append(new_point)
+		for line in lines:
+			line.points = points
 		if _check_self_cross():
 			_create_sigil()
 			_end_draw()
@@ -126,7 +135,7 @@ func _create_sigil() -> void:
 		_:
 			magics = general_magic
 	var new_sigil = Sigil.new_sigil(sigil_points, magics, duration)
-	add_child(new_sigil)
+	$Sigils.add_child(new_sigil)
 
 func _is_sigilpoints_clockwise() -> bool:
 	# 一个多边形至少需要3个点。如果少于3个点，它没有明确的环绕方向。

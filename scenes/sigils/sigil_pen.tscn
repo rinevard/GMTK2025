@@ -1,10 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://samklyvqty0f"]
+[gd_scene load_steps=3 format=3 uid="uid://samklyvqty0f"]
 
 [ext_resource type="Script" uid="uid://cpqn8iry7hyq" path="res://scripts/sigil/sigil_pen.gd" id="1_ltm5e"]
+[ext_resource type="Texture2D" uid="uid://rpy6msr8is2t" path="res://assets/art/test2.png" id="2_euog4"]
 
 [node name="SigilPen" type="Node2D"]
 script = ExtResource("1_ltm5e")
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Sigils" type="Node2D" parent="."]
 
-[node name="Line2D2" type="Line2D" parent="."]
+[node name="BlueLine" type="Line2D" parent="."]
+position = Vector2(0, 8)
+width = 100.0
+default_color = Color(0.75, 0.808333, 1, 1)
+texture = ExtResource("2_euog4")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
