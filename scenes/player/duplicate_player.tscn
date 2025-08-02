@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwhseb0aytbck"]
+
+[ext_resource type="Script" uid="uid://dyil5otq5n2ap" path="res://scripts/player/duplicate_player.gd" id="1_d0mrk"]
+[ext_resource type="Texture2D" uid="uid://1b34f1d7kjx2" path="res://assets/art/player/player.png" id="1_qja7s"]
+[ext_resource type="Shader" uid="uid://cfjn8hg26gxk" path="res://shaders/duplicate_player.gdshader" id="1_ti1h5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ti1h5"]
+shader = ExtResource("1_ti1h5")
+shader_parameter/tint_color = Color(0.5, 0.7, 1, 1)
+shader_parameter/alpha = 0.6
+shader_parameter/distortion_amount = 0.05
+shader_parameter/distortion_speed = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qja7s"]
+size = Vector2(70, 88)
+
+[node name="DuplicatePlayer" type="Node2D"]
+script = ExtResource("1_d0mrk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ti1h5")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qja7s")
+flip_h = true
+
+[node name="AttackedArea" type="Area2D" parent="."]
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackedArea"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_qja7s")
+
+[connection signal="area_entered" from="AttackedArea" to="." method="_on_attacked_area_area_entered"]

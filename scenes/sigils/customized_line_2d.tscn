@@ -4,7 +4,6 @@
 
 [node name="CustomizedLine2D" type="Line2D"]
 modulate = Color(1, 1, 1, 0.392157)
-points = PackedVector2Array(96, 42, 247, 18)
 texture = ExtResource("2_qxg6d")
 texture_mode = 1
 joint_mode = 2

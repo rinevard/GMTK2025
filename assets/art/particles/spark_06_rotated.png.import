@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1b34f1d7kjx2"
-path="res://.godot/imported/player.png-8c4ee02a94cc8da9818978a3030aa92d.ctex"
+uid="uid://o80mvmwmfx6c"
+path="res://.godot/imported/spark_06_rotated.png-338bb36f38d7b843005bb1bd362122ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/player/player.png"
-dest_files=["res://.godot/imported/player.png-8c4ee02a94cc8da9818978a3030aa92d.ctex"]
+source_file="res://assets/art/particles/spark_06_rotated.png"
+dest_files=["res://.godot/imported/spark_06_rotated.png-338bb36f38d7b843005bb1bd362122ad.ctex"]
 
 [params]
 

@@ -18,6 +18,8 @@ script = ExtResource("1_imr1f")
 shape = SubResource("ConvexPolygonShape2D_imr1f")
 
 [node name="PolygonLine2D" parent="." instance=ExtResource("3_qht1a")]
+modulate = Color(1, 1, 1, 0.392157)
+points = PackedVector2Array()
 closed = true
 width = 50.0
 

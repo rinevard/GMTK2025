@@ -6,12 +6,15 @@ const NORMAL_ATTACK_MAGIC = preload("res://scenes/sigils/normal_attack_magic.tsc
 const PROTECT_ICE_MAGIC = preload("res://scenes/sigils/protect_ice_magic.tscn")
 const NORMAL_ICE_MAGIC = preload("res://scenes/sigils/normal_ice_magic.tscn")
 const BULLET_DELETE_MAGIC = preload("res://scenes/sigils/bullet_delete_magic.tscn")
+const VISUAL_LIGHTNING_MAGIC = preload("res://scenes/sigils/visual_lightning_magic.tscn")
+const HEAL_MAGIC = preload("res://scenes/sigils/heal_magic.tscn")
+const DUPLICATE_MAGIC = preload("res://scenes/sigils/duplicate_magic.tscn")
 
 var shape_to_magic: Dictionary = {
 	"cw_pentagon": [PROTECT_ICE_MAGIC], # 顺时针五边形: 子弹时间场
-	"ccw_pentagon": [NORMAL_ATTACK_MAGIC, NORMAL_ICE_MAGIC], # 逆时针五边形: 寒冰攻击
-	"cw_hexagon": [NORMAL_ATTACK_MAGIC], # 顺时针六边形: 电火花场
-	"ccw_hexagon": [NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC], # 逆时针六边形: 闪电攻击
+	"ccw_pentagon": [VISUAL_LIGHTNING_MAGIC, NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC], # 逆时针五边形: 电火花场
+	"cw_hexagon": [DUPLICATE_MAGIC], # 顺时针六边形: 分身
+	"ccw_hexagon": [HEAL_MAGIC], # 逆时针六边形: 生命回复
 }
 var general_magic = [NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC]
 #endregion
@@ -59,6 +62,7 @@ func _physics_process(delta: float) -> void:
 			_create_sigil()
 			_end_draw()
 
+var intersection_tolerance: float = 20.0 # 自交的允许误差
 var area_threshold: float = 1000.0
 ## 1. 自交
 ## 2. 自交图形面积足够大
@@ -75,10 +79,15 @@ func _check_self_cross() -> bool:
 		# 1. 检查自交
 		var p_i = points[i]
 		var p_i_plus_1 = points[i + 1]
-		var intersection_point = Geometry2D.segment_intersects_segment(p_penultimate, p_last, p_i, p_i_plus_1)
-		if intersection_point:
+
+		
+		var closest_points = Geometry2D.get_closest_points_between_segments(p_penultimate, p_last, p_i, p_i_plus_1)
+		var distance = closest_points[0].distance_to(closest_points[1])
+		
+		if distance < intersection_tolerance:
 			# 2. 构造自交形状的顶点
 			var loop_points = PackedVector2Array()
+			var intersection_point = closest_points[0].lerp(closest_points[1], 0.5)
 			loop_points.append(intersection_point)
 			for j in range(i + 1, n - 1):
 				loop_points.append(points[j])
@@ -121,16 +130,16 @@ func _create_sigil() -> void:
 		5:
 			if _is_sigilpoints_clockwise():
 				magics = shape_to_magic["cw_pentagon"] # 子弹时间场
-				duration = 5.0
+				duration = 6.4
 			else:
-				magics = shape_to_magic["ccw_pentagon"] # 冰霜攻击
-				duration = 0.5
+				magics = shape_to_magic["ccw_pentagon"] # 电火花场
+				duration = 6.4
 		6:
 			if _is_sigilpoints_clockwise():
-				magics = shape_to_magic["cw_hexagon"] # 电火花场
-				duration = 5.0
+				magics = shape_to_magic["cw_hexagon"] # 分身
+				duration = 0.5
 			else:
-				magics = shape_to_magic["ccw_hexagon"] # 闪电攻击
+				magics = shape_to_magic["ccw_hexagon"] # 生命恢复
 				duration = 0.5
 		_:
 			magics = general_magic

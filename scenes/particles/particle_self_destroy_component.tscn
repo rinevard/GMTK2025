@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jfygh5sgpo6v"]
+
+[ext_resource type="Script" uid="uid://dxn2ot5kd7kom" path="res://scripts/components/particle_self_destroy_component.gd" id="1_4lmve"]
+
+[node name="ParticleSelfDestroyComponent" type="Node"]
+script = ExtResource("1_4lmve")

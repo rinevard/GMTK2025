@@ -24,6 +24,7 @@ var origin_scale: Vector2
 #endregion
 
 func _ready() -> void:
+	PlayerRelatedData.init_player_data(self)
 	origin_scale = scale
 
 func _physics_process(delta: float) -> void:

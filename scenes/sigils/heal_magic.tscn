@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmyjhqry32amn"]
+
+[ext_resource type="Script" uid="uid://8yodaaaiuc7a" path="res://scripts/sigil/heal_magic.gd" id="1_xdv8b"]
+
+[node name="HealMagic" type="Node2D"]
+script = ExtResource("1_xdv8b")

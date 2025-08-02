@@ -28,9 +28,13 @@ static func new_sigil(sigil_points: PackedVector2Array, packed_sigil_magics: Arr
 	sigil.sigil_res = p_sigil_res
 	return sigil
 
+var center = Vector2.ZERO
 func _ready() -> void:
 	var shape = ConvexPolygonShape2D.new()
 	shape.points = points
+	for p in points:
+		center += p
+	center /= points.size()
 	collision_shape_2d.shape = shape
 	_play_line_animation()
 	for magic in magics:
@@ -38,6 +42,9 @@ func _ready() -> void:
 
 @onready var animation_container: Node2D = $AnimationContainer
 func _play_line_animation() -> void:
+	# 只有五边形和六边形法阵有额外动画
+	if points.size() != 5 and points.size() != 6:
+		return
 	# 为主多边形线段设置基础属性
 	polygon_line_2d.points = points
 	var polygon_line_texture = sigil_res.polygon_line_texture
@@ -47,17 +54,10 @@ func _play_line_animation() -> void:
 	
 	polygon_line_2d.texture = polygon_line_texture
 	polygon_line_2d.width = polygon_line_width
-	
-	# 只有五边形和六边形法阵有额外动画
-	if points.size() != 5 and points.size() != 6:
-		return
 
 	# --- 1. 通用设置：计算中心点 ---
-	var center = Vector2.ZERO
-	for p in points:
-		center += p
-	center /= points.size()
-
+	# 已在 ready 中计算
+	
 	# --- 2. 将动画容器放到中心 ---
 	animation_container.position = center
 	
@@ -287,10 +287,6 @@ func _solve_linear_system(M: Array, b: Array) -> Array:
 	return x
 
 const CUSTOMIZED_LINE_2D = preload("res://scenes/sigils/customized_line_2d.tscn")
-## texture mode -> Tile
-## joint mode -> round
-## begin cap mode -> round
-## end cap mode -> round
 func _create_line_2d() -> Line2D:
 	var line2d: Line2D = CUSTOMIZED_LINE_2D.instantiate()
 	return line2d

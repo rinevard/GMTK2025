@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0ptm7s1g5hvs"]
 
 [ext_resource type="Script" uid="uid://ce8ok3nalelxm" path="res://scripts/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://dhivdcdye0mlg" path="res://assets/art/player/player.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://1b34f1d7kjx2" path="res://assets/art/player/player.png" id="2_gmlin"]
 [ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="3_gmlin"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
@@ -14,8 +14,6 @@ script = ExtResource("1_8afob")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_gmlin")
 flip_h = true
-region_enabled = true
-region_rect = Rect2(-85, 0, 555, 360)
 
 [node name="Marker2D" type="Marker2D" parent="Sprite2D"]
 
@@ -23,6 +21,7 @@ region_rect = Rect2(-85, 0, 555, 360)
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackedArea"]
+position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_gmlin")]

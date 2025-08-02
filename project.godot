@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GestureRecognizer="*res://globals/gesture_recognizer.tscn"
 PlayerRelatedData="*res://globals/player_related_data.tscn"
+ParticleHandler="*res://globals/particle_handler.tscn"
 
 [display]
 
@@ -36,3 +37,7 @@ Enemy=""
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Sigil"
 2d_physics/layer_4="Bullet"
+
+[rendering]
+
+textures/canvas_textures/default_texture_repeat=1

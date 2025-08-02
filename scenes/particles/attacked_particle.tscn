@@ -1,3 +1,33 @@
-[gd_scene format=3 uid="uid://c76g8q2om8r0c"]
+[gd_scene load_steps=6 format=3 uid="uid://c76g8q2om8r0c"]
+
+[ext_resource type="Texture2D" uid="uid://co1jw22mshg6o" path="res://assets/art/particles/circle_05.png" id="1_mblam"]
+[ext_resource type="PackedScene" uid="uid://jfygh5sgpo6v" path="res://scenes/particles/particle_self_destroy_component.tscn" id="2_q1pjo"]
+
+[sub_resource type="Gradient" id="Gradient_mblam"]
+colors = PackedColorArray(1, 0.00999999, 0.637, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q1pjo"]
+gradient = SubResource("Gradient_mblam")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ev5p6"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = -2.23517e-06
+damping_min = 100.0
+damping_max = 100.0
+scale_min = 0.1
+scale_max = 0.12
+color_ramp = SubResource("GradientTexture1D_q1pjo")
 
 [node name="AttackedParticle" type="GPUParticles2D"]
+emitting = false
+texture = ExtResource("1_mblam")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ev5p6")
+
+[node name="ParticleSelfDestroyComponent" parent="." instance=ExtResource("2_q1pjo")]
