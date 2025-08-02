@@ -10,7 +10,8 @@
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_e1fnv")
 
-[node name="SigilPen" parent="." instance=ExtResource("2_7xj1c")]
+[node name="SigilPen" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_7xj1c")]
+player = NodePath("../Player")
 
 [node name="EnemyHandler" parent="." instance=ExtResource("3_7xj1c")]
 

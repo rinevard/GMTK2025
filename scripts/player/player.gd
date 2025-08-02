@@ -9,6 +9,7 @@ var max_invincible_time: float = 3.0
 @onready var collision_shape_2d: CollisionShape2D = $AttackedArea/CollisionShape2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var broom_end_marker: Marker2D = $Sprite2D/Marker2D
 
 #region 移动与飞行
 @export_group("飞行参数")

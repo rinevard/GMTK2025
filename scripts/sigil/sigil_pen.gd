@@ -1,7 +1,6 @@
 extends Node2D
 
 
-
 #region 魔法们
 const NORMAL_ATTACK_MAGIC = preload("res://scenes/sigils/normal_attack_magic.tscn")
 const PROTECT_ICE_MAGIC = preload("res://scenes/sigils/protect_ice_magic.tscn")
@@ -39,9 +38,12 @@ var sigil_points: PackedVector2Array = []
 
 ## 显示绘制的轨迹
 @onready var line_2d: Line2D = $Line2D
+@export var player: Player
 func _physics_process(delta: float) -> void:
 	if is_drawing:
 		var new_point = get_global_mouse_position()
+		if player:
+			new_point = player.broom_end_marker.global_position
 		points.append(new_point)
 		line_2d.points = points
 		if _check_self_cross():
