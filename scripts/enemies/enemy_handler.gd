@@ -3,8 +3,9 @@ extends Node2D
 
 @export var spawn_pos: Node2D
 const MELEE_ENEMY = preload("res://scenes/enemies/melee_enemy.tscn")
+const QUICK_MELEE_ENEMY = preload("res://scenes/enemies/quick_melee_enemy.tscn")
 const RANGED_ENEMY = preload("res://scenes/enemies/ranged_enemy.tscn")
-var packed_enemies: Array[PackedScene] = [MELEE_ENEMY, MELEE_ENEMY, RANGED_ENEMY]
+var packed_enemies: Array[PackedScene] = [MELEE_ENEMY, MELEE_ENEMY, QUICK_MELEE_ENEMY, RANGED_ENEMY]
 
 var markers: Array = []
 

@@ -12,5 +12,4 @@ func _ready() -> void:
 		push_error("Particle 自毁 component 的父节点不是 particle!")
 
 func _on_finished() -> void:
-	print(1)
 	particle.call_deferred("queue_free")

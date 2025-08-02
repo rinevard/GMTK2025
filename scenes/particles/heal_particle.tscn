@@ -1,3 +1,38 @@
-[gd_scene format=3 uid="uid://csujbqj8h4von"]
+[gd_scene load_steps=7 format=3 uid="uid://csujbqj8h4von"]
+
+[ext_resource type="PackedScene" uid="uid://jfygh5sgpo6v" path="res://scenes/particles/particle_self_destroy_component.tscn" id="1_rtgvq"]
+
+[sub_resource type="Gradient" id="Gradient_rtgvq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ue0pf"]
+gradient = SubResource("Gradient_rtgvq")
+width = 16
+height = 16
+
+[sub_resource type="Gradient" id="Gradient_ue0pf"]
+colors = PackedColorArray(0.3, 0.6, 0.4, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ui84l"]
+gradient = SubResource("Gradient_ue0pf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rtgvq"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(100, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ui84l")
 
 [node name="HealParticle" type="GPUParticles2D"]
+emitting = false
+texture = SubResource("GradientTexture2D_ue0pf")
+lifetime = 0.4
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_rtgvq")
+
+[node name="ParticleSelfDestroyComponent" parent="." instance=ExtResource("1_rtgvq")]

@@ -20,3 +20,5 @@ script = ExtResource("6_t6xnl")
 
 [node name="Player" parent="." instance=ExtResource("1_upopr")]
 position = Vector2(1646, 261)
+x_bound = Vector2(100, 1800)
+y_bound = Vector2(100, 1000)

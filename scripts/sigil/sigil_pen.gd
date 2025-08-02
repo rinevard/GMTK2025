@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 			_create_sigil()
 			_end_draw()
 
-var intersection_tolerance: float = 20.0 # 自交的允许误差
+var intersection_tolerance: float = 40.0 # 自交的允许误差
 var area_threshold: float = 1000.0
 ## 1. 自交
 ## 2. 自交图形面积足够大

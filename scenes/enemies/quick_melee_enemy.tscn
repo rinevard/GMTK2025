@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv8twjff3q0rx"]
+
+[ext_resource type="PackedScene" uid="uid://krhoxrvynsul" path="res://scenes/enemies/melee_enemy.tscn" id="1_1rqg8"]
+
+[sub_resource type="Gradient" id="Gradient_1rqg8"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bm5vm"]
+gradient = SubResource("Gradient_1rqg8")
+width = 96
+height = 96
+
+[node name="QuickMeleeEnemy" instance=ExtResource("1_1rqg8")]
+speed = 600.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("GradientTexture2D_bm5vm")
+
+[node name="HealthComponent" parent="." index="4"]
+health = 1

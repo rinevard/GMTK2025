@@ -10,6 +10,7 @@ func _ready() -> void:
 	is_enemy = get_parent().is_in_group("Enemy")
 
 func heal(value: int) -> void:
+	ParticleHandler.spawn_particle(ParticleHandler.ParticleType.HEAL, global_position, self)
 	health += value
 
 func hit(damage: int):

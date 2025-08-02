@@ -20,6 +20,9 @@ var max_invincible_time: float = 3.0
 @export var hover_frequency: float = 2.0 # 浮动频率
 @export var hover_amplitude: float = 15.0 # 浮动幅度
 
+@export var x_bound: Vector2 = Vector2(-99999, 99999)
+@export var y_bound: Vector2 = Vector2(-99999, 99999)
+
 var origin_scale: Vector2
 #endregion
 
@@ -36,15 +39,17 @@ func _physics_process(delta: float) -> void:
 func _update_invincible(delta: float) -> void:
 	if rest_invincible_time > 0:
 		rest_invincible_time -= delta
-		modulate.g = 0
+		self_modulate.g = 0
 	else:
-		modulate.g = 1
+		self_modulate.g = 1
 
 var is_flipped: bool = false
 var flip_duration: float = 0.2
 func _update_pos(delta: float) -> void:
 	# 平滑移动
 	var target_pos = get_global_mouse_position()
+	target_pos.x = clamp(target_pos.x, x_bound[0], x_bound[1])
+	target_pos.y = clamp(target_pos.y, y_bound[0], y_bound[1])
 	var direction_to_target = (target_pos - global_position)
 	global_position = global_position.lerp(target_pos, follow_smoothness * delta)
 

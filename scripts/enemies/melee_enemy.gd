@@ -4,7 +4,7 @@ extends Node2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var time_scale_component: TimeScaleComponent = $TimeScaleComponent
 
-var speed: float = 400
+@export var speed: float = 400
 
 func _physics_process(delta: float) -> void:
 	# 时间缩放
@@ -17,4 +17,5 @@ func _on_health_less_than_zero() -> void:
 	die()
 
 func die() -> void:
+	ParticleHandler.spawn_particle(ParticleHandler.ParticleType.DIE, global_position)
 	queue_free()

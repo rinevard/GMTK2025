@@ -26,6 +26,7 @@ func _on_health_less_than_zero() -> void:
 	die()
 
 func die() -> void:
+	ParticleHandler.spawn_particle(ParticleHandler.ParticleType.DIE, global_position)
 	queue_free()
 
 func shot(dir: Vector2) -> void:
