@@ -7,6 +7,8 @@ var rest_invincible_time: float = 0.0
 var max_invincible_time: float = 3.0
 #endregion
 
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
 #region 移动
 var max_speed: float = 1200.0
 var speed_up_smoothness: float = 30.0
@@ -26,8 +28,8 @@ func _update_invincible(delta: float) -> void:
 	else:
 		modulate.g = 1
 
+var is_flip: bool = false
 func _update_pos(delta: float) -> void:
-	# 看起来我们不太需要缓动
 	var global_mouse_pos = get_global_mouse_position()
 	global_position = global_mouse_pos
 	PlayerRelatedData.update_player_data(self)

@@ -1,5 +1,7 @@
 extends Node2D
 
+
+
 #region 魔法们
 const NORMAL_ATTACK_MAGIC = preload("res://scenes/sigils/normal_attack_magic.tscn")
 const PROTECT_ICE_MAGIC = preload("res://scenes/sigils/protect_ice_magic.tscn")
@@ -10,7 +12,7 @@ var shape_to_magic: Dictionary = {
 	"cw_pentagon": [PROTECT_ICE_MAGIC], # 顺时针五边形: 子弹时间场
 	"ccw_pentagon": [NORMAL_ATTACK_MAGIC, NORMAL_ICE_MAGIC], # 逆时针五边形: 寒冰攻击
 	"cw_hexagon": [NORMAL_ATTACK_MAGIC], # 顺时针六边形: 电火花场
-	"ccw_hexagon": [NORMAL_ATTACK_MAGIC], # 逆时针六边形: 闪电攻击
+	"ccw_hexagon": [NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC], # 逆时针六边形: 闪电攻击
 }
 var general_magic = [NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC]
 #endregion

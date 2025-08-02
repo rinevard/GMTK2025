@@ -10,12 +10,12 @@
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_e1fnv")
 
-[node name="Player" parent="." instance=ExtResource("1_upopr")]
-position = Vector2(1646, 261)
-
 [node name="SigilPen" parent="." instance=ExtResource("2_7xj1c")]
 
 [node name="EnemyHandler" parent="." instance=ExtResource("3_7xj1c")]
 
 [node name="BulletHandler" parent="." instance=ExtResource("5_3ipv6")]
 script = ExtResource("6_t6xnl")
+
+[node name="Player" parent="." instance=ExtResource("1_upopr")]
+position = Vector2(1646, 261)
