@@ -24,6 +24,7 @@ PlayerRelatedData="*res://globals/player_related_data.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]
