@@ -9,10 +9,18 @@ var points: PackedVector2Array = []
 var magics: Array[Magic] = []
 var live_duration: float = 0.3
 
-static func new_sigil(sigil_points: PackedVector2Array, sigil_magics: Array[Magic]) -> Sigil:
+static func new_sigil(sigil_points: PackedVector2Array, packed_sigil_magics: Array, duration: float = 0.3) -> Sigil:
 	var sigil = SIGIL.instantiate()
 	sigil.points = sigil_points
+
+	var sigil_magics: Array[Magic] = []
+	for packed_magic in packed_sigil_magics:
+		var new_magic = packed_magic.instantiate()
+		if new_magic is Magic:
+			sigil_magics.append(new_magic)
+
 	sigil.magics = sigil_magics
+	sigil.live_duration = duration
 	return sigil
 
 func _ready() -> void:
@@ -20,8 +28,6 @@ func _ready() -> void:
 	shape.points = points
 	collision_shape_2d.shape = shape
 	line_2d.points = points
-	if (points.size() <= 6):
-		live_duration = 1.0
 	for magic in magics:
 		magic_handler.add_child(magic)
 
@@ -38,6 +44,17 @@ func _on_area_entered(area: Area2D) -> void:
 	if enemy.is_in_group("Enemy"):
 		_apply_magics(enemy)
 
-func _apply_magics(enemy: Node2D):
+func _on_area_exited(area: Area2D) -> void:
+	var enemy = area.get_parent()
+	if enemy.is_in_group("Enemy"):
+		_remove_magics(enemy)
+
+func _apply_magics(enemy: Node2D) -> void:
 	for magic in magics:
-		magic.apply_on(enemy)
+		if magic.has_method("apply_on"):
+			magic.apply_on(enemy)
+
+func _remove_magics(enemy: Node2D) -> void:
+	for magic in magics:
+		if magic.has_method("remove_on"):
+			magic.remove_on(enemy)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://lwgyo5jl7kqu"]
+[gd_scene load_steps=9 format=3 uid="uid://lwgyo5jl7kqu"]
 
 [ext_resource type="Script" uid="uid://n3sl7a2w7j1u" path="res://scripts/enemies/ranged_enemy.gd" id="1_k7uv6"]
 [ext_resource type="PackedScene" uid="uid://o6l6cttixb7g" path="res://scenes/components/ranged_ai_component.tscn" id="1_tegwr"]
 [ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="3_d5ppq"]
 [ext_resource type="PackedScene" uid="uid://bxcap5fdjer81" path="res://scenes/enemies/enemy_attacked_area.tscn" id="4_yiki0"]
+[ext_resource type="PackedScene" uid="uid://cr7k10gljbltm" path="res://scenes/components/time_scale_component.tscn" id="5_fejvx"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_d5ppq"]
 
@@ -29,5 +30,7 @@ texture = SubResource("NoiseTexture2D_d5ppq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackedArea"]
 shape = SubResource("RectangleShape2D_yiki0")
+
+[node name="TimeScaleComponent" parent="." instance=ExtResource("5_fejvx")]
 
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

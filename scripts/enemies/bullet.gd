@@ -4,7 +4,7 @@ extends Node2D
 var speed: float = 1200.0
 var dir: Vector2
 var life_time: float = 30.0
-var is_cold: bool = false
+@onready var time_scale_component: TimeScaleComponent = $TimeScaleComponent
 
 const BULLET = preload("res://scenes/enemies/bullet.tscn")
 
@@ -16,10 +16,10 @@ static func new_bullet(p_dir: Vector2, p_global_pos: Vector2) -> Bullet:
 	return bullet
 
 func _physics_process(delta: float) -> void:
-	if is_cold:
-		global_position += 0.5 * speed * delta * dir
-	else:
-		global_position += speed * delta * dir
+	# 时间缩放
+	delta *= time_scale_component.get_time_scale()
+
+	global_position += speed * delta * dir
 
 	life_time -= delta
 	if life_time < 0.0:
@@ -30,6 +30,3 @@ func _on_attack_some_area(area: Area2D) -> void:
 
 func die() -> void:
 	call_deferred("queue_free")
-
-func get_cold() -> void:
-	is_cold = true

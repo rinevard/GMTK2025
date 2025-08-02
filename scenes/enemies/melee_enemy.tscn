@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://krhoxrvynsul"]
+[gd_scene load_steps=10 format=3 uid="uid://krhoxrvynsul"]
 
 [ext_resource type="PackedScene" uid="uid://bp5cnuyqfyejc" path="res://scenes/components/melee_ai_component.tscn" id="1_l188l"]
 [ext_resource type="Script" uid="uid://bsa6f4jau1mpy" path="res://scripts/enemies/melee_enemy.gd" id="1_ru65g"]
 [ext_resource type="PackedScene" uid="uid://bf5jlbp1hfdlv" path="res://scenes/enemies/enemy_attack_area.tscn" id="3_ghbxi"]
 [ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="4_c1gin"]
 [ext_resource type="PackedScene" uid="uid://bxcap5fdjer81" path="res://scenes/enemies/enemy_attacked_area.tscn" id="5_p6yma"]
+[ext_resource type="PackedScene" uid="uid://cr7k10gljbltm" path="res://scenes/components/time_scale_component.tscn" id="6_nw5r8"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ykcao"]
 size = Vector2(96, 96)
@@ -35,5 +36,7 @@ shape = SubResource("RectangleShape2D_p6yma")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_c1gin")]
 health = 2
+
+[node name="TimeScaleComponent" parent="." instance=ExtResource("6_nw5r8")]
 
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

@@ -1,12 +1,12 @@
+## 普通冰霜魔法, 减速敌人
 extends Magic
 
-@export var damage: int = 1
-
 func apply_on(enemy: Node2D):
-	print(enemy.name)
-	var health_component = enemy.get_node_or_null("HealthComponent")
-	if health_component:
-		health_component.hit(damage)
-	if enemy.has_method("get_cold"):
-		print("cold")
-		enemy.is_cold = true
+	var time_scale_component = enemy.get_node_or_null("TimeScaleComponent")
+	if time_scale_component:
+		time_scale_component.get_cold()
+
+func remove_on(enemy: Node2D):
+	var time_scale_component = enemy.get_node_or_null("TimeScaleComponent")
+	if time_scale_component:
+		time_scale_component.remove_cold()

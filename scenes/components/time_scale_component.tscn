@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr7k10gljbltm"]
+
+[ext_resource type="Script" uid="uid://bsoc5ydm5s8fs" path="res://scripts/components/time_scale_component.gd" id="1_tcilm"]
+
+[node name="TimeScaleComponent" type="Node2D"]
+script = ExtResource("1_tcilm")

@@ -4,6 +4,15 @@ extends Node2D
 const NORMAL_ATTACK_MAGIC = preload("res://scenes/sigils/normal_attack_magic.tscn")
 const PROTECT_ICE_MAGIC = preload("res://scenes/sigils/protect_ice_magic.tscn")
 const NORMAL_ICE_MAGIC = preload("res://scenes/sigils/normal_ice_magic.tscn")
+const BULLET_DELETE_MAGIC = preload("res://scenes/sigils/bullet_delete_magic.tscn")
+
+var shape_to_magic: Dictionary = {
+	"cw_pentagon": [PROTECT_ICE_MAGIC], # 顺时针五边形: 子弹时间场
+	"ccw_pentagon": [NORMAL_ATTACK_MAGIC, NORMAL_ICE_MAGIC], # 逆时针五边形: 寒冰攻击
+	"cw_hexagon": [NORMAL_ATTACK_MAGIC], # 顺时针六边形: 电火花场
+	"ccw_hexagon": [NORMAL_ATTACK_MAGIC], # 逆时针六边形: 闪电攻击
+}
+var general_magic = [NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC]
 #endregion
 
 ## 根据鼠标按下/松开判断是否在画画
@@ -34,7 +43,6 @@ func _physics_process(delta: float) -> void:
 		points.append(new_point)
 		line_2d.points = points
 		if _check_self_cross():
-			print("点数: ", sigil_points.size())
 			_create_sigil()
 			_end_draw()
 
@@ -65,7 +73,6 @@ func _check_self_cross() -> bool:
 			# 3. 计算面积并与阈值比较
 			var area = _polygon_area(loop_points)
 			if area > area_threshold:
-				print(area)
 				sigil_points = GestureRecognizer.simplify_shape(loop_points)
 				return true
 
@@ -95,9 +102,50 @@ func _create_sigil() -> void:
 	# 已经被记录过了
 	
 	# 3. create
-	var new_sigil = Sigil.new_sigil(sigil_points, [magic1, magic2])
+	var magics: Array = []
+	var duration: float = 0.3
+	match sigil_points.size():
+		5:
+			if _is_sigilpoints_clockwise():
+				magics = shape_to_magic["cw_pentagon"] # 子弹时间场
+				duration = 5.0
+			else:
+				magics = shape_to_magic["ccw_pentagon"] # 冰霜攻击
+				duration = 0.5
+		6:
+			if _is_sigilpoints_clockwise():
+				magics = shape_to_magic["cw_hexagon"] # 电火花场
+				duration = 5.0
+			else:
+				magics = shape_to_magic["ccw_hexagon"] # 闪电攻击
+				duration = 0.5
+		_:
+			magics = general_magic
+	var new_sigil = Sigil.new_sigil(sigil_points, magics, duration)
 	add_child(new_sigil)
-	
+
+func _is_sigilpoints_clockwise() -> bool:
+	# 一个多边形至少需要3个点。如果少于3个点，它没有明确的环绕方向。
+	var point_count = sigil_points.size()
+	if point_count < 3:
+		return false
+
+	# 使用鞋带公式计算有符号面积的两倍。
+	# 我们只需要知道结果的符号，所以不需要除以2。
+	var area_sum: float = 0.0
+
+	for i in range(point_count):
+		var current_point = sigil_points[i]
+		# 获取下一个点，并使用模运算(%)来处理从最后一个点到第一个点的“环绕”。
+		var next_point = sigil_points[(i + 1) % point_count]
+
+		# 累加 (x1*y2 - x2*y1)
+		area_sum += (current_point.x * next_point.y) - (next_point.x * current_point.y)
+
+	# 在Godot的2D坐标系中，Y轴是向下的。
+	# 因此，如果和为正，则为顺时针；如果为负，则为逆时针。
+	# 如果和为0，说明所有点共线，我们将其视为非顺时针。
+	return area_sum > 0.0
 
 func _sample_create_sigil() -> void:
 	# 1. magics

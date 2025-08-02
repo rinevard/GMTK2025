@@ -41,8 +41,8 @@ func simplify_shape(original_points: PackedVector2Array) -> PackedVector2Array:
 	var rdp_simplified_points = _simplify_path_rdp(original_points, RDP_EPSILON)
 	var simplified_polygon = _simplify_path_corner(rdp_simplified_points)
 	
-	# 如果简化后多边形顶点过少，很可能不是一个有效的多边形，直接平滑
-	if simplified_polygon.size() < 3 or simplified_polygon.size() > 6:
+	# 只返回五边形和六边形
+	if simplified_polygon.size() != 5 and simplified_polygon.size() != 6:
 		return _smooth_path_moving_average_closed(original_points, MOVING_AVERAGE_ITERATIONS, SMOOTHING_FACTOR)
 
 	# 评估多边形拟合的质量
