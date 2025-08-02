@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SigilResource" load_steps=3 format=3 uid="uid://d2jrclgkjg4mf"]
+
+[ext_resource type="Script" uid="uid://c82i4xq75djsq" path="res://scripts/resources/sigil_resource.gd" id="1_va5de"]
+[ext_resource type="Texture2D" uid="uid://rpy6msr8is2t" path="res://assets/art/test2.png" id="1_vf1p2"]
+
+[resource]
+script = ExtResource("1_va5de")
+polygon_line_texture = ExtResource("1_vf1p2")
+polygon_line_width = 100.0
+other_line_width = 10.0
+metadata/_custom_type_script = "uid://c82i4xq75djsq"
