@@ -15,6 +15,10 @@ static func new_bullet(p_dir: Vector2, p_global_pos: Vector2) -> Bullet:
 	bullet.look_at(p_global_pos + p_dir.normalized())
 	return bullet
 
+@onready var sprite_2d: Sprite2D = $Sprite2D
+func _ready() -> void:
+	sprite_2d.material = sprite_2d.material.duplicate()
+
 func _physics_process(delta: float) -> void:
 	if PlayerRelatedData.level_paused:
 		return

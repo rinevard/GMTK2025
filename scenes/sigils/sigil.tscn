@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3p3a6vo1jaw7"]
+[gd_scene load_steps=5 format=3 uid="uid://d3p3a6vo1jaw7"]
 
 [ext_resource type="Script" uid="uid://3cjsrepx2va4" path="res://scripts/sigil/sigil.gd" id="1_imr1f"]
 [ext_resource type="PackedScene" uid="uid://ida55mw66cs4" path="res://scenes/sigils/customized_line_2d.tscn" id="3_qht1a"]
+[ext_resource type="Texture2D" uid="uid://ca1rbrcwwpfxw" path="res://assets/art/lines/color-line3.png" id="4_lsgq8"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_imr1f"]
 
@@ -20,6 +21,7 @@ shape = SubResource("ConvexPolygonShape2D_imr1f")
 [node name="PolygonLine2D" parent="." instance=ExtResource("3_qht1a")]
 closed = true
 width = 50.0
+texture = ExtResource("4_lsgq8")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

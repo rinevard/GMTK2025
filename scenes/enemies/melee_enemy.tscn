@@ -45,5 +45,6 @@ score = 20
 scale = Vector2(0.65, 0.65)
 
 [node name="DroppedComponent" parent="." instance=ExtResource("8_i1li3")]
+drop_prob = 0.02
 
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

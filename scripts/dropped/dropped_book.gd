@@ -65,6 +65,21 @@ var shape_to_texture: Dictionary = {
 	"ccw_hexagon": BOOK_4, # 逆六 (奶) -> 治疗线
 }
 
+# --- 开始: 修改 ---
+# 根据注释中的HSV值，我们使用Color.from_hsv来创建颜色。
+# 注意：Godot的from_hsv需要0-1范围的值，所以我们对原始值进行转换。
+var shape_to_color: Dictionary = {
+	# 顺五 (冰) -> HSV(205, 95, 100)
+	"cw_pentagon": Color.from_hsv(205.0 / 360.0, 95.0 / 100.0, 100.0 / 100.0),
+	# 逆五 (电) -> HSV(42, 86, 100)
+	"ccw_pentagon": Color.from_hsv(42.0 / 360.0, 86.0 / 100.0, 100.0 / 100.0),
+	# 顺六 (镜) -> HSV(346, 71, 100)
+	"cw_hexagon": Color.from_hsv(346.0 / 360.0, 71.0 / 100.0, 100.0 / 100.0),
+	# 逆六 (奶) -> HSV(178, 100, 72)
+	"ccw_hexagon": Color.from_hsv(178.0 / 360.0, 100.0 / 100.0, 72.0 / 100.0)
+}
+# --- 结束: 修改 ---
+
 var shape_to_line: Dictionary = {
 	"cw_pentagon": SLOW_LINE, # 顺五 (冰) -> 减速线
 	"ccw_pentagon": ELEC_LINE, # 逆五 (电) -> 闪电线
@@ -79,7 +94,21 @@ func _ready() -> void:
 	# 记录书本的初始Y坐标，作为漂浮的中心点
 	initial_position_y = self.position.y
 
-	sprite_2d.texture = shape_to_texture[sigil_shapes[rand_idx]]
+	var current_shape: String = sigil_shapes[rand_idx]
+	sprite_2d.texture = shape_to_texture[current_shape]
+
+	# --- 开始: 新增修改 ---
+	# 根据形状获取对应的颜色
+	var shader_color: Color = shape_to_color[current_shape]
+	# 设置shader的 "color" uniform参数
+	# 前提：你的Sprite2D节点在检查器中已经附加了一个ShaderMaterial
+	if sprite_2d.material is ShaderMaterial:
+		sprite_2d.material = sprite_2d.material.duplicate()
+		sprite_2d.material.set_shader_parameter("color", shader_color)
+	else:
+		# 如果没有ShaderMaterial，打印一个警告，方便调试
+		push_warning("DroppedBook's Sprite2D does not have a ShaderMaterial assigned.")
+	# --- 结束: 新增修改 ---
 
 
 #region --- 开始：为实现漂浮效果新增的函数 ---

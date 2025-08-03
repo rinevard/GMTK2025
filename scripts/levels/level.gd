@@ -5,6 +5,7 @@ signal level_completed(num: int)
 
 @export var level_num: int
 @export var duration: float = 60.0
+var level_time: float = 0.0
 
 @onready var player: Player = $Player
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
@@ -13,3 +14,4 @@ signal level_completed(num: int)
 
 func _ready() -> void:
 	PlayerRelatedData.update_level(self)
+	level_time = 0.0

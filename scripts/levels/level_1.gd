@@ -5,6 +5,7 @@ var time_after_last_spawn: float = 3.0
 var level_end: bool = false
 
 func _process(delta: float) -> void:
+	level_time += delta
 	# 关卡结束就不做事情了
 	if level_end or PlayerRelatedData.level_paused:
 		return

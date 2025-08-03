@@ -48,5 +48,6 @@ shape = SubResource("CircleShape2D_g1mby")
 scale = Vector2(0.6, 0.6)
 
 [node name="DroppedComponent" parent="." instance=ExtResource("8_fb6p4")]
+drop_prob = 0.05
 
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

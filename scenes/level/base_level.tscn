@@ -42,4 +42,4 @@ x_bound = Vector2(100, 1800)
 y_bound = Vector2(100, 1000)
 
 [node name="DroppedBook" parent="." instance=ExtResource("8_8xnqg")]
-position = Vector2(808, 335)
+position = Vector2(1018, 593)
