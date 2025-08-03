@@ -35,8 +35,17 @@ func jump_back() -> void:
 	tween.tween_property(self, "scale", Vector2.ZERO, jump_duration * 0.8).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	await tween.finished
 
+const BOOK_ELE = preload("res://assets/art/ui/new-book/book-ele.png")
+const BOOK_HEAL = preload("res://assets/art/ui/new-book/book-heal.png")
+const BOOK_MIRROR = preload("res://assets/art/ui/new-book/book-mirror.png")
+const BOOK_SLOW = preload("res://assets/art/ui/new-book/book-slow.png")
+var books: Array[Resource] = [
+BOOK_SLOW, BOOK_ELE, BOOK_MIRROR, BOOK_HEAL
+]
+@onready var book: TextureRect = $Book
+
 func set_book(book_num: int) -> void:
-	pass
+	book.texture = books[book_num % books.size()]
 
 func _on_confirm_pressed() -> void:
 	reading_finished.emit()

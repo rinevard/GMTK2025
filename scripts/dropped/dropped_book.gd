@@ -7,7 +7,7 @@ extends Area2D
 signal ui_need_show_magic_book()
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-# 顺五冰, 逆五电, 逆六奶, 顺六镜
+# 顺五冰, 逆五电, 顺六镜, 逆六奶
 var sigil_shapes: Array[String] = [
 	"cw_pentagon",
 	"ccw_pentagon",
@@ -52,8 +52,8 @@ func _on_area_entered(area: Area2D) -> void:
 		_ui_show_magic_book()
 		SaveManager.books_seen_arr[rand_idx] = true
 		SaveManager.save_game()
-	else:
-		_generate_random_sigil(rand_idx)
+		await PlayerRelatedData.level_continuing
+	_generate_random_sigil(rand_idx)
 	_remove_self()
 
 func _generate_random_sigil(idx: int) -> void:

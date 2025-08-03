@@ -27,6 +27,9 @@ var is_drawing: bool = false # 由 pen 设置
 var level_score: int = 0
 var level_paused: bool = false
 
+# 
+signal level_continuing()
+
 func init_player_data(player: Player) -> void:
 	player_global_pos = player.global_position
 	player_health_component = player.health_component

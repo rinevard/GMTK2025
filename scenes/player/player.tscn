@@ -32,7 +32,7 @@ position = Vector2(1, 10)
 shape = SubResource("CapsuleShape2D_lvxji")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_gmlin")]
-health = 5
+health = 3
 
 [node name="Label" type="Label" parent="."]
 offset_left = -17.0

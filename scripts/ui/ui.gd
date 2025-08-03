@@ -30,6 +30,7 @@ func _on_magic_book_reading_finished() -> void:
 	# TODO
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	await magic_book.jump_back()
+	PlayerRelatedData.level_continuing.emit()
 	magic_book.hide()
 	continue_game.emit()
 
