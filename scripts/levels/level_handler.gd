@@ -35,3 +35,4 @@ func continue_level() -> void:
 func end_level() -> void:
 	if cur_level:
 		cur_level.call_deferred("queue_free")
+	Engine.time_scale = 1.0

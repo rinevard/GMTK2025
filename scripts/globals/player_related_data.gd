@@ -3,11 +3,15 @@ extends Node
 # 只应由 player 发出
 signal player_lose()
 
+# 由 score handler 订阅
+signal score_updated()
+
 var player_global_pos: Vector2 = Vector2(-1000, -1000)
 var duplicate_player_global_positions: Dictionary = {}
 var bullet_handler: BulletHandler
 var player_health_component: HealthComponent
 var is_drawing: bool = false # 由 pen 设置
+var level_score: int = 0
 
 func init_player_data(player: Player) -> void:
 	player_global_pos = player.global_position
@@ -31,6 +35,8 @@ func heal_player(value: int) -> void:
 ## 只应由 level 调用
 func update_level(level: Level) -> void:
 	bullet_handler = level.bullet_handler
+	level_score = 0
+	score_updated.emit()
 
 func get_bullet_handler() -> BulletHandler:
 	return bullet_handler
@@ -40,3 +46,9 @@ func get_player_global_pos() -> Vector2:
 	if duplicate_player_global_positions.size() > 0:
 		return duplicate_player_global_positions.values().back()
 	return player_global_pos
+
+func level_get_score(score: int) -> void:
+	if score == 0:
+		return
+	level_score += score
+	score_updated.emit()

@@ -36,6 +36,7 @@ shape = SubResource("CircleShape2D_i1li3")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hit_particle_pos_markers") instance=ExtResource("4_c1gin")]
 hit_particle_pos_markers = [NodePath("../ParticleMarkers/Marker2D")]
+score = 20
 
 [node name="TimeScaleComponent" parent="." instance=ExtResource("6_nw5r8")]
 

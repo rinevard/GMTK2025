@@ -6,6 +6,7 @@ signal health_less_than_zero()
 
 @export var health: int = 1
 @export var hit_particle_pos_markers: Array[Marker2D] = []
+@export var score: int = 0
 var hit_particle_idx: int = 0
 
 var is_enemy: bool = false
@@ -27,6 +28,7 @@ func hit(damage: int):
 		ParticleHandler.spawn_particle(ParticleHandler.ParticleType.ATTACKED, particle_spawn_pos)
 	if health <= 0:
 		health_less_than_zero.emit()
+		PlayerRelatedData.level_get_score(score)
 
 func get_health() -> int:
 	return health

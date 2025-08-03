@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1p2vaoqj1g1l"]
+
+[ext_resource type="Script" uid="uid://ccyfhvbm6uu27" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_0mwgc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 708.0
+offset_top = 29.0
+offset_right = 1272.0
+offset_bottom = 217.0
+text = "HUD"

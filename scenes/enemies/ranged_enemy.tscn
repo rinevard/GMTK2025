@@ -27,6 +27,7 @@ position = Vector2(23, -19)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hit_particle_pos_markers") instance=ExtResource("3_d5ppq")]
 hit_particle_pos_markers = [NodePath("../HitParticleMarkers/Marker2D")]
+score = 30
 
 [node name="EnemyAttackedArea" parent="." instance=ExtResource("4_yiki0")]
 
