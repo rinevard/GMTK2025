@@ -10,6 +10,11 @@ const VISUAL_LIGHTNING_MAGIC = preload("res://scenes/sigils/visual_lightning_mag
 const HEAL_MAGIC = preload("res://scenes/sigils/heal_magic.tscn")
 const DUPLICATE_MAGIC = preload("res://scenes/sigils/duplicate_magic.tscn")
 
+const ELEC_LINE = preload("res://resources/elec_line.tres")
+const HEAL_LINE = preload("res://resources/heal_line.tres")
+const MIRROR_LINE = preload("res://resources/mirror_line.tres")
+const SLOW_LINE = preload("res://resources/slow_line.tres")
+
 var shape_to_magic: Dictionary = {
 	"cw_pentagon": [PROTECT_ICE_MAGIC], # 顺时针五边形: 子弹时间场
 	"ccw_pentagon": [VISUAL_LIGHTNING_MAGIC, NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC], # 逆时针五边形: 电火花场
@@ -123,25 +128,34 @@ func _create_sigil() -> void:
 	# 已经被记录过了
 	# 3. create
 	var magics: Array = []
+	var sigil_res: Resource = null
 	var duration: float = 0.3
 	match sigil_points.size():
 		5:
 			if _is_sigilpoints_clockwise():
 				magics = shape_to_magic["cw_pentagon"] # 子弹时间场
+				sigil_res = SLOW_LINE
 				duration = 6.4
 			else:
 				magics = shape_to_magic["ccw_pentagon"] # 电火花场
+				sigil_res = ELEC_LINE
 				duration = 6.4
 		6:
 			if _is_sigilpoints_clockwise():
 				magics = shape_to_magic["cw_hexagon"] # 分身
+				sigil_res = MIRROR_LINE
 				duration = 0.5
 			else:
 				magics = shape_to_magic["ccw_hexagon"] # 生命恢复
+				sigil_res = HEAL_LINE
 				duration = 0.5
 		_:
 			magics = general_magic
-	var new_sigil = Sigil.new_sigil(sigil_points, magics, duration)
+	var new_sigil: Sigil
+	if sigil_res:
+		new_sigil = Sigil.new_sigil(sigil_points, magics, duration, sigil_res)
+	else:
+		new_sigil = Sigil.new_sigil(sigil_points, magics, duration)
 	$Sigils.add_child(new_sigil)
 
 func _is_sigilpoints_clockwise() -> bool:
@@ -166,20 +180,3 @@ func _is_sigilpoints_clockwise() -> bool:
 	# 因此，如果和为正，则为顺时针；如果为负，则为逆时针。
 	# 如果和为0，说明所有点共线，我们将其视为非顺时针。
 	return area_sum > 0.0
-
-func _sample_create_sigil() -> void:
-	# 1. magics
-	var attack_magic1 = NORMAL_ATTACK_MAGIC.instantiate()
-	var attack_magic2 = NORMAL_ATTACK_MAGIC.instantiate()
-
-	# 2. points
-	var screen_center: Vector2 = Vector2(1920 / 2.0, 1080 / 2.0)
-	var test_points = PackedVector2Array([
-		screen_center + Vector2(0, 0),
-		screen_center + Vector2(200, 0),
-		screen_center + Vector2(0, 300)
-	])
-
-	# 3. create
-	var new_sigil = Sigil.new_sigil(test_points, [attack_magic1, attack_magic2])
-	add_child(new_sigil)

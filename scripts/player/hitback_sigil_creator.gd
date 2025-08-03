@@ -42,10 +42,3 @@ func create_hitback_sigil() -> void:
 	new_sigil.global_position = owner_node2d.global_position
 	# 3. 将创建好的魔法阵作为子节点添加到当前节点下
 	call_deferred("add_child", new_sigil)
-	call_deferred("scale_new_sigil", new_sigil)
-
-func scale_new_sigil(sigil: Sigil) -> void:
-	await get_tree().create_timer(hitback_duration / 2.0).timeout
-	var tween = get_tree().create_tween()
-	tween.tween_property(sigil, "scale", Vector2.ZERO, hitback_duration / 2.0) \
-	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SigilResource" load_steps=3 format=3 uid="uid://dw4mtbbsc30sn"]
+
+[ext_resource type="Texture2D" uid="uid://ci0hna44rbc67" path="res://assets/art/magic-line/line-heal.png" id="1_2gif1"]
+[ext_resource type="Script" uid="uid://c82i4xq75djsq" path="res://scripts/resources/sigil_resource.gd" id="1_fasxs"]
+
+[resource]
+script = ExtResource("1_fasxs")
+polygon_line_texture = ExtResource("1_2gif1")
+other_line_texture = ExtResource("1_2gif1")
+polygon_line_width = 20.0
+other_line_width = 20.0
+metadata/_custom_type_script = "uid://c82i4xq75djsq"

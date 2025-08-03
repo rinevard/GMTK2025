@@ -13,6 +13,8 @@ var magics: Array[Magic] = []
 var live_duration: float = 0.3
 var sigil_res: SigilResource
 
+## sigil_points: global positions，表示 sigil 的各个顶点. 
+# 最终 sigil 的 global_position 会出现在这些点中心
 static func new_sigil(sigil_points: PackedVector2Array, packed_sigil_magics: Array, duration: float = 0.3, p_sigil_res: SigilResource = NORMAL_SIGIL) -> Sigil:
 	var sigil = SIGIL.instantiate()
 	sigil.points = sigil_points
@@ -23,6 +25,14 @@ static func new_sigil(sigil_points: PackedVector2Array, packed_sigil_magics: Arr
 		if new_magic is Magic:
 			sigil_magics.append(new_magic)
 
+	for p in sigil.points:
+		sigil.center += p
+	sigil.center /= sigil.points.size()
+	sigil.global_position = sigil.center
+
+	for i in range(len(sigil.points)):
+		sigil.points[i] -= sigil.center
+
 	sigil.magics = sigil_magics
 	sigil.live_duration = duration
 	sigil.sigil_res = p_sigil_res
@@ -32,9 +42,6 @@ var center = Vector2.ZERO
 func _ready() -> void:
 	var shape = ConvexPolygonShape2D.new()
 	shape.points = points
-	for p in points:
-		center += p
-	center /= points.size()
 	collision_shape_2d.shape = shape
 	_play_line_animation()
 	for magic in magics:
@@ -59,14 +66,13 @@ func _play_line_animation() -> void:
 	# 已在 ready 中计算
 	
 	# --- 2. 将动画容器放到中心 ---
-	animation_container.position = center
 	
 	# --- 3. 处理主多边形 ---
 	# 将现有的多边形线移动到动画容器中，使其也参与动画
 	# 为了正确缩放，我们需要将其顶点坐标转换为相对于中心的坐标
 	var relative_points = PackedVector2Array()
 	for p in points:
-		relative_points.append(p - center)
+		relative_points.append(p)
 	
 	# 用于存放所有需要创建的新线条
 	var new_lines: Array[Line2D] = []
@@ -92,13 +98,13 @@ func _play_line_animation() -> void:
 		ellipse_line.width = other_line_width
 		# 调用基于线性代数的精确解法
 		# 注意：传入的是原始坐标点和中心点
-		ellipse_line.points = _calculate_ellipse_by_solving_system(points, center)
+		ellipse_line.points = _calculate_ellipse_by_solving_system(points)
 		
 		# 椭圆比多边形大, 更新碰撞体形状
 		var shape = ConvexPolygonShape2D.new()
 		var collision_shape_points = PackedVector2Array()
 		for p in ellipse_line.points:
-			collision_shape_points.append(p + center)
+			collision_shape_points.append(p)
 		shape.points = collision_shape_points
 		collision_shape_2d.shape = shape
 
@@ -142,11 +148,20 @@ func _play_line_animation() -> void:
 		 .set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
 func _physics_process(delta: float) -> void:
+	if is_fading:
+		return
 	live_duration -= delta
 	if live_duration < 0:
 		_fade_away()
 
+var is_fading: bool = false
+var fade_duration: float = 0.5
 func _fade_away() -> void:
+	is_fading = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "scale", Vector2.ZERO, fade_duration) \
+	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	await tween.finished
 	call_deferred("queue_free")
 
 func _on_area_entered(area: Area2D) -> void:
@@ -172,7 +187,7 @@ func _remove_magics(enemy: Node2D) -> void:
 #                    线性代数精确解法核心函数
 # =========================================================================
 # 函数 1: 通过求解线性方程组计算外接椭圆的点 (已修正采样逻辑)
-func _calculate_ellipse_by_solving_system(p_points: PackedVector2Array, p_center: Vector2) -> PackedVector2Array:
+func _calculate_ellipse_by_solving_system(p_points: PackedVector2Array) -> PackedVector2Array:
 	if p_points.size() != 5:
 		return PackedVector2Array()
 
@@ -238,7 +253,7 @@ func _calculate_ellipse_by_solving_system(p_points: PackedVector2Array, p_center
 			var global_point = centered_point + ellipse_center
 			
 			# 将全局坐标点转换为相对于动画容器中心的坐标
-			ellipse_points.append(global_point - p_center)
+			ellipse_points.append(global_point)
 
 	return ellipse_points
 
