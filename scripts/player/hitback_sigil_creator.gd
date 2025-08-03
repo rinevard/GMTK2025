@@ -13,7 +13,7 @@ const VISUAL_LIGHTNING_MAGIC = preload("res://scenes/sigils/visual_lightning_mag
 const HEAL_MAGIC = preload("res://scenes/sigils/heal_magic.tscn")
 const DUPLICATE_MAGIC = preload("res://scenes/sigils/duplicate_magic.tscn")
 
-const HIT_BACK_SIGIL_RES = preload("res://resources/hit_back_sigil.tres")
+const MIRROR_LINE = preload("res://resources/mirror_line.tres")
 # 五个平a，一个子弹消除，一个视觉闪电
 var hitback_magic = [NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC, NORMAL_ATTACK_MAGIC,
 					BULLET_DELETE_MAGIC]
@@ -38,7 +38,7 @@ func create_hitback_sigil() -> void:
 		
 	# 2. 调用 Sigil 类的静态工厂方法来创建魔法阵实例
 	# 我们传入计算好的顶点、预设的魔法、持续时间和视觉资源
-	var new_sigil: Sigil = Sigil.new_sigil(points, hitback_magic, hitback_duration, HIT_BACK_SIGIL_RES)
+	var new_sigil: Sigil = Sigil.new_sigil(points, hitback_magic, hitback_duration, MIRROR_LINE)
 	new_sigil.global_position = owner_node2d.global_position
 	# 3. 将创建好的魔法阵作为子节点添加到当前节点下
 	call_deferred("add_child", new_sigil)

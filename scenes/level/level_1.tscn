@@ -6,4 +6,3 @@
 [node name="Level1" instance=ExtResource("1_cfjva")]
 script = ExtResource("1_xbhhu")
 level_num = 1
-duration = 1e+07

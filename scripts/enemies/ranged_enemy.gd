@@ -27,6 +27,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# 时间缩放
 	delta *= time_scale_component.get_time_scale()
+	ranged_anim_scene.set_speed_scale(time_scale_component.get_time_scale())
 
 	var pos_offset = ranged_ai_component.get_target_global_pos() - global_position
 
