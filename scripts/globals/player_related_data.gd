@@ -6,6 +6,9 @@ signal player_lose()
 # 由 score handler 订阅
 signal score_updated()
 
+# 只应由 dropped_book 发出
+signal book_picked(idx: int)
+
 var player_global_pos: Vector2 = Vector2(-1000, -1000)
 var duplicate_player_global_positions: Dictionary = {}
 var bullet_handler: BulletHandler

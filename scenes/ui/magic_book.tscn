@@ -19,4 +19,11 @@ offset_right = 1267.0
 offset_bottom = 697.0
 text = "OK"
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 625.0
+offset_top = 81.0
+offset_right = 1312.0
+offset_bottom = 417.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

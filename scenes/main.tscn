@@ -11,7 +11,6 @@ script = ExtResource("1_sugp2")
 
 [node name="UI" parent="." instance=ExtResource("3_sugp2")]
 
-[connection signal="level_completed" from="LevelHandler" to="." method="_on_level_handler_level_completed"]
 [connection signal="continue_game" from="UI" to="." method="_on_ui_continue_game"]
 [connection signal="end_level" from="UI" to="." method="_on_ui_end_level"]
 [connection signal="pause_level" from="UI" to="." method="_on_ui_pause_level"]

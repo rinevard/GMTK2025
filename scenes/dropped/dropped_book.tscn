@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbg80hbdg43h8"]
+
+[ext_resource type="Script" uid="uid://hjmi3xlr42t6" path="res://scripts/dropped/dropped_book.gd" id="1_u142l"]
+[ext_resource type="Texture2D" uid="uid://cm4wv16dcybvw" path="res://icon.svg" id="2_b0utg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0utg"]
+size = Vector2(128, 128)
+
+[node name="DroppedBook" type="Area2D"]
+collision_layer = 2048
+collision_mask = 128
+script = ExtResource("1_u142l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_b0utg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b0utg")
+
+[node name="Node" type="Node" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

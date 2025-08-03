@@ -118,6 +118,7 @@ func _on_health_less_than_zero() -> void:
 	die()
 
 func die() -> void:
-	PlayerRelatedData.player_lose.emit()
+	SaveManager.high_score = max(SaveManager.high_score, PlayerRelatedData.level_score)
 	SaveManager.save_game()
+	PlayerRelatedData.player_lose.emit()
 	call_deferred("queue_free")

@@ -129,7 +129,7 @@ func _create_sigil() -> void:
 	# 3. create
 	var magics: Array = []
 	var sigil_res: Resource = null
-	var duration: float = 0.3
+	var duration: float = 0.05
 	match sigil_points.size():
 		5:
 			if _is_sigilpoints_clockwise():

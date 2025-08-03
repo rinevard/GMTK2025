@@ -21,7 +21,7 @@ var hitback_duration: float = 1.0
 #endregion
 
 # 可以在编辑器中调整六边形的大小
-@export var sigil_radius: float = 300.0
+var sigil_radius: float = 300.0
 
 func create_hitback_sigil() -> void:
 	# 1. 计算正六边形的六个顶点
@@ -34,11 +34,10 @@ func create_hitback_sigil() -> void:
 		var angle = i * angle_step
 		# Vector2.from_angle(angle) 创建一个指向该角度的单位向量
 		var vertex_position = Vector2.from_angle(angle) * sigil_radius
-		points.append(vertex_position)
+		points.append(vertex_position + owner_node2d.global_position)
 		
 	# 2. 调用 Sigil 类的静态工厂方法来创建魔法阵实例
 	# 我们传入计算好的顶点、预设的魔法、持续时间和视觉资源
 	var new_sigil: Sigil = Sigil.new_sigil(points, hitback_magic, hitback_duration, MIRROR_LINE)
-	new_sigil.global_position = owner_node2d.global_position
 	# 3. 将创建好的魔法阵作为子节点添加到当前节点下
 	call_deferred("add_child", new_sigil)

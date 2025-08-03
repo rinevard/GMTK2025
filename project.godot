@@ -38,6 +38,8 @@ Enemy=""
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Sigil"
 2d_physics/layer_4="Bullet"
+2d_physics/layer_8="PlayerPick"
+2d_physics/layer_12="DroppedItem"
 
 [rendering]
 

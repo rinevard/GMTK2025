@@ -10,7 +10,7 @@ const SIGIL = preload("res://scenes/sigils/sigil.tscn")
 
 var points: PackedVector2Array = []
 var magics: Array[Magic] = []
-var live_duration: float = 0.3
+var live_duration: float = 0.05
 var sigil_res: SigilResource
 
 ## sigil_points: global positions，表示 sigil 的各个顶点. 
@@ -49,9 +49,6 @@ func _ready() -> void:
 
 @onready var animation_container: Node2D = $AnimationContainer
 func _play_line_animation() -> void:
-	# 只有五边形和六边形法阵有额外动画
-	if points.size() != 5 and points.size() != 6:
-		return
 	# 为主多边形线段设置基础属性
 	polygon_line_2d.points = points
 	var polygon_line_texture = sigil_res.polygon_line_texture
@@ -61,6 +58,9 @@ func _play_line_animation() -> void:
 	
 	polygon_line_2d.texture = polygon_line_texture
 	polygon_line_2d.width = polygon_line_width
+	# 只有五边形和六边形法阵有额外动画
+	if points.size() != 5 and points.size() != 6:
+		return
 
 	# --- 1. 通用设置：计算中心点 ---
 	# 已在 ready 中计算

@@ -17,9 +17,11 @@ func _ready() -> void:
 	reset_menu.hide()
 	start_menu.show()
 	PlayerRelatedData.player_lose.connect(_on_player_lose)
+	PlayerRelatedData.book_picked.connect(show_magic_book)
 
-func show_magic_book(level_num: int=1) -> void:
+func show_magic_book(book_num: int = 1) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	magic_book.set_book(book_num)
 	magic_book.show()
 	pause_level.emit()
 

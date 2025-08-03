@@ -3,8 +3,8 @@ extends Control
 
 signal reading_finished()
 
-func set_book() -> void:
-	pass
+func set_book(book_num: int) -> void:
+	$Label.text = str(book_num)
 
 func _on_button_pressed() -> void:
 	reading_finished.emit()
