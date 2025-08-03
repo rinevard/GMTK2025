@@ -23,11 +23,13 @@ func show_magic_book(book_num: int = 1) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	magic_book.set_book(book_num)
 	magic_book.show()
+	magic_book.jump_out()
 	pause_level.emit()
 
 func _on_magic_book_reading_finished() -> void:
 	# TODO
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	await magic_book.jump_back()
 	magic_book.hide()
 	continue_game.emit()
 

@@ -54,7 +54,7 @@ func _on_area_entered(area: Area2D) -> void:
 		SaveManager.save_game()
 	else:
 		_generate_random_sigil(rand_idx)
-		_remove_self()
+	_remove_self()
 
 func _generate_random_sigil(idx: int) -> void:
 	# 1. 根据索引获取法阵的名称和对应属性
