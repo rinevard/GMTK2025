@@ -14,6 +14,7 @@ const SIGIL_ACTIVATION_SHIELD = preload("res://assets/sfx/sigil_activation_shiel
 const ELEC_ENEMY = preload("res://assets/sfx/elec_enemy.ogg")
 const HEAL = preload("res://assets/sfx/heal.wav")
 const HIT_BACK = preload("res://assets/sfx/hit_back.wav")
+const UI_INTRO = preload("res://assets/sfx/ui_intro.wav")
 
 # --- 音效枚举 ---
 enum SFXs {
@@ -30,6 +31,7 @@ enum SFXs {
 	ELEC_ENEMY,
 	HEAL,
 	HIT_BACK,
+	UI_INTRO,
 }
 
 # --- 音频播放器 ---
@@ -60,6 +62,7 @@ func _ready() -> void:
 		SFXs.ELEC_ENEMY: ELEC_ENEMY,
 		SFXs.HEAL: HEAL,
 		SFXs.HIT_BACK: HIT_BACK,
+		SFXs.UI_INTRO: UI_INTRO,
 	}
 	
 	# --- 初始化专用的绘画循环音效播放器 ---

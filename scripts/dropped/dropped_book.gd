@@ -56,6 +56,7 @@ var rand_idx: int = randi_range(0, sigil_shapes.size() - 1)
 func _on_area_entered(area: Area2D) -> void:
 	if not SaveManager.books_seen_arr[rand_idx]:
 		_ui_show_magic_book()
+		SfxPlayer.play_sfx(SfxPlayer.SFXs.UI_INTRO)
 		SaveManager.books_seen_arr[rand_idx] = true
 		SaveManager.save_game()
 		await PlayerRelatedData.level_continuing
