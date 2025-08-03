@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://lwgyo5jl7kqu"]
+[gd_scene load_steps=11 format=3 uid="uid://lwgyo5jl7kqu"]
 
 [ext_resource type="Script" uid="uid://n3sl7a2w7j1u" path="res://scripts/enemies/ranged_enemy.gd" id="1_k7uv6"]
 [ext_resource type="PackedScene" uid="uid://o6l6cttixb7g" path="res://scenes/components/ranged_ai_component.tscn" id="1_tegwr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cr7k10gljbltm" path="res://scenes/components/time_scale_component.tscn" id="5_fejvx"]
 [ext_resource type="PackedScene" uid="uid://cwn750hs2kpy6" path="res://scenes/anim_scenes/anim_ranged.tscn" id="6_a7ubc"]
 [ext_resource type="PackedScene" uid="uid://bf5jlbp1hfdlv" path="res://scenes/enemies/enemy_attack_area.tscn" id="7_g1mby"]
+[ext_resource type="PackedScene" uid="uid://cie2i443yc640" path="res://scenes/enemies/dropped_component.tscn" id="8_fb6p4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yiki0"]
 size = Vector2(64, 57)
@@ -45,5 +46,7 @@ shape = SubResource("CircleShape2D_g1mby")
 
 [node name="RangedAnimScene" parent="." instance=ExtResource("6_a7ubc")]
 scale = Vector2(0.6, 0.6)
+
+[node name="DroppedComponent" parent="." instance=ExtResource("8_fb6p4")]
 
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

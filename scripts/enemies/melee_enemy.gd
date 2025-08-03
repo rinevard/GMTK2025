@@ -21,6 +21,8 @@ func _physics_process(delta: float) -> void:
 func _on_health_less_than_zero() -> void:
 	die()
 
+@onready var dropped_component: DroppedComponent = $DroppedComponent
 func die() -> void:
 	ParticleHandler.spawn_particle(ParticleHandler.ParticleType.DIE, global_position)
+	dropped_component.random_drop()
 	queue_free()

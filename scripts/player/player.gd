@@ -5,7 +5,7 @@ extends Node2D
 @onready var hitback_sigil_creator: HitbackSigilCreator = $Node/HitbackSigilCreator
 @onready var health_component: HealthComponent = $HealthComponent
 var rest_invincible_time: float = 0.0
-var max_invincible_time: float = 3.0
+var max_invincible_time: float = 0.2
 #endregion
 @onready var collision_shape_2d: CollisionShape2D = $AttackedArea/CollisionShape2D
 

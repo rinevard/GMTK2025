@@ -555,9 +555,10 @@ _data = {
 &"idle": SubResource("Animation_ejgcv")
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("eyes")]
 script = ExtResource("1_cv5fd")
 anim_names = Array[String](["create", "idle"])
+eyes = [NodePath("CharacterBody2D/top/1"), NodePath("CharacterBody2D/top/4"), NodePath("CharacterBody2D/top/2"), NodePath("CharacterBody2D/top/3")]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 0

@@ -8,7 +8,8 @@ signal level_completed(num: int)
 
 @onready var player: Player = $Player
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
-@onready var bullet_handler: Node2D = $BulletHandler
+@onready var bullet_handler: BulletHandler = $BulletHandler
+@onready var dropped_handler: DroppedHandler = $DroppedHandler
 
 func _ready() -> void:
 	PlayerRelatedData.update_level(self)

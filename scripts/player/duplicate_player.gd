@@ -7,7 +7,7 @@ extends Node2D
 @onready var hitback_sigil_creator: HitbackSigilCreator = $Node/HitbackSigilCreator
 @onready var health_component: HealthComponent = $HealthComponent
 var rest_invincible_time: float = 0.0
-var max_invincible_time: float = 3.0
+var max_invincible_time: float = 0.2
 #endregion
 
 var need_remove_from_global: bool = false # 防止竞争
@@ -47,4 +47,4 @@ func _disable_collision() -> void:
 	$AttackedArea/CollisionShape2D.disabled = true
 
 func _call_deferred_queue_free() -> void:
-	call_deferred("queue_free")	
+	call_deferred("queue_free")

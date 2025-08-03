@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://ci76xbl0hpoqw"]
+
+[ext_resource type="Script" uid="uid://cqxlnpx3nmljm" path="res://scripts/enemies/spawn_enemy.gd" id="1_cjkfe"]
+[ext_resource type="PackedScene" uid="uid://b46t6lgvx33oq" path="res://scenes/anim_scenes/anim_spawn.tscn" id="1_wbxpi"]
+[ext_resource type="PackedScene" uid="uid://o6l6cttixb7g" path="res://scenes/components/ranged_ai_component.tscn" id="2_bfj1v"]
+[ext_resource type="PackedScene" uid="uid://bf5jlbp1hfdlv" path="res://scenes/enemies/enemy_attack_area.tscn" id="3_84nce"]
+[ext_resource type="PackedScene" uid="uid://bxcap5fdjer81" path="res://scenes/enemies/enemy_attacked_area.tscn" id="4_0cinj"]
+[ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="5_cdm1h"]
+[ext_resource type="PackedScene" uid="uid://cr7k10gljbltm" path="res://scenes/components/time_scale_component.tscn" id="6_cjkfe"]
+[ext_resource type="PackedScene" uid="uid://cie2i443yc640" path="res://scenes/enemies/dropped_component.tscn" id="8_riipd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjkfe"]
+radius = 87.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_riipd"]
+radius = 87.0
+
+[node name="SpawnEnemy" type="Node2D" groups=["Enemy"]]
+script = ExtResource("1_cjkfe")
+
+[node name="ParticleMarkers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="ParticleMarkers"]
+position = Vector2(-107, -7)
+
+[node name="Marker2D2" type="Marker2D" parent="ParticleMarkers"]
+position = Vector2(116, -9)
+
+[node name="Marker2D3" type="Marker2D" parent="ParticleMarkers"]
+position = Vector2(-31, 17)
+
+[node name="Marker2D4" type="Marker2D" parent="ParticleMarkers"]
+position = Vector2(55, 23)
+
+[node name="RangedAIComponent" parent="." instance=ExtResource("2_bfj1v")]
+threshold = 200.0
+
+[node name="EnemyAttackArea" parent="." instance=ExtResource("3_84nce")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea"]
+position = Vector2(-3, 9)
+shape = SubResource("CircleShape2D_cjkfe")
+
+[node name="EnemyAttackedArea" parent="." instance=ExtResource("4_0cinj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackedArea"]
+position = Vector2(-3, 9)
+shape = SubResource("CircleShape2D_riipd")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hit_particle_pos_markers") instance=ExtResource("5_cdm1h")]
+health = 4
+hit_particle_pos_markers = [NodePath("../ParticleMarkers/Marker2D"), NodePath("../ParticleMarkers/Marker2D2"), NodePath("../ParticleMarkers/Marker2D3"), NodePath("../ParticleMarkers/Marker2D4")]
+score = 150
+
+[node name="TimeScaleComponent" parent="." instance=ExtResource("6_cjkfe")]
+
+[node name="SpawnAnimScene" parent="." instance=ExtResource("1_wbxpi")]
+scale = Vector2(0.74, 0.74)
+
+[node name="SpawnPosMarker" type="Marker2D" parent="."]
+position = Vector2(0, 60)
+
+[node name="DroppedComponent" parent="." instance=ExtResource("8_riipd")]
+
+[connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]
+[connection signal="health_minus" from="HealthComponent" to="." method="_on_health_component_health_minus"]

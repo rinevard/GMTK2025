@@ -25,7 +25,6 @@ func play_anim_after_cur_finished(anim_name: String) -> void:
 
 func _anim_finished(finished_anim_name: String) -> void:
 	anim_finished.emit(finished_anim_name)
-	print(next_anim)
 	if next_anim in anim_names:
 		play_anim(next_anim)
 	next_anim = ""

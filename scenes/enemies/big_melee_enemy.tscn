@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://df5rnov42jdty"]
+[gd_scene load_steps=11 format=3 uid="uid://df5rnov42jdty"]
 
 [ext_resource type="PackedScene" uid="uid://bp5cnuyqfyejc" path="res://scenes/components/melee_ai_component.tscn" id="1_upar8"]
 [ext_resource type="PackedScene" uid="uid://4vhukdywaw8b" path="res://scenes/anim_scenes/anim_big_melee.tscn" id="2_1raeo"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bxcap5fdjer81" path="res://scenes/enemies/enemy_attacked_area.tscn" id="3_qmrr2"]
 [ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="4_rha7m"]
 [ext_resource type="PackedScene" uid="uid://cr7k10gljbltm" path="res://scenes/components/time_scale_component.tscn" id="5_8oi8e"]
+[ext_resource type="PackedScene" uid="uid://cie2i443yc640" path="res://scenes/enemies/dropped_component.tscn" id="8_w1rdu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w1rdu"]
 radius = 78.5175
@@ -50,6 +51,8 @@ score = 50
 
 [node name="BigMeleeAnimScene" parent="." instance=ExtResource("2_1raeo")]
 scale = Vector2(0.8, 0.8)
+
+[node name="DroppedComponent" parent="." instance=ExtResource("8_w1rdu")]
 
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]
 [connection signal="health_minus" from="HealthComponent" to="." method="_on_health_component_health_minus"]

@@ -6,6 +6,7 @@ extends Node2D
 
 @export var speed: float = 400
 @onready var big_melee_anim_scene: AnimScene = $BigMeleeAnimScene
+@onready var dropped_component: DroppedComponent = $DroppedComponent
 
 func _ready() -> void:
 	big_melee_anim_scene.play_anim("idle")
@@ -22,7 +23,8 @@ func _on_health_less_than_zero() -> void:
 
 func die() -> void:
 	ParticleHandler.spawn_particle(ParticleHandler.ParticleType.DIE, global_position)
-	queue_free()
+	dropped_component.random_drop()
+	call_deferred("queue_free")
 
 func _on_health_component_health_minus(value: int) -> void:
 	big_melee_anim_scene.hit_eye()

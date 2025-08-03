@@ -12,6 +12,8 @@ signal book_picked(idx: int)
 var player_global_pos: Vector2 = Vector2(-1000, -1000)
 var duplicate_player_global_positions: Dictionary = {}
 var bullet_handler: BulletHandler
+var enemy_handler: EnemyHandler
+var dropped_handler: DroppedHandler
 var player_health_component: HealthComponent
 var is_drawing: bool = false # 由 pen 设置
 var level_score: int = 0
@@ -38,11 +40,20 @@ func heal_player(value: int) -> void:
 ## 只应由 level 调用
 func update_level(level: Level) -> void:
 	bullet_handler = level.bullet_handler
+	enemy_handler = level.enemy_handler
+	dropped_handler = level.dropped_handler
+	
 	level_score = 0
 	score_updated.emit()
 
 func get_bullet_handler() -> BulletHandler:
 	return bullet_handler
+
+func get_enemy_handler() -> EnemyHandler:
+	return enemy_handler
+
+func get_dropped_handler() -> DroppedHandler:
+	return dropped_handler
 
 ## 这可能会返回分身的位置
 func get_player_global_pos() -> Vector2:

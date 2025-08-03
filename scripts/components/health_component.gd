@@ -17,6 +17,7 @@ func heal(value: int) -> void:
 	ParticleHandler.spawn_particle(ParticleHandler.ParticleType.HEAL, global_position, self)
 	health += value
 
+var has_died: bool = false
 func hit(damage: int):
 	health -= damage
 	health_minus.emit(damage)
@@ -26,9 +27,10 @@ func hit(damage: int):
 			particle_spawn_pos = hit_particle_pos_markers[hit_particle_idx % hit_particle_pos_markers.size()].global_position
 			hit_particle_idx += 1
 		ParticleHandler.spawn_particle(ParticleHandler.ParticleType.ATTACKED, particle_spawn_pos)
-	if health <= 0:
+	if health <= 0 and not has_died:
 		health_less_than_zero.emit()
 		PlayerRelatedData.level_get_score(score)
+		has_died = true
 
 func get_health() -> int:
 	return health
