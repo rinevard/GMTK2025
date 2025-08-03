@@ -41,3 +41,4 @@ func create_hitback_sigil() -> void:
 	var new_sigil: Sigil = Sigil.new_sigil(points, hitback_magic, hitback_duration, MIRROR_LINE)
 	# 3. 将创建好的魔法阵作为子节点添加到当前节点下
 	call_deferred("add_child", new_sigil)
+	SfxPlayer.play_sfx(SfxPlayer.SFXs.HIT_BACK)

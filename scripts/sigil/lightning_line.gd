@@ -18,6 +18,7 @@ func strike(life_time: float = 0.28):
 		push_warning("LightningLine has no ShaderMaterial assigned. Cannot perform strike effect.")
 		return
 
+	SfxPlayer.play_sfx(SfxPlayer.SFXs.ELEC_ENEMY)
 	# 2. 设置动画的初始状态
 	# 闪电开始时是完全没有的 (头部和尾部都在起点)
 	material.set_shader_parameter("head_progress", 0.0)

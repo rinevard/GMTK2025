@@ -21,6 +21,7 @@ GestureRecognizer="*res://globals/gesture_recognizer.tscn"
 PlayerRelatedData="*res://globals/player_related_data.tscn"
 ParticleHandler="*res://globals/particle_handler.tscn"
 SaveManager="*res://globals/save_manager.tscn"
+SfxPlayer="*res://globals/sfx_player.tscn"
 
 [display]
 

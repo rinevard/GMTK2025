@@ -60,6 +60,10 @@ func _physics_process(delta: float) -> void:
 	if PlayerRelatedData.level_paused:
 		return
 	if is_drawing:
+		# if not PlayerRelatedData.level_paused:
+		# 	SfxPlayer.play_draw_loop()
+		# else:
+		# 	SfxPlayer.pause_draw_loop()
 		var new_point = get_global_mouse_position()
 		if player:
 			new_point = player.broom_end_marker.global_position
@@ -70,6 +74,8 @@ func _physics_process(delta: float) -> void:
 		if _check_self_cross():
 			_create_sigil()
 			_end_draw()
+	else:
+		SfxPlayer.pause_draw_loop()
 
 var intersection_tolerance: float = 40.0 # 自交的允许误差
 var area_threshold: float = 1000.0
@@ -138,21 +144,26 @@ func _create_sigil() -> void:
 				magics = shape_to_magic["cw_pentagon"] # 子弹时间场
 				sigil_res = SLOW_LINE
 				duration = 6.4
+				SfxPlayer.play_sfx(SfxPlayer.SFXs.SIGIL_ACTIVATION_FROST)
 			else:
 				magics = shape_to_magic["ccw_pentagon"] # 电火花场
 				sigil_res = ELEC_LINE
 				duration = 6.4
+				SfxPlayer.play_sfx(SfxPlayer.SFXs.LIGHTNING)
 		6:
 			if _is_sigilpoints_clockwise():
 				magics = shape_to_magic["cw_hexagon"] # 分身
 				sigil_res = MIRROR_LINE
 				duration = 0.5
+				SfxPlayer.play_sfx(SfxPlayer.SFXs.SIGIL_ACTIVATION_SHIELD)
 			else:
 				magics = shape_to_magic["ccw_hexagon"] # 生命恢复
 				sigil_res = HEAL_LINE
 				duration = 0.5
+				SfxPlayer.play_sfx(SfxPlayer.SFXs.HEAL)
 		_:
 			magics = general_magic
+			SfxPlayer.play_sfx(SfxPlayer.SFXs.ENEMY_DEATH_2)
 	var new_sigil: Sigil
 	if sigil_res:
 		new_sigil = Sigil.new_sigil(sigil_points, magics, duration, sigil_res)

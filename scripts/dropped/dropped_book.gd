@@ -35,6 +35,12 @@ var shape_to_magic: Dictionary = {
 	"ccw_hexagon": [HEAL_MAGIC], # 逆时针六边形: 生命回复
 }
 var general_magic = [NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC]
+var shape_to_sfx: Dictionary = {
+	"cw_pentagon": SfxPlayer.SFXs.SIGIL_ACTIVATION_FROST, # 顺时针五边形: 子弹时间场
+	"ccw_pentagon": SfxPlayer.SFXs.LIGHTNING, # 逆时针五边形: 电火花场
+	"cw_hexagon": SfxPlayer.SFXs.SIGIL_ACTIVATION_SHIELD, # 顺时针六边形: 分身
+	"ccw_hexagon": SfxPlayer.SFXs.HEAL, # 逆时针六边形: 生命回复
+}
 #endregion
 
 var shape_to_line: Dictionary = {
@@ -64,7 +70,8 @@ func _generate_random_sigil(idx: int) -> void:
 	var duration: float
 	var line_resource: Resource = shape_to_line[shape_name]
 	var magic_array: Array = shape_to_magic[shape_name]
-	
+	var magic_sfx: SfxPlayer.SFXs = shape_to_sfx[shape_name]
+	SfxPlayer.play_sfx(magic_sfx)
 	# 根据法阵名称确定顶点数和持续时间
 	if shape_name.contains("pentagon"):
 		num_vertices = 5
