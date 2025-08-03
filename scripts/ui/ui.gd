@@ -25,7 +25,7 @@ func show_magic_book(book_num: int = 1) -> void:
 	magic_book.set_book(book_num)
 	magic_book.show()
 	magic_book.jump_out()
-	BgmPlayer.pause_level_bgm()
+	BgmPlayer.low_level_bgm()
 	pause_level.emit()
 
 func _on_magic_book_reading_finished() -> void:
@@ -34,7 +34,7 @@ func _on_magic_book_reading_finished() -> void:
 	await magic_book.jump_back()
 	PlayerRelatedData.level_continuing.emit()
 	magic_book.hide()
-	BgmPlayer.continue_play_level_bgm()
+	BgmPlayer.ret_level_bgm()
 	continue_game.emit()
 
 func _on_start_menu_game_start() -> void:

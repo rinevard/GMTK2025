@@ -29,24 +29,24 @@ func _label_roll_number() -> void:
 		SaveManager.high_score = level_score
 	
 	# 3. 先设置最高分 Label 的文本为旧的分数
-	best_label.text = "Best: %d" % old_best_score
+	best_label.text = "%d" % old_best_score
 	
 	# 如果本次得分为0，则无需滚动，直接设置为0并返回
 	if level_score == 0:
-		score_label.text = "Score: 0"
+		score_label.text = "0"
 		return
 
 	# 4. 创建一个新的 Tween 用于动画序列
 	var roll_tween = create_tween()
 	# 将动画链起来，这样它们会按顺序播放
-	roll_tween.set_parallel(false) 
+	roll_tween.set_parallel(false)
 	
 	# 定义滚动动画的持续时间
 	var roll_duration: float = 1.2
 
 	# 5. 第一个动画：滚动当前分数
 	roll_tween.tween_method(
-		func(value: float): score_label.text = "Score: %d" % int(value),
+		func(value: float): score_label.text = "%d" % int(value),
 		0.0,
 		float(level_score),
 		roll_duration
@@ -57,17 +57,17 @@ func _label_roll_number() -> void:
 		# 使用 tween_callback 在上一个动画结束后执行逻辑
 		roll_tween.tween_callback(func():
 			# 更新 Best Label 的文本和外观
-			best_label.text = "Best: %d" % SaveManager.high_score
+			best_label.text = "%d" % SaveManager.high_score
 			best_label.modulate = Color.GOLD # 让它变金黄色，更醒目！
 			
 			# 创建一个独立的Tween来播放弹跳动画，可以与音效等并行
 			var pop_tween = create_tween()
 			var pop_duration = 0.2
 			# 放大
-			pop_tween.tween_property(best_label, "scale", Vector2(1.5, 1.5), pop_duration)\
+			pop_tween.tween_property(best_label, "scale", Vector2(1.5, 1.5), pop_duration) \
 					 .set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 			# 带回弹效果地恢复原状
-			pop_tween.tween_property(best_label, "scale", Vector2.ONE, pop_duration * 1.5)\
+			pop_tween.tween_property(best_label, "scale", Vector2.ONE, pop_duration * 1.5) \
 					 .set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 		)
 

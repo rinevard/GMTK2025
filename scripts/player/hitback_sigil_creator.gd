@@ -36,6 +36,7 @@ func create_hitback_sigil() -> void:
 		var vertex_position = Vector2.from_angle(angle) * sigil_radius
 		points.append(vertex_position + owner_node2d.global_position)
 		
+	PlayerRelatedData.screen_shake(25.0, global_position, 0.5)
 	# 2. 调用 Sigil 类的静态工厂方法来创建魔法阵实例
 	# 我们传入计算好的顶点、预设的魔法、持续时间和视觉资源
 	var new_sigil: Sigil = Sigil.new_sigil(points, hitback_magic, hitback_duration, MIRROR_LINE)

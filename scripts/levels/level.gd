@@ -2,6 +2,7 @@ class_name Level
 extends Node2D
 
 signal level_completed(num: int)
+@onready var camera_2d: Camera2D = $Camera2D
 
 @export var level_num: int
 @export var duration: float = 60.0

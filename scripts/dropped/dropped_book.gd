@@ -48,7 +48,7 @@ var general_magic = [NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC]
 var shape_to_sfx: Dictionary = {
 	"cw_pentagon": SfxPlayer.SFXs.ICE, # 顺时针五边形: 子弹时间场
 	"ccw_pentagon": SfxPlayer.SFXs.LIGHTNING, # 逆时针五边形: 电火花场
-	"cw_hexagon": SfxPlayer.SFXs.SIGIL_ACTIVATION_SHIELD, # 顺时针六边形: 分身
+	"cw_hexagon": SfxPlayer.SFXs.DRAWING_FAIL, # 顺时针六边形: 分身
 	"ccw_hexagon": SfxPlayer.SFXs.HEAL, # 逆时针六边形: 生命回复
 }
 #endregion
@@ -154,6 +154,7 @@ func _generate_random_sigil(idx: int) -> void:
 	else: # 法阵是六边形
 		num_vertices = 6
 		duration = 0.5 # 六边形持续时间
+		PlayerRelatedData.screen_shake(8.0, global_position, 0.3)
 		
 	# 2. 计算法阵的顶点
 	var points = PackedVector2Array()

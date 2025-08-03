@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1p2vaoqj1g1l"]
+[gd_scene load_steps=8 format=3 uid="uid://d1p2vaoqj1g1l"]
 
 [ext_resource type="Script" uid="uid://ccyfhvbm6uu27" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
 [ext_resource type="PackedScene" uid="uid://bvq17ahiqn0ny" path="res://scenes/ui/hud/heart.tscn" id="2_hqnrr"]
+[ext_resource type="Texture2D" uid="uid://6l3123uh1flg" path="res://assets/art/finalfinal/score.png" id="3_bo48s"]
+[ext_resource type="Shader" uid="uid://ccoldad2vhuvq" path="res://shaders/uis/jittery_outline.gdshader" id="3_oj5la"]
+[ext_resource type="Theme" uid="uid://b7h7v0hb6c5t8" path="res://resources/ui_theme.tres" id="4_8qguk"]
+[ext_resource type="Script" uid="uid://crmebb0qq7ku3" path="res://scripts/ui/score_label.gd" id="6_oj5la"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gss2c"]
+shader = ExtResource("3_oj5la")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 5.0
+shader_parameter/speed = 2.0
+shader_parameter/blockSize = 0.0
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/tolerance = 0.0
+shader_parameter/texture_jiggle_amount = 5.0
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -29,3 +43,27 @@ layout_mode = 2
 
 [node name="Heart3" parent="HeartContainer" instance=ExtResource("2_hqnrr")]
 layout_mode = 2
+
+[node name="ScoreTexture" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_gss2c")
+layout_mode = 0
+offset_left = 1372.0
+offset_top = 44.0
+offset_right = 1859.0
+offset_bottom = 176.0
+texture = ExtResource("3_bo48s")
+
+[node name="ScoreLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 1489.0
+offset_top = 163.0
+offset_right = 1689.0
+offset_bottom = 228.0
+theme = ExtResource("4_8qguk")
+theme_override_colors/font_color = Color(0.702734, 0.876236, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_oj5la")

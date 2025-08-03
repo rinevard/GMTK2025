@@ -105,6 +105,7 @@ func _update_hover() -> void:
 func _hit(area: Area2D) -> void:
 	if rest_invincible_time > 0:
 		return
+	
 	health_component.hit(1)
 	PlayerRelatedData.player_hurt.emit()
 	hitback_sigil_creator.create_hitback_sigil()

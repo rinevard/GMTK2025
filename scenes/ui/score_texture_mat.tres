@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dgovhr6bf013j"]
+
+[ext_resource type="Shader" uid="uid://dholp50o2dqcg" path="res://shaders/uis/witch.gdshader" id="1_rv75m"]
+
+[resource]
+shader = ExtResource("1_rv75m")
+shader_parameter/amplitude = 10.0
+shader_parameter/speed = 1.0

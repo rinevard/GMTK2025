@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="GMTK2025"
+config/name="Arcana Loop"
 run/main_scene="uid://1qhkngukjpre"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://boqya1tixyesa"
 
 [autoload]
 
@@ -48,3 +48,4 @@ Enemy=""
 
 textures/canvas_textures/default_texture_repeat=1
 viewport/hdr_2d=true
+anti_aliasing/quality/msaa_2d=1

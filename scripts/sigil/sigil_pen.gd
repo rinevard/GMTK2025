@@ -151,11 +151,12 @@ func _create_sigil() -> void:
 				duration = 6.4
 				SfxPlayer.play_sfx(SfxPlayer.SFXs.LIGHTNING)
 		6:
+			PlayerRelatedData.screen_shake(8.0, global_position, 0.3)
 			if _is_sigilpoints_clockwise():
 				magics = shape_to_magic["cw_hexagon"] # 分身
 				sigil_res = MIRROR_LINE
 				duration = 0.5
-				SfxPlayer.play_sfx(SfxPlayer.SFXs.SIGIL_ACTIVATION_SHIELD)
+				SfxPlayer.play_sfx(SfxPlayer.SFXs.DRAWING_FAIL)
 			else:
 				magics = shape_to_magic["ccw_hexagon"] # 生命恢复
 				sigil_res = HEAL_LINE

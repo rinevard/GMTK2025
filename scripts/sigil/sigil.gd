@@ -92,6 +92,8 @@ func _play_line_animation() -> void:
 		star_line.points = star_points
 		new_lines.append(star_line)
 
+		PlayerRelatedData.screen_shake(20.0, global_position, 0.3)
+
 		# 创建外接椭圆 (Circumscribed Ellipse) - **通过求解线性方程组**
 		var ellipse_line = _create_line_2d()
 		ellipse_line.texture = other_line_texture
