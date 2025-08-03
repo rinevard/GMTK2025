@@ -1,7 +1,7 @@
 class_name Bullet
 extends Node2D
 
-var speed: float = 1200.0
+var speed: float = 280.0
 var dir: Vector2
 var life_time: float = 30.0
 @onready var time_scale_component: TimeScaleComponent = $TimeScaleComponent

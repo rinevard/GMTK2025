@@ -7,11 +7,12 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sugp2")
 
-[node name="Background" type="Sprite2D" parent="."]
-
 [node name="LevelHandler" parent="." instance=ExtResource("1_0wfyh")]
 
 [node name="UI" parent="." instance=ExtResource("3_sugp2")]
 
 [connection signal="level_completed" from="LevelHandler" to="." method="_on_level_handler_level_completed"]
-[connection signal="reading_finished" from="UI" to="." method="_on_ui_reading_finished"]
+[connection signal="continue_game" from="UI" to="." method="_on_ui_continue_game"]
+[connection signal="end_level" from="UI" to="." method="_on_ui_end_level"]
+[connection signal="pause_level" from="UI" to="." method="_on_ui_pause_level"]
+[connection signal="start_game" from="UI" to="." method="_on_ui_start_game"]

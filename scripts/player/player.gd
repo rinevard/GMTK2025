@@ -113,4 +113,8 @@ func _be_invincible() -> void:
 	rest_invincible_time = max_invincible_time
 
 func _on_health_less_than_zero() -> void:
-	print("lose!")
+	PlayerRelatedData.player_lose.emit()
+	die()
+
+func die() -> void:
+	call_deferred("queue_free")

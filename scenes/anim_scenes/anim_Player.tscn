@@ -1716,39 +1716,33 @@ position = Vector2(439, 265)
 offset = Vector2(54, -16)
 
 [node name="broom" type="Sprite2D" parent="player/body"]
-z_as_relative = false
 position = Vector2(-30, 64)
 texture = ExtResource("1_m8llk")
 offset = Vector2(83, -80)
 
 [node name="back-leg" type="Sprite2D" parent="player/body"]
 z_index = -1
-z_as_relative = false
 position = Vector2(-40, 52)
 texture = ExtResource("2_b1irg")
 offset = Vector2(94, -68)
 
 [node name="front-leg" type="Sprite2D" parent="player/body"]
-z_as_relative = false
 position = Vector2(-10, 59)
 texture = ExtResource("3_xwogt")
 offset = Vector2(63, -76)
 
 [node name="head" type="Sprite2D" parent="player/body"]
-z_as_relative = false
 position = Vector2(-12, -5.96423)
 texture = ExtResource("4_q76rc")
 offset = Vector2(66, -9)
 
 [node name="back-hair" type="Sprite2D" parent="player/body/head"]
 z_index = -1
-z_as_relative = false
 position = Vector2(-32, -32)
 texture = ExtResource("5_qvs8n")
 offset = Vector2(97, 23)
 
 [node name="front-hair" type="Sprite2D" parent="player/body/head"]
-z_as_relative = false
 position = Vector2(273, 124.995)
 rotation = 0.042221
 offset = Vector2(-213.592, -121.99)
@@ -1767,7 +1761,6 @@ offset = Vector2(-0.777771, -23.0004)
 
 [node name="hat1" type="Sprite2D" parent="player/body/head/hat"]
 z_index = 2
-z_as_relative = false
 position = Vector2(11, -59.6587)
 texture = ExtResource("8_42wrl")
 offset = Vector2(56, 51.6587)
@@ -1775,7 +1768,6 @@ offset = Vector2(56, 51.6587)
 [node name="2-1" type="Sprite2D" parent="player/body/head/hat"]
 visible = false
 z_index = 2
-z_as_relative = false
 position = Vector2(-3, -59.0358)
 texture = ExtResource("9_uhqk8")
 offset = Vector2(71, 51.0358)
@@ -1789,7 +1781,6 @@ offset = Vector2(68, 61)
 
 [node name="eyes" type="Sprite2D" parent="player/body/head/face"]
 z_index = 1
-z_as_relative = false
 position = Vector2(-10, -27)
 texture = ExtResource("11_mauim")
 offset = Vector2(75, 18)
@@ -1809,7 +1800,6 @@ offset = Vector2(83, 22.3155)
 
 [node name="cloth" type="Sprite2D" parent="player/body/cloth"]
 z_index = 2
-z_as_relative = false
 position = Vector2(-3, 1)
 texture = ExtResource("14_mw5r4")
 offset = Vector2(56, -16.5603)

@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://do6to2r30tvc0"]
+
+[ext_resource type="Script" uid="uid://dkhsduabh2au2" path="res://scripts/ui/start_menu.gd" id="1_irhji"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_irhji")
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 251.0
+offset_right = 1176.0
+offset_bottom = 497.0
+text = "Start"
+
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 622.0
+offset_right = 1355.0
+offset_bottom = 874.0
+text = "Exit"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

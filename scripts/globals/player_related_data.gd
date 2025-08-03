@@ -1,5 +1,8 @@
 extends Node
 
+# 只应由 player 发出
+signal player_lose()
+
 var player_global_pos: Vector2 = Vector2(-1000, -1000)
 var duplicate_player_global_positions: Dictionary = {}
 var bullet_handler: BulletHandler

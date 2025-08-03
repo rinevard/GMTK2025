@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx0yvywbjnai7"]
+[gd_scene load_steps=7 format=3 uid="uid://cx0yvywbjnai7"]
 
 [ext_resource type="Script" uid="uid://dmowbbc6io8hy" path="res://scripts/levels/level.gd" id="1_e1fnv"]
 [ext_resource type="PackedScene" uid="uid://b0ptm7s1g5hvs" path="res://scenes/player/player.tscn" id="1_upopr"]
@@ -7,13 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://pnm7djwly5em" path="res://scenes/level/bullet_handler.tscn" id="5_3ipv6"]
 [ext_resource type="Script" uid="uid://no50rbpxx7gh" path="res://scripts/levels/bullet_handler.gd" id="6_t6xnl"]
 
-[sub_resource type="Environment" id="Environment_t6xnl"]
-background_mode = 3
-glow_enabled = true
-glow_blend_mode = 1
-
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_e1fnv")
+duration = 1e+07
 
 [node name="SigilPen" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_7xj1c")]
 player = NodePath("../Player")
@@ -27,9 +23,3 @@ script = ExtResource("6_t6xnl")
 position = Vector2(1391, 266)
 x_bound = Vector2(100, 1800)
 y_bound = Vector2(100, 1000)
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.8, 0.8, 0.8, 1)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_t6xnl")
