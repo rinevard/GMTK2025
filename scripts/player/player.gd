@@ -32,6 +32,8 @@ func _ready() -> void:
 	origin_scale = scale
 
 func _physics_process(delta: float) -> void:
+	if PlayerRelatedData.level_paused:
+		return
 	_update_invincible(delta)
 	_update_pos_and_anim(delta)
 	_update_hover()
@@ -108,6 +110,7 @@ func _hit(area: Area2D) -> void:
 	if rest_invincible_time > 0:
 		return
 	health_component.hit(1)
+	PlayerRelatedData.player_hurt.emit()
 	hitback_sigil_creator.create_hitback_sigil()
 	_be_invincible()
 

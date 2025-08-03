@@ -1,5 +1,13 @@
 extends Node
 
+const MAX_PLAYER_HEALTH: int = 3
+
+# 只应由 player 发出
+signal player_hurt()
+
+# 由 player_related_data 即本节点发出
+signal player_heal()
+
 # 只应由 player 发出
 signal player_lose()
 
@@ -17,6 +25,7 @@ var dropped_handler: DroppedHandler
 var player_health_component: HealthComponent
 var is_drawing: bool = false # 由 pen 设置
 var level_score: int = 0
+var level_paused: bool = false
 
 func init_player_data(player: Player) -> void:
 	player_global_pos = player.global_position
@@ -36,6 +45,7 @@ func remove_duplicate_player(duplicate_player_id: int):
 
 func heal_player(value: int) -> void:
 	player_health_component.heal(value)
+	player_heal.emit()
 
 ## 只应由 level 调用
 func update_level(level: Level) -> void:

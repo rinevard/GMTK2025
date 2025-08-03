@@ -6,7 +6,7 @@ var level_end: bool = false
 
 func _process(delta: float) -> void:
 	# 关卡结束就不做事情了
-	if level_end:
+	if level_end or PlayerRelatedData.level_paused:
 		return
 	
 	duration -= delta

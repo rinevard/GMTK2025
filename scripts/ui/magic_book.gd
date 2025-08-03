@@ -4,7 +4,7 @@ extends Control
 signal reading_finished()
 
 func set_book(book_num: int) -> void:
-	$Label.text = str(book_num)
+	pass
 
-func _on_button_pressed() -> void:
+func _on_confirm_pressed() -> void:
 	reading_finished.emit()

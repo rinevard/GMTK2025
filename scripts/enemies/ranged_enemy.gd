@@ -25,6 +25,8 @@ func _ready() -> void:
 	ranged_anim_scene.anim_finished.connect(_on_anim_finished)
 
 func _physics_process(delta: float) -> void:
+	if PlayerRelatedData.level_paused:
+		return
 	# 时间缩放
 	delta *= time_scale_component.get_time_scale()
 	ranged_anim_scene.set_speed_scale(time_scale_component.get_time_scale())

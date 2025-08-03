@@ -14,8 +14,9 @@ func _ready() -> void:
 	is_enemy = get_parent().is_in_group("Enemy")
 
 func heal(value: int) -> void:
-	ParticleHandler.spawn_particle(ParticleHandler.ParticleType.HEAL, global_position, self)
-	health += value
+	if health + value <= PlayerRelatedData.MAX_PLAYER_HEALTH:
+		ParticleHandler.spawn_particle(ParticleHandler.ParticleType.HEAL, global_position, self)
+		health += value
 
 var has_died: bool = false
 func hit(damage: int):

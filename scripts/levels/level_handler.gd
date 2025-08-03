@@ -27,12 +27,12 @@ func _on_level_completed(level_num: int) -> void:
 	level_completed.emit(level_num)
 
 func pause_level() -> void:
-	Engine.time_scale = 0.0
+	PlayerRelatedData.level_paused = true
 
 func continue_level() -> void:
-	Engine.time_scale = 1.0
+	PlayerRelatedData.level_paused = false
 
 func end_level() -> void:
 	if cur_level:
 		cur_level.call_deferred("queue_free")
-	Engine.time_scale = 1.0
+	PlayerRelatedData.level_paused = false

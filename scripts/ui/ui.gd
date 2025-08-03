@@ -26,6 +26,7 @@ func show_magic_book(book_num: int = 1) -> void:
 	pause_level.emit()
 
 func _on_magic_book_reading_finished() -> void:
+	# TODO
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	magic_book.hide()
 	continue_game.emit()

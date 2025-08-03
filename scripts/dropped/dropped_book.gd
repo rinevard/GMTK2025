@@ -52,9 +52,9 @@ func _on_area_entered(area: Area2D) -> void:
 		_ui_show_magic_book()
 		SaveManager.books_seen_arr[rand_idx] = true
 		SaveManager.save_game()
-	await get_tree().create_timer(0.1).timeout
-	_generate_random_sigil(rand_idx)
-	_remove_self()
+	else:
+		_generate_random_sigil(rand_idx)
+		_remove_self()
 
 func _generate_random_sigil(idx: int) -> void:
 	# 1. 根据索引获取法阵的名称和对应属性

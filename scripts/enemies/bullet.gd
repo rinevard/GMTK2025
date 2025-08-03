@@ -16,6 +16,8 @@ static func new_bullet(p_dir: Vector2, p_global_pos: Vector2) -> Bullet:
 	return bullet
 
 func _physics_process(delta: float) -> void:
+	if PlayerRelatedData.level_paused:
+		return
 	# 时间缩放
 	delta *= time_scale_component.get_time_scale()
 

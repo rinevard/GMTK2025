@@ -12,6 +12,8 @@ func _ready() -> void:
 	big_melee_anim_scene.play_anim("idle")
 
 func _physics_process(delta: float) -> void:
+	if PlayerRelatedData.level_paused:
+		return
 	# 时间缩放
 	delta *= time_scale_component.get_time_scale()
 	big_melee_anim_scene.set_speed_scale(time_scale_component.get_time_scale())

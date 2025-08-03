@@ -57,6 +57,8 @@ func _ready() -> void:
 @export var player: Player
 var point_distance_threshold: float = 15.0
 func _physics_process(delta: float) -> void:
+	if PlayerRelatedData.level_paused:
+		return
 	if is_drawing:
 		var new_point = get_global_mouse_position()
 		if player:

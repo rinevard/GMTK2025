@@ -3,6 +3,9 @@ extends Node2D
 @onready var ui: UI = $UI
 @onready var level_handler: LevelHandler = $LevelHandler
 
+func _ready() -> void:
+	SaveManager.clear_data()
+
 func _on_ui_reading_finished() -> void:
 	level_handler.next_level()
 

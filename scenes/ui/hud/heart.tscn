@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvq17ahiqn0ny"]
+
+[ext_resource type="Texture2D" uid="uid://cfv53yrvqqsn8" path="res://assets/art/ui/heart-2.png" id="1_g5kwl"]
+[ext_resource type="Script" uid="uid://bfocp62qmhcpd" path="res://scripts/ui/heart.gd" id="2_7ns54"]
+[ext_resource type="Shader" uid="uid://6lee5nu8d2yx" path="res://shaders/uis/heart.gdshader" id="2_7u57x"]
+[ext_resource type="Texture2D" uid="uid://boqya1tixyesa" path="res://assets/art/ui/heart-1.png" id="2_krsew"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ns54"]
+shader = ExtResource("2_7u57x")
+shader_parameter/progress = 0.0
+
+[node name="Heart" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_g5kwl")
+script = ExtResource("2_7ns54")
+
+[node name="InnerHeart" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_7ns54")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_krsew")

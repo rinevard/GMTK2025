@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1p2vaoqj1g1l"]
+[gd_scene load_steps=3 format=3 uid="uid://d1p2vaoqj1g1l"]
 
 [ext_resource type="Script" uid="uid://ccyfhvbm6uu27" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
+[ext_resource type="PackedScene" uid="uid://bvq17ahiqn0ny" path="res://scenes/ui/hud/heart.tscn" id="2_hqnrr"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -12,10 +13,19 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_0mwgc")
 
-[node name="Label" type="Label" parent="."]
+[node name="HeartContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 708.0
-offset_top = 29.0
-offset_right = 1272.0
-offset_bottom = 217.0
-text = "HUD"
+offset_left = 52.0
+offset_top = 52.0
+offset_right = 444.0
+offset_bottom = 164.0
+scale = Vector2(0.7, 0.7)
+
+[node name="Heart" parent="HeartContainer" instance=ExtResource("2_hqnrr")]
+layout_mode = 2
+
+[node name="Heart2" parent="HeartContainer" instance=ExtResource("2_hqnrr")]
+layout_mode = 2
+
+[node name="Heart3" parent="HeartContainer" instance=ExtResource("2_hqnrr")]
+layout_mode = 2
