@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://rpy6msr8is2t" path="res://assets/art/test2.png" id="2_qxg6d"]
 
 [node name="CustomizedLine2D" type="Line2D"]
-modulate = Color(1, 1, 1, 0.392157)
+modulate = Color(1, 1, 1, 0.156863)
 texture = ExtResource("2_qxg6d")
 texture_mode = 1
 joint_mode = 2

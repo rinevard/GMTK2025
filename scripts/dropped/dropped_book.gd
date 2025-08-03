@@ -46,7 +46,7 @@ var shape_to_magic: Dictionary = {
 }
 var general_magic = [NORMAL_ATTACK_MAGIC, BULLET_DELETE_MAGIC]
 var shape_to_sfx: Dictionary = {
-	"cw_pentagon": SfxPlayer.SFXs.SIGIL_ACTIVATION_FROST, # 顺时针五边形: 子弹时间场
+	"cw_pentagon": SfxPlayer.SFXs.ICE, # 顺时针五边形: 子弹时间场
 	"ccw_pentagon": SfxPlayer.SFXs.LIGHTNING, # 逆时针五边形: 电火花场
 	"cw_hexagon": SfxPlayer.SFXs.SIGIL_ACTIVATION_SHIELD, # 顺时针六边形: 分身
 	"ccw_hexagon": SfxPlayer.SFXs.HEAL, # 逆时针六边形: 生命回复

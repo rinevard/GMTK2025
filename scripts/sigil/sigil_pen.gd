@@ -144,7 +144,7 @@ func _create_sigil() -> void:
 				magics = shape_to_magic["cw_pentagon"] # 子弹时间场
 				sigil_res = SLOW_LINE
 				duration = 6.4
-				SfxPlayer.play_sfx(SfxPlayer.SFXs.SIGIL_ACTIVATION_FROST)
+				SfxPlayer.play_sfx(SfxPlayer.SFXs.ICE)
 			else:
 				magics = shape_to_magic["ccw_pentagon"] # 电火花场
 				sigil_res = ELEC_LINE

@@ -41,9 +41,6 @@ func _physics_process(delta: float) -> void:
 func _update_invincible(delta: float) -> void:
 	if rest_invincible_time > 0:
 		rest_invincible_time -= delta
-		self_modulate.g = 0
-	else:
-		self_modulate.g = 1
 
 var is_flipped: bool = false
 var flip_duration: float = 0.2

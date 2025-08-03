@@ -18,21 +18,23 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_ynhqv")
 
 [sub_resource type="Curve" id="Curve_d650b"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.64133, 0.538896), -0.490215, -0.490215, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.455969, 0.46425), -0.490215, -0.490215, 0, 0, Vector2(0.626223, 0.0403839), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_xlfki"]
 curve = SubResource("Curve_d650b")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y55ko"]
 particle_flag_disable_z = true
-emission_shape_scale = Vector3(50, 1, 1)
+emission_shape_scale = Vector3(100, 1, 1)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 direction = Vector3(0, -1, 0)
 spread = 20.0
 initial_velocity_max = 200.0
 gravity = Vector3(0, 0, 0)
+damping_min = 10.0
+damping_max = 20.0
 scale_min = 1.5
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_xlfki")
@@ -40,7 +42,7 @@ color_ramp = SubResource("GradientTexture1D_41qp3")
 
 [node name="DieParticle" type="GPUParticles2D"]
 emitting = false
-amount = 24
+amount = 12
 texture = SubResource("GradientTexture2D_ynhqv")
 lifetime = 1.4
 one_shot = true
