@@ -8,8 +8,8 @@ var max_invincible_time: float = 3.0
 #endregion
 @onready var collision_shape_2d: CollisionShape2D = $AttackedArea/CollisionShape2D
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var broom_end_marker: Marker2D = $Sprite2D/Marker2D
+@onready var anim_player_scene: AnimScene = $PlayerAnimScene
+@onready var broom_end_marker: Marker2D = $PlayerAnimScene/Marker2D
 
 #region 移动与飞行
 @export_group("飞行参数")
@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_update_invincible(delta)
-	_update_pos(delta)
+	_update_pos_and_anim(delta)
 	_update_hover()
 	$Label.text = "Health: " + str(health_component.get_health())
 
@@ -45,12 +45,21 @@ func _update_invincible(delta: float) -> void:
 
 var is_flipped: bool = false
 var flip_duration: float = 0.2
-func _update_pos(delta: float) -> void:
+func _update_pos_and_anim(delta: float) -> void:
 	# 平滑移动
 	var target_pos = get_global_mouse_position()
 	target_pos.x = clamp(target_pos.x, x_bound[0], x_bound[1])
 	target_pos.y = clamp(target_pos.y, y_bound[0], y_bound[1])
 	var direction_to_target = (target_pos - global_position)
+	# 设置动画
+	if PlayerRelatedData.is_drawing:
+		anim_player_scene.play_anim("draw")
+	elif direction_to_target.length() > 1.0:
+		anim_player_scene.play_anim("move")
+	else:
+		anim_player_scene.play_anim("move")
+		# 过渡不好做
+		# anim_player_scene.play_anim("idle")
 	global_position = global_position.lerp(target_pos, follow_smoothness * delta)
 
 	# 适当旋转
@@ -92,7 +101,7 @@ func open_collision() -> void:
 func _update_hover() -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 	var hover_offset = sin(time * hover_frequency) * hover_amplitude
-	sprite_2d.position.y = hover_offset
+	anim_player_scene.position.y = hover_offset
 
 func _hit(area: Area2D) -> void:
 	if rest_invincible_time > 0:

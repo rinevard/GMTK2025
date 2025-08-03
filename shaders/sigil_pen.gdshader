@@ -1,9 +1,8 @@
 shader_type canvas_item;
-render_mode unshaded; // 确保不被场景光照影响
-
 
 // --- 可调参数 ---
 uniform float speed : hint_range(0.0, 5.0) = 1.0;
+uniform float max_glow_bonus: hint_range(0.0, 1.0, 0.1) = 0.2;
 
 // 第一个波浪 (主波浪，频率较低，振幅较大)
 uniform int wave1_frequency : hint_range(1, 10) = 3;
@@ -41,5 +40,5 @@ void fragment() {
         final_color.a = 0.0;
     }
 
-    COLOR = final_color;
+    COLOR = final_color * (1.0 + max_glow_bonus);
 }

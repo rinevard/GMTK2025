@@ -1,21 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0ptm7s1g5hvs"]
+[gd_scene load_steps=7 format=3 uid="uid://b0ptm7s1g5hvs"]
 
 [ext_resource type="Script" uid="uid://ce8ok3nalelxm" path="res://scripts/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://1b34f1d7kjx2" path="res://assets/art/player/player.png" id="2_gmlin"]
 [ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="3_gmlin"]
+[ext_resource type="PackedScene" uid="uid://35rvx434jphq" path="res://scenes/anim_scenes/anim_Player.tscn" id="4_lvxji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(70, 88)
 
+[sub_resource type="Gradient" id="Gradient_gmlin"]
+offsets = PackedFloat32Array(0, 0.781938)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lvxji"]
+gradient = SubResource("Gradient_gmlin")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Player" type="Node2D"]
 script = ExtResource("1_8afob")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_gmlin")
-flip_h = true
-
-[node name="Marker2D" type="Marker2D" parent="Sprite2D"]
 
 [node name="AttackedArea" type="Area2D" parent="."]
 collision_mask = 10
@@ -32,6 +34,17 @@ offset_left = -17.0
 offset_top = -89.0
 offset_right = 23.0
 offset_bottom = -66.0
+
+[node name="PlayerAnimScene" parent="." instance=ExtResource("4_lvxji")]
+scale = Vector2(-1, 1)
+
+[node name="Marker2D" type="Marker2D" parent="PlayerAnimScene"]
+scale = Vector2(0.5, 0.5)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-15.5, -4)
+scale = Vector2(3.70313, 2.1875)
+texture = SubResource("GradientTexture2D_lvxji")
 
 [connection signal="area_entered" from="AttackedArea" to="." method="_hit"]
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

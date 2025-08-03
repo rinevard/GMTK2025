@@ -6,37 +6,40 @@
 [ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="4_c1gin"]
 [ext_resource type="PackedScene" uid="uid://bxcap5fdjer81" path="res://scenes/enemies/enemy_attacked_area.tscn" id="5_p6yma"]
 [ext_resource type="PackedScene" uid="uid://cr7k10gljbltm" path="res://scenes/components/time_scale_component.tscn" id="6_nw5r8"]
+[ext_resource type="PackedScene" uid="uid://cq5trtdngasqq" path="res://scenes/anim_scenes/anim_melee.tscn" id="7_xopx7"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ykcao"]
-size = Vector2(96, 96)
+[sub_resource type="CircleShape2D" id="CircleShape2D_xopx7"]
+radius = 45.0999
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghbxi"]
-size = Vector2(96, 96)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6yma"]
-size = Vector2(96, 96)
+[sub_resource type="CircleShape2D" id="CircleShape2D_i1li3"]
+radius = 54.5894
 
 [node name="MeleeEnemy" type="Node2D" groups=["Enemy"]]
 script = ExtResource("1_ru65g")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_ykcao")
+[node name="ParticleMarkers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="ParticleMarkers"]
+position = Vector2(-1, -10)
 
 [node name="MeleeAIComponent" parent="." instance=ExtResource("1_l188l")]
 
 [node name="EnemyAttackArea" parent="." instance=ExtResource("3_ghbxi")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea"]
-shape = SubResource("RectangleShape2D_ghbxi")
+shape = SubResource("CircleShape2D_xopx7")
 
 [node name="EnemyAttackedArea" parent="." instance=ExtResource("5_p6yma")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackedArea"]
-shape = SubResource("RectangleShape2D_p6yma")
+shape = SubResource("CircleShape2D_i1li3")
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_c1gin")]
-health = 2
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hit_particle_pos_markers") instance=ExtResource("4_c1gin")]
+hit_particle_pos_markers = [NodePath("../ParticleMarkers/Marker2D")]
 
 [node name="TimeScaleComponent" parent="." instance=ExtResource("6_nw5r8")]
+
+[node name="MeleeAnimScene" parent="." instance=ExtResource("7_xopx7")]
+scale = Vector2(0.65, 0.65)
 
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

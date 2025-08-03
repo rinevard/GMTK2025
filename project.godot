@@ -25,7 +25,6 @@ ParticleHandler="*res://globals/particle_handler.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]
@@ -42,3 +41,4 @@ Enemy=""
 [rendering]
 
 textures/canvas_textures/default_texture_repeat=1
+viewport/hdr_2d=true

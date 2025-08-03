@@ -25,8 +25,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			is_drawing = true
+			PlayerRelatedData.is_drawing = true
 		else:
 			is_drawing = false
+			PlayerRelatedData.is_drawing = false
 			_end_draw()
 
 ## 清空绘制内容

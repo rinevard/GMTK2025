@@ -4,6 +4,7 @@ var player_global_pos: Vector2 = Vector2(-1000, -1000)
 var duplicate_player_global_positions: Dictionary = {}
 var bullet_handler: BulletHandler
 var player_health_component: HealthComponent
+var is_drawing: bool = false # 由 pen 设置
 
 func init_player_data(player: Player) -> void:
 	player_global_pos = player.global_position
