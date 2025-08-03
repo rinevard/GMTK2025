@@ -9,7 +9,7 @@ signal continue_game()
 @onready var hud: Hud = $HUD
 @onready var magic_book: MagicBook = $MagicBook
 @onready var start_menu: Control = $StartMenu
-@onready var reset_menu: Control = $ResetMenu
+@onready var reset_menu: ResetMenu = $ResetMenu
 
 func _ready() -> void:
 	hud.hide()
@@ -60,6 +60,7 @@ func _transition_fade_out() -> void:
 
 func _on_reset_menu_back_to_start() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	await reset_menu.jump_back()
 	reset_menu.hide()
 	magic_book.hide()
 	hud.hide()
@@ -68,6 +69,7 @@ func _on_reset_menu_back_to_start() -> void:
 
 func _on_reset_menu_reset_level() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	await reset_menu.jump_back()
 	reset_menu.hide()
 	hud.reset_hud()
 	start_game.emit()
@@ -75,4 +77,5 @@ func _on_reset_menu_reset_level() -> void:
 func _on_player_lose() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	reset_menu.show()
+	reset_menu.jump_out()
 	pause_level.emit()

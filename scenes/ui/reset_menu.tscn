@@ -1,31 +1,107 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2qij0es4ed0t"]
+[gd_scene load_steps=9 format=3 uid="uid://d2qij0es4ed0t"]
 
 [ext_resource type="Script" uid="uid://bdrlhykhnqko0" path="res://scripts/ui/reset_menu.gd" id="1_42gvn"]
+[ext_resource type="Texture2D" uid="uid://ivq3khn16nc" path="res://assets/art/final_arts/gameover/retry.png" id="2_cfwcm"]
+[ext_resource type="Texture2D" uid="uid://daq5vbcba0y33" path="res://assets/art/final_arts/gameover/home.png" id="3_m5oc8"]
+[ext_resource type="Texture2D" uid="uid://dk7pdg03wdji7" path="res://assets/art/final_arts/gameover/over.png" id="4_0yeyr"]
+[ext_resource type="Theme" uid="uid://b7h7v0hb6c5t8" path="res://resources/ui_theme.tres" id="4_t5wt3"]
+[ext_resource type="Texture2D" uid="uid://d6khstfaxann" path="res://assets/art/final_arts/gameover/score.png" id="5_y0c3s"]
+[ext_resource type="Texture2D" uid="uid://chhf26gfp76b6" path="res://assets/art/final_arts/gameover/record.png" id="6_7af6s"]
+[ext_resource type="Script" uid="uid://boil1r377gqqf" path="res://scripts/ui/reset_menu_button.gd" id="6_sdgnp"]
 
 [node name="ResetMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_42gvn")
 
-[node name="ResetButton" type="Button" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 698.0
-offset_top = 264.0
-offset_right = 1336.0
-offset_bottom = 512.0
-text = "Play again"
+offset_left = 272.0
+offset_top = -88.0
+offset_right = 762.0
+offset_bottom = 80.0
 
-[node name="BackStartMenuButton" type="Button" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Score" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_y0c3s")
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Record" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_7af6s")
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_t5wt3")
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="Control2" type="Control" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BestLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_t5wt3")
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="Over" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 666.0
-offset_top = 606.0
-offset_right = 1338.0
-offset_bottom = 854.0
-text = "Return to start menu"
+offset_left = 209.0
+offset_top = -350.0
+offset_right = 1110.0
+offset_bottom = -135.0
+mouse_filter = 2
+texture = ExtResource("4_0yeyr")
 
+[node name="BackStartButton" type="TextureButton" parent="."]
+layout_mode = 2
+offset_left = 369.0
+offset_top = 173.0
+offset_right = 531.0
+offset_bottom = 336.0
+texture_normal = ExtResource("3_m5oc8")
+texture_pressed = ExtResource("3_m5oc8")
+texture_hover = ExtResource("3_m5oc8")
+texture_focused = ExtResource("3_m5oc8")
+script = ExtResource("6_sdgnp")
+
+[node name="ResetButton" type="TextureButton" parent="."]
+layout_mode = 2
+offset_left = 739.0
+offset_top = 173.0
+offset_right = 901.0
+offset_bottom = 336.0
+texture_normal = ExtResource("2_cfwcm")
+texture_pressed = ExtResource("2_cfwcm")
+texture_hover = ExtResource("2_cfwcm")
+texture_focused = ExtResource("2_cfwcm")
+script = ExtResource("6_sdgnp")
+
+[connection signal="pressed" from="BackStartButton" to="." method="_on_back_start_menu_button_pressed"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="BackStartMenuButton" to="." method="_on_back_start_menu_button_pressed"]

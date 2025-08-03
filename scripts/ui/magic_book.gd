@@ -6,9 +6,6 @@ signal reading_finished()
 var jump_duration: float = 0.5
 var tween: Tween
 
-func _ready() -> void:
-	jump_out()
-
 func jump_out() -> void:
 	# 如果上一个动画还在播放，先杀掉它，防止冲突
 	if tween and tween.is_running():

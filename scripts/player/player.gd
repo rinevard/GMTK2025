@@ -37,7 +37,6 @@ func _physics_process(delta: float) -> void:
 	_update_invincible(delta)
 	_update_pos_and_anim(delta)
 	_update_hover()
-	$Label.text = "Health: " + str(health_component.get_health())
 
 func _update_invincible(delta: float) -> void:
 	if rest_invincible_time > 0:
@@ -121,7 +120,6 @@ func _on_health_less_than_zero() -> void:
 	die()
 
 func die() -> void:
-	SaveManager.high_score = max(SaveManager.high_score, PlayerRelatedData.level_score)
 	SaveManager.save_game()
 	PlayerRelatedData.player_lose.emit()
 	call_deferred("queue_free")
