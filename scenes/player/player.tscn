@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0ptm7s1g5hvs"]
+[gd_scene load_steps=6 format=3 uid="uid://b0ptm7s1g5hvs"]
 
 [ext_resource type="Script" uid="uid://ce8ok3nalelxm" path="res://scripts/player/player.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="3_gmlin"]
 [ext_resource type="PackedScene" uid="uid://35rvx434jphq" path="res://scenes/anim_scenes/anim_Player.tscn" id="4_lvxji"]
+[ext_resource type="PackedScene" uid="uid://d07t1ysq6yp63" path="res://scenes/player/hitback_sigil_creator.tscn" id="4_p47bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(70, 88)
@@ -18,6 +19,7 @@ position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_gmlin")]
+health = 5
 
 [node name="Label" type="Label" parent="."]
 offset_left = -17.0
@@ -30,6 +32,11 @@ scale = Vector2(-1, 1)
 
 [node name="Marker2D" type="Marker2D" parent="PlayerAnimScene"]
 scale = Vector2(0.5, 0.5)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="HitbackSigilCreator" parent="Node" node_paths=PackedStringArray("owner_node2d") instance=ExtResource("4_p47bc")]
+owner_node2d = NodePath("../..")
 
 [connection signal="area_entered" from="AttackedArea" to="." method="_hit"]
 [connection signal="health_less_than_zero" from="HealthComponent" to="." method="_on_health_less_than_zero"]

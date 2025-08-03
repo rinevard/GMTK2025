@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwhseb0aytbck"]
+[gd_scene load_steps=8 format=3 uid="uid://cwhseb0aytbck"]
 
 [ext_resource type="Script" uid="uid://dyil5otq5n2ap" path="res://scripts/player/duplicate_player.gd" id="1_d0mrk"]
 [ext_resource type="Texture2D" uid="uid://1b34f1d7kjx2" path="res://assets/art/player/player.png" id="1_qja7s"]
 [ext_resource type="Shader" uid="uid://cfjn8hg26gxk" path="res://shaders/duplicate_player.gdshader" id="1_ti1h5"]
+[ext_resource type="PackedScene" uid="uid://dl2tonnk0tfq8" path="res://scenes/components/health_component.tscn" id="4_owtr4"]
+[ext_resource type="PackedScene" uid="uid://d07t1ysq6yp63" path="res://scenes/player/hitback_sigil_creator.tscn" id="5_34t0j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ti1h5"]
 shader = ExtResource("1_ti1h5")
@@ -30,4 +32,12 @@ collision_mask = 10
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_qja7s")
 
-[connection signal="area_entered" from="AttackedArea" to="." method="_on_attacked_area_area_entered"]
+[node name="HealthComponent" parent="." instance=ExtResource("4_owtr4")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="HitbackSigilCreator" parent="Node" node_paths=PackedStringArray("owner_node2d") instance=ExtResource("5_34t0j")]
+owner_node2d = NodePath("../..")
+
+[connection signal="area_entered" from="AttackedArea" to="." method="_hit"]
+[connection signal="health_less_than_zero" from="HealthComponent" to="." method="die"]

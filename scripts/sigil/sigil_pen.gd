@@ -119,12 +119,8 @@ func _polygon_area(polygon_points: PackedVector2Array) -> float:
 ## 自交后被调用来产生魔法阵
 func _create_sigil() -> void:
 	# 1. magics
-	var magic1 = NORMAL_ATTACK_MAGIC.instantiate()
-	var magic2 = NORMAL_ICE_MAGIC.instantiate()
-
 	# 2. points
 	# 已经被记录过了
-	
 	# 3. create
 	var magics: Array = []
 	var duration: float = 0.3

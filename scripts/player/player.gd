@@ -2,6 +2,7 @@ class_name Player
 extends Node2D
 
 #region 生命
+@onready var hitback_sigil_creator: HitbackSigilCreator = $Node/HitbackSigilCreator
 @onready var health_component: HealthComponent = $HealthComponent
 var rest_invincible_time: float = 0.0
 var max_invincible_time: float = 3.0
@@ -107,6 +108,7 @@ func _hit(area: Area2D) -> void:
 	if rest_invincible_time > 0:
 		return
 	health_component.hit(1)
+	hitback_sigil_creator.create_hitback_sigil()
 	_be_invincible()
 
 func _be_invincible() -> void:
