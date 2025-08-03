@@ -1,6 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://do6to2r30tvc0"]
+[gd_scene load_steps=16 format=3 uid="uid://do6to2r30tvc0"]
 
 [ext_resource type="Script" uid="uid://dkhsduabh2au2" path="res://scripts/ui/start_menu.gd" id="1_irhji"]
+[ext_resource type="Texture2D" uid="uid://clklxwprf41ca" path="res://assets/art/final_arts/menu/bg.png" id="2_0kjv3"]
+[ext_resource type="Texture2D" uid="uid://cwwg4otyyp4g" path="res://assets/art/final_arts/menu/magic.png" id="3_s1kfm"]
+[ext_resource type="Texture2D" uid="uid://hkfxdk044mu6" path="res://assets/art/final_arts/menu/title.png" id="4_km2yg"]
+[ext_resource type="Texture2D" uid="uid://dhb5qo7errlxf" path="res://assets/art/final_arts/menu/full_witch.png" id="5_asxkk"]
+[ext_resource type="Shader" uid="uid://dholp50o2dqcg" path="res://shaders/uis/witch.gdshader" id="5_hdmqo"]
+[ext_resource type="Shader" uid="uid://ccoldad2vhuvq" path="res://shaders/uis/jittery_outline.gdshader" id="5_hfk6u"]
+[ext_resource type="Texture2D" uid="uid://djfqioin7jai1" path="res://assets/art/final_arts/menu/start.png" id="6_x0g8l"]
+[ext_resource type="Script" uid="uid://boil1r377gqqf" path="res://scripts/ui/reset_menu_button.gd" id="7_2t0al"]
+[ext_resource type="Texture2D" uid="uid://bb2uyg6qhdxll" path="res://assets/art/final_arts/menu/quit.png" id="7_i11hm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c71uh"]
+shader = ExtResource("5_hfk6u")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 5.0
+shader_parameter/speed = 2.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/tolerance = 0.0
+shader_parameter/texture_jiggle_amount = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbbht"]
+shader = ExtResource("5_hdmqo")
+shader_parameter/amplitude = 8.0
+shader_parameter/speed = 1.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_asxkk"]
+shader = ExtResource("5_hfk6u")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 5.0
+shader_parameter/speed = 2.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/tolerance = 0.0
+shader_parameter/texture_jiggle_amount = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfk6u"]
+shader = ExtResource("5_hfk6u")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 5.0
+shader_parameter/speed = 2.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/tolerance = 0.0
+shader_parameter/texture_jiggle_amount = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdmqo"]
+shader = ExtResource("5_hfk6u")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 5.0
+shader_parameter/speed = 2.0
+shader_parameter/blockSize = 0.001
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/tolerance = 0.0
+shader_parameter/texture_jiggle_amount = 5.0
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -11,21 +65,64 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_irhji")
 
-[node name="StartButton" type="Button" parent="."]
+[node name="Bg" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 608.0
-offset_top = 251.0
-offset_right = 1176.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_0kjv3")
+
+[node name="Magic" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_c71uh")
+layout_mode = 0
+offset_left = 554.0
+offset_top = 172.0
+offset_right = 931.0
+offset_bottom = 549.0
+texture = ExtResource("3_s1kfm")
+
+[node name="Witch" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_tbbht")
+layout_mode = 0
+offset_left = 25.0
+offset_top = -164.0
+offset_right = 2098.0
+offset_bottom = 1227.0
+texture = ExtResource("5_asxkk")
+
+[node name="Title" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_asxkk")
+layout_mode = 0
+offset_left = 57.0
+offset_top = 74.0
+offset_right = 850.0
 offset_bottom = 497.0
-text = "Start"
+texture = ExtResource("4_km2yg")
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="StartuButton" type="TextureButton" parent="."]
+material = SubResource("ShaderMaterial_hfk6u")
 layout_mode = 0
-offset_left = 372.0
-offset_top = 622.0
-offset_right = 1355.0
-offset_bottom = 874.0
-text = "Exit"
+offset_left = 234.0
+offset_top = 549.0
+offset_right = 566.0
+offset_bottom = 652.0
+texture_normal = ExtResource("6_x0g8l")
+texture_pressed = ExtResource("6_x0g8l")
+texture_hover = ExtResource("6_x0g8l")
+texture_focused = ExtResource("6_x0g8l")
+script = ExtResource("7_2t0al")
 
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[node name="ExitButton" type="TextureButton" parent="."]
+material = SubResource("ShaderMaterial_hdmqo")
+layout_mode = 0
+offset_left = 273.0
+offset_top = 704.0
+offset_right = 539.0
+offset_bottom = 818.0
+texture_normal = ExtResource("7_i11hm")
+texture_pressed = ExtResource("7_i11hm")
+texture_hover = ExtResource("7_i11hm")
+texture_focused = ExtResource("7_i11hm")
+script = ExtResource("7_2t0al")
+
+[connection signal="pressed" from="StartuButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

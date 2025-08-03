@@ -5,8 +5,9 @@ extends Node2D
 @onready var time_scale_component: TimeScaleComponent = $TimeScaleComponent
 @onready var ranged_anim_scene: AnimScene = $RangedAnimScene
 
-var speed: float = 400
-var shot_gap: float = 2.0
+var speed: float = 350
+var shot_gap: float = 2.2
+var max_rand: float = 0.5
 var time_after_last_shot: float = 2.0
 var is_shoting: bool = false
 
@@ -18,6 +19,7 @@ var origin_scale: Vector2
 # endregion
 
 func _ready() -> void:
+	shot_gap += randf_range(-max_rand, max_rand)
 	# 保存原始缩放值，用于翻转
 	origin_scale = ranged_anim_scene.scale
 	

@@ -16,6 +16,7 @@ func _ready() -> void:
 	magic_book.hide()
 	reset_menu.hide()
 	start_menu.show()
+	BgmPlayer.reset_play_menu_bgm()
 	PlayerRelatedData.player_lose.connect(_on_player_lose)
 	PlayerRelatedData.book_picked.connect(show_magic_book)
 
@@ -24,6 +25,7 @@ func show_magic_book(book_num: int = 1) -> void:
 	magic_book.set_book(book_num)
 	magic_book.show()
 	magic_book.jump_out()
+	BgmPlayer.pause_level_bgm()
 	pause_level.emit()
 
 func _on_magic_book_reading_finished() -> void:
@@ -32,14 +34,19 @@ func _on_magic_book_reading_finished() -> void:
 	await magic_book.jump_back()
 	PlayerRelatedData.level_continuing.emit()
 	magic_book.hide()
+	BgmPlayer.continue_play_level_bgm()
 	continue_game.emit()
 
 func _on_start_menu_game_start() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	await _transition_fade_in()
 	start_game.emit()
+	BgmPlayer.reset_play_level_bgm()
+	BgmPlayer.stop_menu_bgm()
 	start_menu.hide()
 	hud.reset_hud()
 	hud.show()
+	_transition_fade_out()
 
 func _on_start_menu_game_end() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -61,17 +68,22 @@ func _transition_fade_out() -> void:
 func _on_reset_menu_back_to_start() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	await reset_menu.jump_back()
+	await _transition_fade_in()
 	reset_menu.hide()
 	magic_book.hide()
 	hud.hide()
 	end_level.emit()
+	BgmPlayer.stop_level_bgm()
+	BgmPlayer.reset_play_menu_bgm()
 	start_menu.show()
+	_transition_fade_out()
 
 func _on_reset_menu_reset_level() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	await reset_menu.jump_back()
 	reset_menu.hide()
 	hud.reset_hud()
+	BgmPlayer.continue_play_level_bgm()
 	start_game.emit()
 
 func _on_player_lose() -> void:

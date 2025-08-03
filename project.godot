@@ -22,11 +22,13 @@ PlayerRelatedData="*res://globals/player_related_data.tscn"
 ParticleHandler="*res://globals/particle_handler.tscn"
 SaveManager="*res://globals/save_manager.tscn"
 SfxPlayer="*res://globals/sfx_player.tscn"
+BgmPlayer="*res://globals/bgm_player.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]

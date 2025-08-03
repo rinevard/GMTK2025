@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cobcfkqhctqsm"]
+
+[ext_resource type="Script" uid="uid://bxn3o8cwd3xei" path="res://scripts/globals/bgm_player.gd" id="1_h3yyk"]
+[ext_resource type="AudioStream" uid="uid://cvrh0tuou5rdw" path="res://assets/bgm/looooooop.wav" id="2_tsxtp"]
+[ext_resource type="AudioStream" uid="uid://be1wcyajty06o" path="res://assets/bgm/atmoloop.wav" id="3_tsxtp"]
+
+[node name="BGMPlayer" type="Node"]
+script = ExtResource("1_h3yyk")
+
+[node name="LevelbgmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_tsxtp")
+
+[node name="MenubgmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tsxtp")

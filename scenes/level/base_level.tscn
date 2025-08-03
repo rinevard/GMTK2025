@@ -39,8 +39,8 @@ script = ExtResource("6_kxd26")
 
 [node name="Player" parent="." instance=ExtResource("1_upopr")]
 position = Vector2(1046, 576)
-x_bound = Vector2(100, 1800)
-y_bound = Vector2(100, 1000)
+x_bound = Vector2(50, 1860)
+y_bound = Vector2(90, 1020)
 
 [node name="DroppedBook" parent="." instance=ExtResource("8_8xnqg")]
 position = Vector2(1544, 308)

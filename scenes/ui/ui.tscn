@@ -21,6 +21,7 @@ script = ExtResource("1_u7n8c")
 visible = false
 
 [node name="ResetMenu" parent="." instance=ExtResource("5_0dwhk")]
+visible = false
 
 [node name="StartMenu" parent="." instance=ExtResource("3_aac20")]
 visible = false

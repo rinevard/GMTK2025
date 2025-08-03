@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccp8s5m8n6b7t"]
 
-[ext_resource type="Texture2D" uid="uid://o80mvmwmfx6c" path="res://assets/art/particles/spark_06_rotated.png" id="1_l8vso"]
 [ext_resource type="Shader" uid="uid://dcuiiuahcthfm" path="res://shaders/lightning_line.gdshader" id="1_n6gje"]
+[ext_resource type="Texture2D" uid="uid://d4bqe4c7e3w11" path="res://assets/art/light_textures/line-lightning.png" id="2_jhevi"]
 [ext_resource type="Script" uid="uid://cwofsndbh6y8" path="res://scripts/sigil/lightning_line.gd" id="3_jhevi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhevi"]
@@ -12,8 +12,8 @@ shader_parameter/tail_progress = 0.0
 
 [node name="LightningLine" type="Line2D"]
 material = SubResource("ShaderMaterial_jhevi")
-width = 200.0
+width = 120.0
 default_color = Color(1, 0.742, 0.14, 1)
-texture = ExtResource("1_l8vso")
+texture = ExtResource("2_jhevi")
 texture_mode = 2
 script = ExtResource("3_jhevi")

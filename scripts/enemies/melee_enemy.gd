@@ -5,10 +5,12 @@ extends Node2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var time_scale_component: TimeScaleComponent = $TimeScaleComponent
 
-@export var speed: float = 400
+@export var speed: float = 375
+var max_rand: float = 50.0
 @onready var melee_anim_scene: AnimScene = $MeleeAnimScene
 
 func _ready() -> void:
+	speed += randf_range(-max_rand, max_rand)
 	melee_anim_scene.play_anim("idle")
 
 func _physics_process(delta: float) -> void:

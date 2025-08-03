@@ -12,11 +12,13 @@ const RANGED_ENEMY = preload("res://scenes/enemies/ranged_enemy.tscn")
 var packed_enemies: Array[PackedScene] = [MELEE_ENEMY, MELEE_ENEMY, BIG_MELEE_ENEMY, RANGED_ENEMY]
 
 var speed: float = 200
-var spawn_gap: float = 7.0
+var spawn_gap: float = 6.5
+var max_rand: float = 1.0
 var time_after_last_spawn: float = 2.0
 var is_spawning: bool = false
 
 func _ready() -> void:
+	spawn_gap += randf_range(-max_rand, max_rand)
 	spawn_anim_scene.play_anim("idle")
 	spawn_anim_scene.anim_finished.connect(_on_anim_finished)
 
