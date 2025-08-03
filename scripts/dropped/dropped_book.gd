@@ -7,6 +7,16 @@ extends Area2D
 signal ui_need_show_magic_book()
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
+#region --- 开始：为实现漂浮效果新增的变量 ---
+# @export 关键字让这些变量可以在 Godot 编辑器的“检查器”面板中方便地进行调整
+@export var float_amplitude: float = 16.0 # 漂浮的振幅（上下移动的距离）
+@export var float_speed: float = 1.5 # 漂浮的速度（数值越大，上下移动越快）
+
+var time_passed: float = 0.0 # 用于累计时间，驱动正弦函数
+var initial_position_y: float # 用于存储书本的初始Y坐标
+#endregion --- 结束：为实现漂浮效果新增的变量 ---
+
+
 # 顺五冰, 逆五电, 顺六镜, 逆六奶
 var sigil_shapes: Array[String] = [
 	"cw_pentagon",
@@ -42,6 +52,18 @@ var shape_to_sfx: Dictionary = {
 	"ccw_hexagon": SfxPlayer.SFXs.HEAL, # 逆时针六边形: 生命回复
 }
 #endregion
+const BOOK_1 = preload("res://assets/art/final_arts/book/book1.png")
+const BOOK_2 = preload("res://assets/art/final_arts/book/book2.png")
+const BOOK_3 = preload("res://assets/art/final_arts/book/book3.png")
+const BOOK_4 = preload("res://assets/art/final_arts/book/book4.png")
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
+var shape_to_texture: Dictionary = {
+	"cw_pentagon": BOOK_1, # 顺五 (冰) -> 减速线
+	"ccw_pentagon": BOOK_2, # 逆五 (电) -> 闪电线
+	"cw_hexagon": BOOK_3, # 顺六 (镜) -> 镜像线
+	"ccw_hexagon": BOOK_4, # 逆六 (奶) -> 治疗线
+}
 
 var shape_to_line: Dictionary = {
 	"cw_pentagon": SLOW_LINE, # 顺五 (冰) -> 减速线
@@ -52,6 +74,29 @@ var shape_to_line: Dictionary = {
 
 var sigil_radius: float = 300.0
 var rand_idx: int = randi_range(0, sigil_shapes.size() - 1)
+
+func _ready() -> void:
+	# 记录书本的初始Y坐标，作为漂浮的中心点
+	initial_position_y = self.position.y
+
+	sprite_2d.texture = shape_to_texture[sigil_shapes[rand_idx]]
+
+
+#region --- 开始：为实现漂浮效果新增的函数 ---
+# _process 函数每一帧都会被调用
+func _process(delta: float) -> void:
+	# 累加每帧的间隔时间
+	time_passed += delta
+	
+	# 使用 sin() 函数计算Y坐标的偏移量。
+	# sin() 的值会在 -1 和 1 之间平滑地变化，乘以振幅 float_amplitude 即可得到最终的偏移。
+	# time_passed * float_speed 控制了 sin() 函数变化的快慢，从而控制漂浮速度。
+	var y_offset = sin(time_passed * float_speed) * float_amplitude
+	
+	# 将计算出的偏移量应用到书本的Y坐标上，实现漂浮
+	self.position.y = initial_position_y + y_offset
+#endregion --- 结束：为实现漂浮效果新增的函数 ---
+
 
 func _on_area_entered(area: Area2D) -> void:
 	if not SaveManager.books_seen_arr[rand_idx]:
@@ -109,6 +154,10 @@ func _ui_show_magic_book() -> void:
 	PlayerRelatedData.book_picked.emit(rand_idx)
 
 func _remove_self() -> void:
+	#region --- 开始：为实现漂浮效果修改的代码 ---
+	# 在移除书本前，禁用 _process 函数，停止漂浮计算，这是一种优化。
+	set_process(false)
+	#endregion --- 结束：为实现漂浮效果修改的代码 ---
 	$Sprite2D.visible = false
 	collision_shape_2d.call_deferred("set_disabled", true)
 	get_tree().create_timer(20.0).timeout.connect(_call_deferred_free)

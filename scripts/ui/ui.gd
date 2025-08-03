@@ -6,7 +6,7 @@ signal end_level()
 signal pause_level()
 signal continue_game()
 
-@onready var hud: Control = $HUD
+@onready var hud: Hud = $HUD
 @onready var magic_book: MagicBook = $MagicBook
 @onready var start_menu: Control = $StartMenu
 @onready var reset_menu: Control = $ResetMenu
@@ -38,6 +38,7 @@ func _on_start_menu_game_start() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	start_game.emit()
 	start_menu.hide()
+	hud.reset_hud()
 	hud.show()
 
 func _on_start_menu_game_end() -> void:
@@ -68,6 +69,7 @@ func _on_reset_menu_back_to_start() -> void:
 func _on_reset_menu_reset_level() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	reset_menu.hide()
+	hud.reset_hud()
 	start_game.emit()
 
 func _on_player_lose() -> void:

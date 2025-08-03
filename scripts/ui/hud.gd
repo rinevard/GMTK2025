@@ -1,3 +1,4 @@
+class_name Hud
 extends Control
 
 @onready var heart_container: HBoxContainer = $HeartContainer
@@ -11,6 +12,10 @@ func _ready() -> void:
 	for heart in heart_container.get_children():
 		if heart is HudHeart:
 			hud_hearts.append(heart)
+
+func reset_hud() -> void:
+	for i in range(PlayerRelatedData.MAX_PLAYER_HEALTH):
+		get_heart()
 
 func lose_heart() -> void:
 	for i in range(hud_hearts.size() - 1, -1, -1):
