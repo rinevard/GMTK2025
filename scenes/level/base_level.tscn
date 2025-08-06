@@ -42,6 +42,13 @@ player = NodePath("../Player")
 [node name="DroppedHandler" type="Node2D" parent="."]
 script = ExtResource("6_kxd26")
 
+[node name="DroppedBook" parent="." instance=ExtResource("8_8xnqg")]
+position = Vector2(1544, 308)
+
+[node name="LevelParticle" parent="." instance=ExtResource("11_2qxot")]
+position = Vector2(0, 1080)
+amount = 16
+
 [node name="BulletHandler" parent="." instance=ExtResource("5_3ipv6")]
 script = ExtResource("6_t6xnl")
 
@@ -51,13 +58,6 @@ script = ExtResource("6_t6xnl")
 position = Vector2(1046, 576)
 x_bound = Vector2(50, 1860)
 y_bound = Vector2(90, 1020)
-
-[node name="DroppedBook" parent="." instance=ExtResource("8_8xnqg")]
-position = Vector2(1544, 308)
-
-[node name="LevelParticle" parent="." instance=ExtResource("11_2qxot")]
-position = Vector2(0, 1080)
-amount = 16
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

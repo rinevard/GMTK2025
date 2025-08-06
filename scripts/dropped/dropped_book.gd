@@ -176,9 +176,8 @@ func _generate_random_sigil(idx: int) -> void:
 	# 假设 Sigil 是一个已在别处定义的类名 (class_name Sigil)，拥有静态方法 new_sigil
 	var new_sigil = Sigil.new_sigil(points, magic_array, duration, line_resource)
 	
-	# 4. 将创建好的魔法阵作为子节点添加到当前节点下
-	# 使用 call_deferred 以避免在物理帧期间修改场景树
-	$Node.call_deferred("add_child", new_sigil)
+	new_sigil.global_position = global_position
+	PlayerRelatedData.get_dropped_handler().call_deferred("add_child", new_sigil)
 
 func _ui_show_magic_book() -> void:
 	PlayerRelatedData.book_picked.emit(rand_idx)
