@@ -95,13 +95,17 @@ func heal_player(value: int) -> void:
 var level_camera: Camera2D
 ## 只应由 level 调用
 func update_level(level: Level) -> void:
+	print("level updated")
+	print(duplicate_player_global_positions)
 	bullet_handler = level.bullet_handler
 	enemy_handler = level.enemy_handler
 	dropped_handler = level.dropped_handler
 	level_camera = level.camera_2d
+	duplicate_player_global_positions = {}
+	print(duplicate_player_global_positions)
 	level_score = 0
 	score_updated.emit()
-
+	print(duplicate_player_global_positions)
 
 # **【修改/添加部分 4/5：实现 screen_shake 函数】**
 func screen_shake(strength: float, collision_global_pos: Vector2, duration: float) -> void:

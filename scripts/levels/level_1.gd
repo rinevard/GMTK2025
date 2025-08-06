@@ -29,3 +29,4 @@ func _process(delta: float) -> void:
 func _on_player_lose() -> void:
 	enemy_handler.clear_enemies()
 	bullet_handler.clear_bullets()
+	dropped_handler.clear_dropped()

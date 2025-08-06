@@ -43,7 +43,6 @@ func _be_invincible() -> void:
 func die() -> void:
 	need_remove_from_global = true
 	PlayerRelatedData.remove_duplicate_player(get_instance_id())
-	print(str(get_instance_id()) + " die")
 	visible = false
 	call_deferred("_disable_collision")
 	get_tree().create_timer(10.0).timeout.connect(_call_deferred_queue_free)

@@ -22,7 +22,6 @@ var time_reach_hardest: float = 60.0 * 2
 
 func _spawn_weights() -> Array[float]:
 	var hardness = 0.0
-	print(hardness)
 	if level:
 		hardness = level.level_time / time_reach_hardest
 	hardness = clamp(hardness, 0.0, 1.0)
@@ -42,7 +41,6 @@ func _ready() -> void:
 
 func spawn_enemy(packed_enemy: PackedScene = null, global_pos: Vector2 = Vector2(-10000, -10000)) -> void:
 	var spawn_weights: Array[float] = _spawn_weights()
-	print(spawn_weights)
 
 	var weights_sum := 0.0
 	var rand_idx = 0
@@ -50,13 +48,11 @@ func spawn_enemy(packed_enemy: PackedScene = null, global_pos: Vector2 = Vector2
 		weights_sum += weight
 	
 	var remaining_distance := randf() * weights_sum
-	print(remaining_distance)
 	for i in spawn_weights.size():
 		remaining_distance -= spawn_weights[i]
 		if remaining_distance < 0:
 			rand_idx = i
 			break
-	print(rand_idx)
 	
 
 	var rand_marker = markers.pick_random()

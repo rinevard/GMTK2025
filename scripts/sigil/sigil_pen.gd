@@ -170,7 +170,10 @@ func _create_sigil() -> void:
 		new_sigil = Sigil.new_sigil(sigil_points, magics, duration, sigil_res)
 	else:
 		new_sigil = Sigil.new_sigil(sigil_points, magics, duration)
-	$Sigils.add_child(new_sigil)
+	if PlayerRelatedData.get_dropped_handler():
+		PlayerRelatedData.get_dropped_handler().call_deferred("add_child", new_sigil)
+	else:
+		$Sigils.call_deferred("add_child", new_sigil)
 
 func _is_sigilpoints_clockwise() -> bool:
 	# 一个多边形至少需要3个点。如果少于3个点，它没有明确的环绕方向。
