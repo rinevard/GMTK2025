@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://ccyfhvbm6uu27" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
 [ext_resource type="PackedScene" uid="uid://bvq17ahiqn0ny" path="res://scenes/ui/hud/heart.tscn" id="2_hqnrr"]
-[ext_resource type="Texture2D" uid="uid://6l3123uh1flg" path="res://assets/art/finalfinal/score.png" id="3_bo48s"]
 [ext_resource type="Shader" uid="uid://ccoldad2vhuvq" path="res://shaders/uis/jittery_outline.gdshader" id="3_oj5la"]
 [ext_resource type="Theme" uid="uid://b7h7v0hb6c5t8" path="res://resources/ui_theme.tres" id="4_8qguk"]
+[ext_resource type="Texture2D" uid="uid://coxt86oh8sbce" path="res://assets/art/finalfinal/new_score.png" id="4_oj5la"]
 [ext_resource type="Script" uid="uid://crmebb0qq7ku3" path="res://scripts/ui/score_label.gd" id="6_oj5la"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gss2c"]
 shader = ExtResource("3_oj5la")
+shader_parameter/bloom_strength = 0.1
 shader_parameter/maxLineWidth = 0.0
 shader_parameter/minLineWidth = 5.0
 shader_parameter/speed = 2.0
@@ -47,11 +48,11 @@ layout_mode = 2
 [node name="ScoreTexture" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_gss2c")
 layout_mode = 0
-offset_left = 1372.0
-offset_top = 44.0
-offset_right = 1859.0
-offset_bottom = 176.0
-texture = ExtResource("3_bo48s")
+offset_left = 1369.0
+offset_top = 34.0
+offset_right = 1869.0
+offset_bottom = 184.0
+texture = ExtResource("4_oj5la")
 
 [node name="ScoreLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(200, 0)

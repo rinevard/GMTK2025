@@ -2,9 +2,9 @@ extends Label
 
 var dynamic_score: float = 0
 var target_score: int = 0
-var smoothness: float = 1.0
+var smoothness: float = 1.6
 var speed: float = 0.0
-var max_speed: float = 50.0
+var max_speed: float = 100.0
 @onready var score_texture: TextureRect = $"../ScoreTexture"
 
 func _physics_process(delta: float) -> void:

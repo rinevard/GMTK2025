@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx0yvywbjnai7"]
+[gd_scene load_steps=13 format=3 uid="uid://cx0yvywbjnai7"]
 
 [ext_resource type="Script" uid="uid://dmowbbc6io8hy" path="res://scripts/levels/level.gd" id="1_e1fnv"]
 [ext_resource type="PackedScene" uid="uid://b0ptm7s1g5hvs" path="res://scenes/player/player.tscn" id="1_upopr"]
@@ -12,9 +12,18 @@
 [ext_resource type="PackedScene" uid="uid://bbg80hbdg43h8" path="res://scenes/dropped/dropped_book.tscn" id="8_8xnqg"]
 [ext_resource type="PackedScene" uid="uid://bh6fjbe7keuby" path="res://scenes/particles/level_particle.tscn" id="11_2qxot"]
 
+[sub_resource type="Environment" id="Environment_2qxot"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.1
+glow_blend_mode = 1
+
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_e1fnv")
 duration = 1e+07
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2qxot")
 
 [node name="Bg" type="Sprite2D" parent="."]
 modulate = Color(0.8, 0.8, 0.8, 1)
@@ -23,7 +32,7 @@ texture = ExtResource("2_wq2a1")
 centered = false
 
 [node name="Front" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.388235)
+modulate = Color(0.8, 0.8, 0.8, 0.388)
 texture = ExtResource("4_2qxot")
 centered = false
 

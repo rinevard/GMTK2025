@@ -14,6 +14,11 @@ var need_remove_from_global: bool = false # 防止竞争
 
 const DUPLICATE_PLAYER = preload("res://scenes/player/duplicate_player.tscn")
 
+func _ready() -> void:
+	sprite_2d.material = sprite_2d.material.duplicate()
+	var random_value: float = randf_range(0.0, PI)
+	sprite_2d.material.set_shader_parameter("random_offset", random_value)
+
 static func new_duplicate_player(global_pos: Vector2) -> DuplicatePlayer:
 	var dup_player: DuplicatePlayer = DUPLICATE_PLAYER.instantiate()
 	dup_player.global_position = global_pos
