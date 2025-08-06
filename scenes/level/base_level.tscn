@@ -29,13 +29,13 @@ centered = false
 [node name="SigilPen" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_7xj1c")]
 player = NodePath("../Player")
 
-[node name="EnemyHandler" parent="." instance=ExtResource("3_7xj1c")]
+[node name="DroppedHandler" type="Node2D" parent="."]
+script = ExtResource("6_kxd26")
 
 [node name="BulletHandler" parent="." instance=ExtResource("5_3ipv6")]
 script = ExtResource("6_t6xnl")
 
-[node name="DroppedHandler" type="Node2D" parent="."]
-script = ExtResource("6_kxd26")
+[node name="EnemyHandler" parent="." instance=ExtResource("3_7xj1c")]
 
 [node name="Player" parent="." instance=ExtResource("1_upopr")]
 position = Vector2(1046, 576)
@@ -47,6 +47,7 @@ position = Vector2(1544, 308)
 
 [node name="LevelParticle" parent="." instance=ExtResource("11_2qxot")]
 position = Vector2(0, 1080)
+amount = 16
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
