@@ -1,5 +1,6 @@
 shader_type canvas_item;
 
+uniform float bloom_strength: hint_range(0.0, 1.0, 0.02) = 0.1;
 // Max distance from texture.
 uniform float maxLineWidth: hint_range(0.0, 200.0) = 10.0;
 // Min distance from texture.
@@ -122,9 +123,9 @@ void fragment() {
 			vec4 finalColor = step(1.0 - tolerance, in_range(size, TEXTURE, final_uv)) * color;
 			newColor = finalColor;
 		}
-		COLOR = newColor;
+		COLOR = newColor * (1.0 + bloom_strength);
 	} else {
 		// 如果没有轮廓，仍然应用纹理抖动
-		COLOR = texture(TEXTURE, final_uv);
+		COLOR = texture(TEXTURE, final_uv) * (1.0 + bloom_strength);
 	}
 }

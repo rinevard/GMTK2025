@@ -7,6 +7,7 @@
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_imr1f"]
 
 [node name="Sigil" type="Area2D"]
+modulate = Color(1.2, 1.2, 1.2, 1)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_imr1f")

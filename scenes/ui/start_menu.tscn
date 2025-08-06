@@ -3,20 +3,21 @@
 [ext_resource type="Script" uid="uid://dkhsduabh2au2" path="res://scripts/ui/start_menu.gd" id="1_irhji"]
 [ext_resource type="Texture2D" uid="uid://clklxwprf41ca" path="res://assets/art/final_arts/menu/bg.png" id="2_0kjv3"]
 [ext_resource type="Texture2D" uid="uid://cwwg4otyyp4g" path="res://assets/art/final_arts/menu/magic.png" id="3_s1kfm"]
-[ext_resource type="Texture2D" uid="uid://hkfxdk044mu6" path="res://assets/art/final_arts/menu/title.png" id="4_km2yg"]
 [ext_resource type="Texture2D" uid="uid://dhb5qo7errlxf" path="res://assets/art/final_arts/menu/full_witch.png" id="5_asxkk"]
 [ext_resource type="Shader" uid="uid://dholp50o2dqcg" path="res://shaders/uis/witch.gdshader" id="5_hdmqo"]
 [ext_resource type="Shader" uid="uid://ccoldad2vhuvq" path="res://shaders/uis/jittery_outline.gdshader" id="5_hfk6u"]
-[ext_resource type="Texture2D" uid="uid://djfqioin7jai1" path="res://assets/art/final_arts/menu/start.png" id="6_x0g8l"]
 [ext_resource type="Script" uid="uid://boil1r377gqqf" path="res://scripts/ui/reset_menu_button.gd" id="7_2t0al"]
-[ext_resource type="Texture2D" uid="uid://bb2uyg6qhdxll" path="res://assets/art/final_arts/menu/quit.png" id="7_i11hm"]
+[ext_resource type="Texture2D" uid="uid://rra8oqta8ept" path="res://assets/art/final_arts/menu/new_title.png" id="7_asxkk"]
+[ext_resource type="Texture2D" uid="uid://b6mbd6wc5xuyk" path="res://assets/art/final_arts/menu/new_start.png" id="8_asxkk"]
+[ext_resource type="Texture2D" uid="uid://4eeqpyr151fs" path="res://assets/art/final_arts/menu/new_quit.png" id="10_hdmqo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c71uh"]
 shader = ExtResource("5_hfk6u")
+shader_parameter/bloom_strength = 0.1
 shader_parameter/maxLineWidth = 0.0
-shader_parameter/minLineWidth = 5.0
+shader_parameter/minLineWidth = 0.0
 shader_parameter/speed = 2.0
-shader_parameter/blockSize = 20.0
+shader_parameter/blockSize = 0.0
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/tolerance = 0.0
 shader_parameter/texture_jiggle_amount = 5.0
@@ -28,8 +29,9 @@ shader_parameter/speed = 1.8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_asxkk"]
 shader = ExtResource("5_hfk6u")
+shader_parameter/bloom_strength = 0.1
 shader_parameter/maxLineWidth = 0.0
-shader_parameter/minLineWidth = 5.0
+shader_parameter/minLineWidth = 0.0
 shader_parameter/speed = 2.0
 shader_parameter/blockSize = 20.0
 shader_parameter/color = Color(0, 0, 0, 1)
@@ -38,20 +40,22 @@ shader_parameter/texture_jiggle_amount = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hfk6u"]
 shader = ExtResource("5_hfk6u")
+shader_parameter/bloom_strength = 0.1
 shader_parameter/maxLineWidth = 0.0
-shader_parameter/minLineWidth = 5.0
+shader_parameter/minLineWidth = 0.0
 shader_parameter/speed = 2.0
-shader_parameter/blockSize = 20.0
+shader_parameter/blockSize = 0.0
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/tolerance = 0.0
 shader_parameter/texture_jiggle_amount = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdmqo"]
 shader = ExtResource("5_hfk6u")
+shader_parameter/bloom_strength = 0.1
 shader_parameter/maxLineWidth = 0.0
-shader_parameter/minLineWidth = 5.0
+shader_parameter/minLineWidth = 0.0
 shader_parameter/speed = 2.0
-shader_parameter/blockSize = 0.001
+shader_parameter/blockSize = 20.0
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/tolerance = 0.0
 shader_parameter/texture_jiggle_amount = 5.0
@@ -92,36 +96,36 @@ texture = ExtResource("5_asxkk")
 [node name="Title" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_asxkk")
 layout_mode = 0
-offset_left = 57.0
-offset_top = 74.0
-offset_right = 850.0
-offset_bottom = 497.0
-texture = ExtResource("4_km2yg")
+offset_left = 41.0
+offset_top = 59.0
+offset_right = 861.0
+offset_bottom = 499.0
+texture = ExtResource("7_asxkk")
 
 [node name="StartuButton" type="TextureButton" parent="."]
 material = SubResource("ShaderMaterial_hfk6u")
 layout_mode = 0
-offset_left = 234.0
-offset_top = 549.0
-offset_right = 566.0
-offset_bottom = 652.0
-texture_normal = ExtResource("6_x0g8l")
-texture_pressed = ExtResource("6_x0g8l")
-texture_hover = ExtResource("6_x0g8l")
-texture_focused = ExtResource("6_x0g8l")
+offset_left = 218.0
+offset_top = 540.0
+offset_right = 578.0
+offset_bottom = 660.0
+texture_normal = ExtResource("8_asxkk")
+texture_pressed = ExtResource("8_asxkk")
+texture_hover = ExtResource("8_asxkk")
+texture_focused = ExtResource("8_asxkk")
 script = ExtResource("7_2t0al")
 
 [node name="ExitButton" type="TextureButton" parent="."]
 material = SubResource("ShaderMaterial_hdmqo")
 layout_mode = 0
-offset_left = 273.0
-offset_top = 704.0
-offset_right = 539.0
-offset_bottom = 818.0
-texture_normal = ExtResource("7_i11hm")
-texture_pressed = ExtResource("7_i11hm")
-texture_hover = ExtResource("7_i11hm")
-texture_focused = ExtResource("7_i11hm")
+offset_left = 263.0
+offset_top = 697.0
+offset_right = 553.0
+offset_bottom = 827.0
+texture_normal = ExtResource("10_hdmqo")
+texture_pressed = ExtResource("10_hdmqo")
+texture_hover = ExtResource("10_hdmqo")
+texture_focused = ExtResource("10_hdmqo")
 script = ExtResource("7_2t0al")
 
 [connection signal="pressed" from="StartuButton" to="." method="_on_start_button_pressed"]

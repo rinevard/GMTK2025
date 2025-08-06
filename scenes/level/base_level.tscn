@@ -17,6 +17,7 @@ script = ExtResource("1_e1fnv")
 duration = 1e+07
 
 [node name="Bg" type="Sprite2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
 position = Vector2(-303, -545)
 texture = ExtResource("2_wq2a1")
 centered = false
