@@ -50,34 +50,23 @@ func _ready() -> void:
 @onready var animation_container: Node2D = $AnimationContainer
 func _play_line_animation() -> void:
 	# 为主多边形线段设置基础属性
-	polygon_line_2d.points = points
 	var polygon_line_texture = sigil_res.polygon_line_texture
 	var polygon_line_width = sigil_res.polygon_line_width
 	var other_line_texture = sigil_res.other_line_texture
 	var other_line_width = sigil_res.other_line_width
 	
+	# 五边形不画外接轮廓
+	if points.size() != 5:
+		polygon_line_2d.points = points
+
 	polygon_line_2d.texture = polygon_line_texture
 	polygon_line_2d.width = polygon_line_width
 	# 只有五边形和六边形法阵有额外动画
 	if points.size() != 5 and points.size() != 6:
 		return
-
-	# --- 1. 通用设置：计算中心点 ---
-	# 已在 ready 中计算
-	
-	# --- 2. 将动画容器放到中心 ---
-	
-	# --- 3. 处理主多边形 ---
-	# 将现有的多边形线移动到动画容器中，使其也参与动画
-	# 为了正确缩放，我们需要将其顶点坐标转换为相对于中心的坐标
-	var relative_points = PackedVector2Array()
-	for p in points:
-		relative_points.append(p)
 	
 	# 用于存放所有需要创建的新线条
 	var new_lines: Array[Line2D] = []
-
-	# --- 4. 分情况处理 ---
 	if points.size() == 5:
 		# --- 五边形：创建五角星和外接圆 ---
 		# 创建五角星 (Pentagram)
@@ -86,8 +75,8 @@ func _play_line_animation() -> void:
 		star_line.width = other_line_width
 		# 五角星的连接顺序: 0-2, 2-4, 4-1, 1-3, 3-0
 		var star_points = PackedVector2Array([
-			relative_points[0], relative_points[2], relative_points[4],
-			relative_points[1], relative_points[3], relative_points[0]
+			points[0], points[2], points[4],
+			points[1], points[3], points[0]
 		])
 		star_line.points = star_points
 		new_lines.append(star_line)
@@ -100,7 +89,9 @@ func _play_line_animation() -> void:
 		ellipse_line.width = other_line_width
 		# 调用基于线性代数的精确解法
 		# 注意：传入的是原始坐标点和中心点
+
 		ellipse_line.points = _calculate_ellipse_by_solving_system(points)
+		ellipse_line.closed = true
 		
 		# 椭圆比多边形大, 更新碰撞体形状
 		var shape = ConvexPolygonShape2D.new()
@@ -120,7 +111,7 @@ func _play_line_animation() -> void:
 		triangle1_line.texture = other_line_texture
 		triangle1_line.width = other_line_width
 		var triangle1_points = PackedVector2Array([
-			relative_points[0], relative_points[2], relative_points[4], relative_points[0]
+			points[0], points[2], points[4], points[0]
 		])
 		triangle1_line.points = triangle1_points
 		new_lines.append(triangle1_line)
@@ -130,7 +121,7 @@ func _play_line_animation() -> void:
 		triangle2_line.texture = other_line_texture
 		triangle2_line.width = other_line_width
 		var triangle2_points = PackedVector2Array([
-			relative_points[1], relative_points[3], relative_points[5], relative_points[1]
+			points[1], points[3], points[5], points[1]
 		])
 		triangle2_line.points = triangle2_points
 		new_lines.append(triangle2_line)
@@ -235,7 +226,7 @@ func _calculate_ellipse_by_solving_system(p_points: PackedVector2Array) -> Packe
 	var ellipse_points = PackedVector2Array()
 	var segments = 128 # 使用足够多的点以确保平滑
 	
-	for i in range(segments + 1):
+	for i in range(segments):
 		var angle = (TAU * i) / segments
 		var cos_a = cos(angle)
 		var sin_a = sin(angle)

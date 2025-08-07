@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceoettqmvyc47"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n71v4"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[node name="SpurtMagicColor" type="GPUParticles2D"]
+process_material = SubResource("ParticleProcessMaterial_n71v4")
