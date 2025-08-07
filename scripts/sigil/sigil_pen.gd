@@ -78,7 +78,7 @@ func _physics_process(delta: float) -> void:
 		SfxPlayer.pause_draw_loop()
 
 var intersection_tolerance: float = 40.0 # 自交的允许误差
-var area_threshold: float = 1000.0
+var area_threshold: float = 4000.0
 ## 1. 自交
 ## 2. 自交图形面积足够大
 ## 如果同时满足上面两条, 设置 sigil_points 并返回 true
