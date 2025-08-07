@@ -42,7 +42,7 @@ func _label_roll_number() -> void:
 	roll_tween.set_parallel(false)
 	
 	# 定义滚动动画的持续时间
-	var roll_duration: float = 1.2
+	var roll_duration: float = 0.7
 
 	# 5. 第一个动画：滚动当前分数
 	roll_tween.tween_method(

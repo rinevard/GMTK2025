@@ -16,7 +16,6 @@ radius = 78.5175
 radius = 91.9837
 
 [node name="BigMeleeEnemy" type="Node2D" groups=["Enemy"]]
-modulate = Color(1.02, 1.02, 1.02, 1)
 script = ExtResource("2_xkrqa")
 speed = 200.0
 
