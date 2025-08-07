@@ -11,7 +11,7 @@ const POLYGON_FIT_ERROR_THRESHOLD = 12.0
 
 # --- 新增常量 for 滑动平均算法 ---
 # 滑动平均的迭代次数。次数越多，曲线越平滑，但收缩也越明显。
-const MOVING_AVERAGE_ITERATIONS = 12
+const MOVING_AVERAGE_ITERATIONS = 8
 # 平滑因子 (0.0 到 1.0)。
 # 0.0 = 没有平滑。
 # 1.0 = 将点完全移动到其邻居的平均位置。
@@ -34,26 +34,53 @@ const SMOOTHING_FACTOR = 0.8
 ##
 func simplify_shape(original_points: PackedVector2Array) -> PackedVector2Array:
 	# 确保有足够的点来进行有意义的分析
-	if original_points.size() < 10:
+	if original_points.size() < 8:
 		return original_points
 
-	# 第一步：保留当前的多边形简化和检查
-	var rdp_simplified_points = _simplify_path_rdp(original_points, RDP_EPSILON)
+	# 找凸包
+	var is_clockwise = _is_points_clockwise(original_points)
+	# convex_hull 函数描述里的 "counterclockwise" 是相对其坐标系而言的
+	# 我们用的 counterclockwise 是相对玩家所见而言的
+	# 因此要 reverse 一下, 才能让 convex_points 是相对于我们的 counterclockwise
+	var convex_points: PackedVector2Array = Geometry2D.convex_hull(original_points)
+	convex_points.reverse()
+	# 去重
+	convex_points.remove_at(convex_points.size() - 1)
+	if is_clockwise:
+		convex_points.reverse()
+
+	# 简化路径
+	var rdp_simplified_points = _simplify_path_rdp(convex_points, RDP_EPSILON)
 	var simplified_polygon = _simplify_path_corner(rdp_simplified_points)
 	
 	# 只返回五边形和六边形
 	if simplified_polygon.size() != 5 and simplified_polygon.size() != 6:
-		return _smooth_path_moving_average_closed(original_points, MOVING_AVERAGE_ITERATIONS, SMOOTHING_FACTOR)
+		return _smooth_path_moving_average_closed(convex_points, MOVING_AVERAGE_ITERATIONS, SMOOTHING_FACTOR)
 
 	# 评估多边形拟合的质量
-	var fit_error = _calculate_polygon_fit_error(original_points, simplified_polygon)
+	var fit_error = _calculate_polygon_fit_error(convex_points, simplified_polygon)
 	
 	# 如果误差低，判定为多边形，结束。
 	if fit_error <= POLYGON_FIT_ERROR_THRESHOLD:
 		return simplified_polygon
 	else:
-		# 第二步：如果没判定为多边形，使用滑动平均算法来平滑
-		return _smooth_path_moving_average_closed(original_points, MOVING_AVERAGE_ITERATIONS, SMOOTHING_FACTOR)
+		# 如果没判定为多边形，使用滑动平均算法来平滑
+		return _smooth_path_moving_average_closed(convex_points, MOVING_AVERAGE_ITERATIONS, SMOOTHING_FACTOR)
+
+func _is_points_clockwise(points: PackedVector2Array) -> bool:
+	var point_count = points.size()
+	if point_count < 3:
+		return false
+
+	# 使用鞋带公式计算有符号面积
+	var area_sum: float = 0.0
+
+	for i in range(point_count):
+		var current_point = points[i]
+		var next_point = points[(i + 1) % point_count]
+		area_sum += (current_point.x * next_point.y) - (next_point.x * current_point.y)
+
+	return area_sum > 0.0
 
 
 # ------------------------------------------------------------------ #

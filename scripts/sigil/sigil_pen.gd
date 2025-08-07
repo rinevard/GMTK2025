@@ -176,24 +176,16 @@ func _create_sigil() -> void:
 		$Sigils.call_deferred("add_child", new_sigil)
 
 func _is_sigilpoints_clockwise() -> bool:
-	# 一个多边形至少需要3个点。如果少于3个点，它没有明确的环绕方向。
 	var point_count = sigil_points.size()
 	if point_count < 3:
 		return false
 
-	# 使用鞋带公式计算有符号面积的两倍。
-	# 我们只需要知道结果的符号，所以不需要除以2。
+	# 使用鞋带公式计算有符号面积
 	var area_sum: float = 0.0
 
 	for i in range(point_count):
 		var current_point = sigil_points[i]
-		# 获取下一个点，并使用模运算(%)来处理从最后一个点到第一个点的“环绕”。
 		var next_point = sigil_points[(i + 1) % point_count]
-
-		# 累加 (x1*y2 - x2*y1)
 		area_sum += (current_point.x * next_point.y) - (next_point.x * current_point.y)
 
-	# 在Godot的2D坐标系中，Y轴是向下的。
-	# 因此，如果和为正，则为顺时针；如果为负，则为逆时针。
-	# 如果和为0，说明所有点共线，我们将其视为非顺时针。
 	return area_sum > 0.0
