@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://ida55mw66cs4"]
 
-[ext_resource type="Texture2D" uid="uid://rpy6msr8is2t" path="res://assets/art/test2.png" id="2_qxg6d"]
+[ext_resource type="Texture2D" uid="uid://ca1rbrcwwpfxw" path="res://assets/art/lines/color-line3.png" id="1_27nfn"]
 
 [node name="CustomizedLine2D" type="Line2D"]
 modulate = Color(1, 1, 1, 0.156863)
-texture = ExtResource("2_qxg6d")
+texture = ExtResource("1_27nfn")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2

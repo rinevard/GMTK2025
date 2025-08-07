@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="SigilResource" load_steps=3 format=3 uid="uid://dmvbv3rpo874a"]
 
-[ext_resource type="Texture2D" uid="uid://o80mvmwmfx6c" path="res://assets/art/particles/spark_06_rotated.png" id="1_ca1h4"]
+[ext_resource type="Texture2D" uid="uid://d4bqe4c7e3w11" path="res://assets/art/light_textures/line-lightning.png" id="1_4emsf"]
 [ext_resource type="Script" uid="uid://c82i4xq75djsq" path="res://scripts/resources/sigil_resource.gd" id="2_yrrg8"]
 
 [resource]
 script = ExtResource("2_yrrg8")
-polygon_line_texture = ExtResource("1_ca1h4")
-other_line_texture = ExtResource("1_ca1h4")
+polygon_line_texture = ExtResource("1_4emsf")
+other_line_texture = ExtResource("1_4emsf")
 polygon_line_width = 20.0
 other_line_width = 20.0
 metadata/_custom_type_script = "uid://c82i4xq75djsq"
