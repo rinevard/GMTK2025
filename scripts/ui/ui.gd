@@ -41,12 +41,12 @@ func _on_start_menu_game_start() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	await _transition_fade_in()
 	start_game.emit()
-	BgmPlayer.reset_play_level_bgm()
 	BgmPlayer.stop_menu_bgm()
 	start_menu.hide()
 	hud.reset_hud()
 	hud.show()
-	_transition_fade_out()
+	await _transition_fade_out()
+	BgmPlayer.reset_play_level_bgm()
 
 func _on_start_menu_game_end() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
