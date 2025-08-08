@@ -37,12 +37,12 @@ func simplify_shape(original_points: PackedVector2Array) -> PackedVector2Array:
 	if original_points.size() < 8:
 		return original_points
 
-	# 找凸包
 	var is_clockwise = _is_points_clockwise(original_points)
+	# 找凸包
+	var convex_points: PackedVector2Array = Geometry2D.convex_hull(original_points)
 	# convex_hull 函数描述里的 "counterclockwise" 是相对其坐标系而言的
 	# 我们用的 counterclockwise 是相对玩家所见而言的
 	# 因此要 reverse 一下, 才能让 convex_points 是相对于我们的 counterclockwise
-	var convex_points: PackedVector2Array = Geometry2D.convex_hull(original_points)
 	convex_points.reverse()
 	# 去重
 	convex_points.remove_at(convex_points.size() - 1)
@@ -57,6 +57,9 @@ func simplify_shape(original_points: PackedVector2Array) -> PackedVector2Array:
 	if simplified_polygon.size() != 5 and simplified_polygon.size() != 6:
 		return _smooth_path_moving_average_closed(convex_points, MOVING_AVERAGE_ITERATIONS, SMOOTHING_FACTOR)
 
+	# 避免画的五边形被误判为六边形
+	if simplified_polygon.size() == 6:
+		simplified_polygon = _simplify_hexagon_by_length(simplified_polygon)
 	# 评估多边形拟合的质量
 	var fit_error = _calculate_polygon_fit_error(convex_points, simplified_polygon)
 	
@@ -82,6 +85,16 @@ func _is_points_clockwise(points: PackedVector2Array) -> bool:
 
 	return area_sum > 0.0
 
+const LENGTH_THRESHOLD: float = 50.0
+func _simplify_hexagon_by_length(points: PackedVector2Array, len_threshold: float = LENGTH_THRESHOLD) -> PackedVector2Array:
+	var points_size: int = points.size()
+	var simplified_polygon: PackedVector2Array = []
+	for i in range(points_size):
+		var p_curr = points[i]
+		var p_next = points[(i + 1) % points_size]
+		if (p_next - p_curr).length() >= len_threshold:
+			simplified_polygon.append(p_curr)
+	return simplified_polygon
 
 # ------------------------------------------------------------------ #
 # 新增的滑动平均算法 (假定输入为闭合环路)
@@ -163,8 +176,6 @@ func _calculate_polygon_fit_error(original_points: PackedVector2Array, polygon_p
 
 	return total_distance / original_points.size()
 
-
-## ... 以下是原有的 _simplify_path_rdp 和 _simplify_path_corner 函数 ...
 func _simplify_path_corner(points: PackedVector2Array, angle_threshold_deg: float = CORNER_ANGLE_THRESHOLD_DEGREES) -> PackedVector2Array:
 	if points.size() < 3: return points
 	var angle_threshold_rad: float = deg_to_rad(angle_threshold_deg)
