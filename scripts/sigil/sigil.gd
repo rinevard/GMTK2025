@@ -35,10 +35,16 @@ static func new_sigil(sigil_points: PackedVector2Array, packed_sigil_magics: Arr
 
 	sigil.magics = sigil_magics
 	sigil.live_duration = duration
+	sigil.grow_duration = 0.0
+	if duration >= 1.0:
+		sigil.grow_duration = duration - 0.2
 	sigil.sigil_res = p_sigil_res
 	return sigil
 
 var center = Vector2.ZERO
+var grow_duration: float = 0.0
+var max_scale: Vector2 = Vector2(1.05, 1.05)
+var is_growing: bool = false
 func _ready() -> void:
 	var shape = ConvexPolygonShape2D.new()
 	shape.points = points
@@ -46,6 +52,12 @@ func _ready() -> void:
 	_play_line_animation()
 	for magic in magics:
 		magic_handler.add_child(magic)
+	
+	# 逐渐放大
+	if grow_duration > 0:
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "scale", max_scale, grow_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+
 
 @onready var animation_container: Node2D = $AnimationContainer
 func _play_line_animation() -> void:
@@ -56,8 +68,8 @@ func _play_line_animation() -> void:
 	var other_line_width = sigil_res.other_line_width
 	
 	# 五边形不画外接轮廓
-	if points.size() != 5:
-		polygon_line_2d.points = points
+	# if points.size() != 5:
+	polygon_line_2d.points = points
 
 	polygon_line_2d.texture = polygon_line_texture
 	polygon_line_2d.width = polygon_line_width
