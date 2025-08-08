@@ -12,19 +12,20 @@
 [ext_resource type="PackedScene" uid="uid://bbg80hbdg43h8" path="res://scenes/dropped/dropped_book.tscn" id="8_8xnqg"]
 [ext_resource type="PackedScene" uid="uid://bh6fjbe7keuby" path="res://scenes/particles/level_particle.tscn" id="11_2qxot"]
 
-[sub_resource type="Environment" id="Environment_2qxot"]
+[sub_resource type="Environment" id="Environment_u35hf"]
 background_mode = 3
 glow_enabled = true
-glow_intensity = 0.2
-glow_strength = 0.2
-glow_bloom = 0.05
+glow_levels/5 = 6.0
+glow_levels/6 = 3.0
+glow_intensity = 2.0
+glow_blend_mode = 1
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_e1fnv")
 duration = 1e+07
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_2qxot")
+environment = SubResource("Environment_u35hf")
 
 [node name="Bg" type="Sprite2D" parent="."]
 modulate = Color(0.65, 0.65, 0.65, 1)

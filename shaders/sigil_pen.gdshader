@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 // --- 可调参数 ---
 uniform float speed : hint_range(0.0, 5.0) = 1.0;
-uniform float max_glow_bonus: hint_range(0.0, 1.0, 0.1) = 0.2;
+uniform float max_glow_bonus: hint_range(0.0, 5.0, 0.1) = 0.2;
 
 // 第一个波浪 (主波浪，频率较低，振幅较大)
 uniform int wave1_frequency : hint_range(1, 10) = 3;

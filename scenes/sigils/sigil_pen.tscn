@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p0ax8"]
 shader = ExtResource("2_euog4")
 shader_parameter/speed = 0.6
-shader_parameter/max_glow_bonus = 0.2
+shader_parameter/max_glow_bonus = 0.1
 shader_parameter/wave1_frequency = 3
 shader_parameter/wave1_amplitude = 0.04
 shader_parameter/wave1_speed = 3.0
@@ -23,6 +23,7 @@ script = ExtResource("1_ltm5e")
 [node name="BlueLine" type="Line2D" parent="."]
 material = SubResource("ShaderMaterial_p0ax8")
 position = Vector2(0, 8)
+points = PackedVector2Array(59, 44, 251, 46)
 width = 20.0
 texture = ExtResource("3_4r3ke")
 texture_mode = 1
