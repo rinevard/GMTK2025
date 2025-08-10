@@ -65,7 +65,7 @@ float get_line_width(vec2 p, float s) {
 		p /= 2.0;
 		intensity /= 2.0;
 	}
-	
+
 	return mix(maxLineWidth, minLineWidth, w);
 }
 
@@ -100,25 +100,25 @@ void fragment() {
 		// 使用不同的偏移量(如12.3, 45.6)来确保x和y的噪点不同步
 		float jiggle_x = noise(uv * 5.0, timeStep + 12.3);
 		float jiggle_y = noise(uv * 5.0, timeStep + 45.6);
-		
+
 		// 将噪点值从[0, 1]范围映射到[-0.5, 0.5]，然后乘以抖动强度
 		jiggle_offset = vec2(jiggle_x - 0.5, jiggle_y - 0.5);
 		jiggle_offset *= texture_jiggle_amount * TEXTURE_PIXEL_SIZE;
 	}
-	
+
 	// 将抖动偏移应用到UV坐标上，得到最终的采样坐标
 	vec2 final_uv = uv + jiggle_offset;
 	// ==============================================================
-	
-	
+
+
 	if (max(maxLineWidth, minLineWidth) > 0.0) {
 		// 使用抖动后的UV (final_uv) 来获取纹理颜色
 		vec4 newColor = texture(TEXTURE, final_uv);
-		
+
 		if (newColor.a <= tolerance || border(uv)) { // border检查仍然使用原始uv，防止边缘伪影
 			vec2 size = TEXTURE_PIXEL_SIZE;
 			size *= get_line_width(uv / TEXTURE_PIXEL_SIZE, timeStep);
-			
+
 			// 使用抖动后的UV (final_uv) 来计算轮廓，确保轮廓跟随纹理
 			vec4 finalColor = step(1.0 - tolerance, in_range(size, TEXTURE, final_uv)) * color;
 			newColor = finalColor;

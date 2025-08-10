@@ -21,6 +21,8 @@ func _physics_process(delta: float) -> void:
 	global_position += speed * delta * pos_offset.normalized()
 
 func _on_health_less_than_zero() -> void:
+	for i in range(10):
+		print(1)
 	die()
 
 func die() -> void:

@@ -1,8 +1,77 @@
-[gd_scene load_steps=4 format=3 uid="uid://1qhkngukjpre"]
+[gd_scene load_steps=14 format=3 uid="uid://1qhkngukjpre"]
 
 [ext_resource type="PackedScene" uid="uid://turwbw4rh6a" path="res://scenes/level/level_handler.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://cp3mr5mlcarv2" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cgeca52qlgh6r" path="res://scenes/ui/ui.tscn" id="3_sugp2"]
+[ext_resource type="Shader" uid="uid://blkvtsmals1xb" path="res://shaders/bullet.gdshader" id="4_jyhfs"]
+[ext_resource type="Shader" uid="uid://cfjn8hg26gxk" path="res://shaders/duplicate_player.gdshader" id="5_tbgi4"]
+[ext_resource type="Shader" uid="uid://dcuiiuahcthfm" path="res://shaders/lightning_line.gdshader" id="5_tefeu"]
+[ext_resource type="Shader" uid="uid://bppak0qx6201y" path="res://shaders/sigil_pen.gdshader" id="7_o6xl0"]
+[ext_resource type="Shader" uid="uid://d1dv56tut28w2" path="res://shaders/uis/new.gdshader" id="8_tipki"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
+shader = ExtResource("4_jyhfs")
+shader_parameter/jitter_strength = 2.0
+shader_parameter/jitter_speed = 8.0
+shader_parameter/jitter_frequency = 12.0
+shader_parameter/separate_xy = true
+shader_parameter/time_offset = 0.0
+shader_parameter/enable_rotation = true
+shader_parameter/rotation_strength = 5.0
+shader_parameter/rotation_speed = 3.0
+shader_parameter/rotation_frequency = 4.0
+shader_parameter/enable_scaling = true
+shader_parameter/scale_strength = 0.1
+shader_parameter/scale_speed = 2.5
+shader_parameter/scale_frequency = 6.0
+shader_parameter/base_scale = 1.0
+shader_parameter/text_color = Color(1, 1, 1, 1)
+shader_parameter/use_custom_color = false
+shader_parameter/shake_intensity = 0.5
+shader_parameter/enable_pixelation = true
+shader_parameter/pixel_size = 4.0
+shader_parameter/adaptive_pixels = true
+shader_parameter/enable_outline = true
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 1.0
+shader_parameter/chromatic_aberration = false
+shader_parameter/aberration_strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6xl0"]
+shader = ExtResource("5_tefeu")
+shader_parameter/scroll_speed = 1.5
+shader_parameter/head_progress = 1.0
+shader_parameter/tail_progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("5_tbgi4")
+shader_parameter/bloom_strength = 0.1
+shader_parameter/tint_color = Color(0.5, 0.7, 1, 1)
+shader_parameter/alpha = 0.6
+shader_parameter/distortion_amount = 0.01
+shader_parameter/distortion_speed = 2.0
+shader_parameter/random_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+shader = ExtResource("7_o6xl0")
+shader_parameter/speed = 1.0
+shader_parameter/max_glow_bonus = 0.2
+shader_parameter/wave1_frequency = 3
+shader_parameter/wave1_amplitude = 0.04
+shader_parameter/wave1_speed = 2.0
+shader_parameter/wave2_frequency = 11
+shader_parameter/wave2_amplitude = 0.02
+shader_parameter/wave2_speed = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85g3d"]
+shader = ExtResource("8_tipki")
+shader_parameter/size_effect = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/texture_size = Vector2(16, 16)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sugp2")
@@ -10,6 +79,24 @@ script = ExtResource("1_sugp2")
 [node name="LevelHandler" parent="." instance=ExtResource("1_0wfyh")]
 
 [node name="UI" parent="." instance=ExtResource("3_sugp2")]
+
+[node name="ShaderLoaders" type="Node2D" parent="."]
+position = Vector2(764, 376)
+
+[node name="Bullet" type="Sprite2D" parent="ShaderLoaders"]
+material = SubResource("ShaderMaterial_tbgi4")
+
+[node name="LightningLine" type="Sprite2D" parent="ShaderLoaders"]
+material = SubResource("ShaderMaterial_o6xl0")
+
+[node name="DupPlayer" type="Sprite2D" parent="ShaderLoaders"]
+material = SubResource("ShaderMaterial_tefeu")
+
+[node name="SigilPen" type="Sprite2D" parent="ShaderLoaders"]
+material = SubResource("ShaderMaterial_tipki")
+
+[node name="New" type="Sprite2D" parent="ShaderLoaders"]
+material = SubResource("ShaderMaterial_85g3d")
 
 [connection signal="continue_game" from="UI" to="." method="_on_ui_continue_game"]
 [connection signal="end_level" from="UI" to="." method="_on_ui_end_level"]

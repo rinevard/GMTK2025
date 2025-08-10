@@ -28,13 +28,12 @@ duration = 1e+07
 environment = SubResource("Environment_u35hf")
 
 [node name="Bg" type="Sprite2D" parent="."]
-modulate = Color(0.65, 0.65, 0.65, 1)
 position = Vector2(-303, -545)
 texture = ExtResource("2_wq2a1")
 centered = false
 
 [node name="Front" type="Sprite2D" parent="."]
-modulate = Color(0.5, 0.5, 0.5, 0.388)
+modulate = Color(1, 1, 1, 0.4)
 texture = ExtResource("4_2qxot")
 centered = false
 
